@@ -1,4 +1,4 @@
-// file      : hello/driver.cxx
+// file      : template/driver.cxx
 // author    : Boris Kolpackov <boris@codesynthesis.com>
 // copyright : not copyrighted - public domain
 
