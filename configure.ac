@@ -7,7 +7,7 @@ AC_PREREQ(2.60)
 AC_INIT([odb-examples], [__value__(version)], [odb-users@codesynthesis.com])
 AC_CONFIG_AUX_DIR([config])
 AC_CONFIG_MACRO_DIR([m4])
-AC_CONFIG_SRCDIR([template/driver.cxx])
+AC_CONFIG_SRCDIR([hello/driver.cxx])
 
 AM_INIT_AUTOMAKE([-Wall -Werror foreign nostdinc subdir-objects dist-bzip2 dist-zip tar-ustar])
 

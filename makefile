@@ -5,9 +5,8 @@
 
 include $(dir $(lastword $(MAKEFILE_LIST)))build/bootstrap.make
 
-dirs := template
-dist_dirs := $(dirs)
-#dist_dirs := $(filterout $(dirs),template)
+dirs := hello template
+dist_dirs := $(filter-out template,$(dirs))
 
 default := $(out_base)/
 dist    := $(out_base)/.dist
