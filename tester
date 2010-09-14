@@ -1,0 +1,24 @@
+#! /bin/sh
+
+# file      : tester
+# author    : Boris Kolpackov <boris@codesynthesis.com>
+# copyright : Copyright (c) 2009-2010 Code Synthesis Tools CC
+# license   : GNU GPL v2; see accompanying LICENSE file
+
+#
+# Run an ODB example. The example driver is in the current directory.
+# The data files, if any, are in $srcdir.
+#
+
+schema=`echo *.sql`
+
+if test -f $schema; then
+  $top_builddir/db-driver $schema
+
+  if test $? -ne 0; then
+    exit 1
+  fi
+fi
+
+echo ./driver --options-file "$top_builddir/db.options"
+./driver --options-file "$top_builddir/db.options"
