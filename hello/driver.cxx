@@ -23,37 +23,87 @@ main (int argc, char* argv[])
   {
     auto_ptr<database> db (create_database (argc, argv));
 
+    unsigned long john_id, jane_id, joe_id;
+
     // Create a few persistent person objects.
     //
     {
-      person john_doe ("John", "Doe", 29);
-      person jane_doe ("Jane", "Doe", 28);
-      person joe_dirt ("Joe", "Dirt", 31);
+      person john ("John", "Doe", 33);
+      person jane ("Jane", "Doe", 32);
+      person joe ("Joe", "Dirt", 30);
 
       transaction t (db->begin_transaction ());
 
-      db->persist (john_doe);
-      db->persist (jane_doe);
-      db->persist (joe_dirt);
+      db->persist (john);
+      db->persist (jane);
+      db->persist (joe);
 
       t.commit ();
+
+      // Save object ids for later use.
+      //
+      john_id = john.id ();
+      jane_id = jane.id ();
+      joe_id = joe.id ();
     }
 
-    // Say hello to those under 30.
+    typedef odb::query<person> query;
+    typedef odb::result<person> result;
+
+    // Say hello to those over 30.
     //
     {
-      typedef odb::query<person> query;
-      typedef odb::result<person> result;
-
       transaction t (db->begin_transaction ());
 
-      result r (db->query<person> (query::age < 30));
+      result r (db->query<person> (query::age > 30));
 
       for (result::iterator i (r.begin ()); i != r.end (); ++i)
       {
         cout << "Hello, " << i->first () << " " << i->last () << "!" << endl;
       }
 
+      t.commit ();
+    }
+
+    // Joe Dirt just had a birthday, so update his age.
+    //
+    {
+      transaction t (db->begin_transaction ());
+
+      auto_ptr<person> joe (db->load<person> (joe_id));
+      joe->age (joe->age () + 1);
+      db->store (*joe);
+
+      t.commit ();
+    }
+
+    /*
+    // Alternative implementation without using the id.
+    //
+    {
+      transaction t (db->begin_transaction ());
+
+      result r (db->query<person> (query::first == "Joe" &&
+                                   query::last == "Dirt"));
+
+      result::iterator i (r.begin ());
+
+      if (i != r.end ())
+      {
+        auto_ptr<person> joe (*i);
+        joe->age (joe->age () + 1);
+        db->store (*joe);
+      }
+
+      t.commit ();
+    }
+    */
+
+    // John Doe is no longer in our database.
+    //
+    {
+      transaction t (db->begin_transaction ());
+      db->erase<person> (john_id);
       t.commit ();
     }
   }

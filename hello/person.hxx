@@ -10,8 +10,9 @@
 #include <odb/core.hxx>
 
 #pragma db object
-struct person
+class person
 {
+public:
   person (const std::string& first,
           const std::string& last,
           unsigned short age)
@@ -35,6 +36,12 @@ struct person
   age () const
   {
     return age_;
+  }
+
+  void
+  age (unsigned short age)
+  {
+    age_ = age;
   }
 
 public:
