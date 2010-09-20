@@ -72,7 +72,7 @@ main (int argc, char* argv[])
 
       auto_ptr<person> joe (db->load<person> (joe_id));
       joe->age (joe->age () + 1);
-      db->store (*joe);
+      db->update (*joe);
 
       t.commit ();
     }
@@ -92,7 +92,7 @@ main (int argc, char* argv[])
       {
         auto_ptr<person> joe (*i);
         joe->age (joe->age () + 1);
-        db->store (*joe);
+        db->update (*joe);
       }
 
       t.commit ();
