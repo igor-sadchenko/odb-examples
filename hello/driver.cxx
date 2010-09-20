@@ -77,9 +77,9 @@ main (int argc, char* argv[])
       t.commit ();
     }
 
-    /*
     // Alternative implementation without using the id.
     //
+    /*
     {
       transaction t (db->begin_transaction ());
 
@@ -90,7 +90,7 @@ main (int argc, char* argv[])
 
       if (i != r.end ())
       {
-        auto_ptr<person> joe (*i);
+        auto_ptr<person> joe (i.load ());
         joe->age (joe->age () + 1);
         db->update (*joe);
       }
@@ -98,6 +98,7 @@ main (int argc, char* argv[])
       t.commit ();
     }
     */
+
 
     // John Doe is no longer in our database.
     //
