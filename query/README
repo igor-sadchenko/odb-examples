@@ -1,4 +1,4 @@
-This examples shows how to use the ODB Query Language to search the database
+This example shows how to use the ODB Query Language to search the database
 for persistent objects matching certain criteria.
 
 The example consists of the following files:

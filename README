@@ -7,8 +7,8 @@ For more information see:
 http://www.codesynthesis.com/products/odb/
 
 This package contains the ODB examples. The following list gives an 
-overview of each example. See the README files in example directories
-for more information on each example.
+overview of each example. See the README file accompanying each example
+for more information.
 
 hello
   A "Hello World" example that shows how to use ODB to perform basic
