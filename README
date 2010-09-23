@@ -6,7 +6,21 @@ For more information see:
 
 http://www.codesynthesis.com/products/odb/
 
-This package contains the ODB examples.
+This package contains the ODB examples. The following list gives an 
+overview of each example. See the README files in example directories
+for more information on each example.
+
+hello
+  A "Hello World" example that shows how to use ODB to perform basic
+  database operations.
+
+query
+  Shows how to use the ODB Query Language to search the database for
+  persistent objects matching certain criteria.
+
+mapping
+  Shows how to customize the mapping between C++ value types and database
+  types.
 
 See the NEWS file for the user-visible changes from the previous release.
 

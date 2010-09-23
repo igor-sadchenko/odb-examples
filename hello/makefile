@@ -70,9 +70,10 @@ $(dist): sources := $(cxx_tun)
 $(dist): headers := $(odb_hdr)
 $(dist): export name := $(name)
 $(dist): export odb_header_stem := $(basename $(odb_hdr))
-$(dist): export extra_dist := $(call vc9projs,$(name)) $(call vc10projs,$(name))
+$(dist): export extra_dist := README $(call vc9projs,$(name)) \
+$(call vc10projs,$(name))
 $(dist):
-	$(call dist-data,$(sources) $(headers) database.hxx)
+	$(call dist-data,$(sources) $(headers) README database.hxx)
 	$(call meta-automake,../template/Makefile.am)
 	$(call meta-vc9projs,../template/template,$(name))
 	$(call meta-vc10projs,../template/template,$(name))
