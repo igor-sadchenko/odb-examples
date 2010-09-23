@@ -3,8 +3,11 @@
 // copyright : not copyrighted - public domain
 
 //
-// Create concrete database based on the DATABASE_* macros.
+// Create concrete database instance based on the DATABASE_* macros.
 //
+
+#ifndef DATABASE_HXX
+#define DATABASE_HXX
 
 #include <string>
 #include <memory>   // std::auto_ptr
@@ -39,3 +42,5 @@ create_database (int& argc, char* argv[])
   return auto_ptr<database> (new mysql::database (argc, argv));
 #endif
 }
+
+#endif // DATABASE_HXX
