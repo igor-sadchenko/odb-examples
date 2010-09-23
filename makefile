@@ -17,7 +17,7 @@ $(default): $(addprefix $(out_base)/,$(addsuffix /,$(dirs)))
 
 $(dist): name := examples
 $(dist): export dirs := $(dist_dirs)
-$(dist): data_dist := GPLv2 LICENSE README NEWS version tester.bat \
+$(dist): data_dist := GPLv2 LICENSE README NEWS INSTALL version tester.bat \
 mysql-driver.bat mysql.options
 $(dist): exec_dist := bootstrap tester
 $(dist): export extra_dist := $(data_dist) $(exec_dist) test.bat \
