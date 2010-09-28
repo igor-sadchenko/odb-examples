@@ -26,7 +26,7 @@ main (int argc, char* argv[])
     {
       person p ("John", "Doe", 21);
 
-      transaction t (db->begin_transaction ());
+      transaction t (db->begin ());
       db->persist (p);
       t.commit ();
     }

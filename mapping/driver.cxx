@@ -28,7 +28,7 @@ main (int argc, char* argv[])
       person jane ("Jane", "Doe", date (1975, 11, 23), false);
       person joe ("Joe", "Dirt", date (1973, 12, 28), true);
 
-      transaction t (db->begin_transaction ());
+      transaction t (db->begin ());
 
       db->persist (john);
       db->persist (jane);
@@ -41,7 +41,7 @@ main (int argc, char* argv[])
       typedef odb::query<person> query;
       typedef odb::result<person> result;
 
-      transaction t (db->begin_transaction ());
+      transaction t (db->begin ());
 
       result r (db->query<person> (query::married &&
                                    query::born == date (1978, 10, 13)));

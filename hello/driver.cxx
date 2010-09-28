@@ -32,7 +32,7 @@ main (int argc, char* argv[])
       person jane ("Jane", "Doe", 32);
       person joe ("Joe", "Dirt", 30);
 
-      transaction t (db->begin_transaction ());
+      transaction t (db->begin ());
 
       db->persist (john);
       db->persist (jane);
@@ -53,7 +53,7 @@ main (int argc, char* argv[])
     // Say hello to those over 30.
     //
     {
-      transaction t (db->begin_transaction ());
+      transaction t (db->begin ());
 
       result r (db->query<person> (query::age > 30));
 
@@ -68,7 +68,7 @@ main (int argc, char* argv[])
     // Joe Dirt just had a birthday, so update his age.
     //
     {
-      transaction t (db->begin_transaction ());
+      transaction t (db->begin ());
 
       auto_ptr<person> joe (db->load<person> (joe_id));
       joe->age (joe->age () + 1);
@@ -81,7 +81,7 @@ main (int argc, char* argv[])
     //
     /*
     {
-      transaction t (db->begin_transaction ());
+      transaction t (db->begin ());
 
       result r (db->query<person> (query::first == "Joe" &&
                                    query::last == "Dirt"));
@@ -103,7 +103,7 @@ main (int argc, char* argv[])
     // John Doe is no longer in our database.
     //
     {
-      transaction t (db->begin_transaction ());
+      transaction t (db->begin ());
       db->erase<person> (john_id);
       t.commit ();
     }

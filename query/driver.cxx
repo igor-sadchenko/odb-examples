@@ -52,7 +52,7 @@ main (int argc, char* argv[])
       p.push_back (person ("Jane", "Doe", 23));
       p.push_back (person ("Jane", "Smith", 24));
 
-      transaction t (db->begin_transaction ());
+      transaction t (db->begin ());
 
       for (people::iterator i (p.begin ()); i != p.end (); ++i)
         db->persist (*i);
@@ -63,7 +63,7 @@ main (int argc, char* argv[])
     // A simple query and result handling.
     //
     {
-      transaction t (db->begin_transaction ());
+      transaction t (db->begin ());
 
       result r (db->query<person> (query::age < 30));
 
@@ -103,7 +103,7 @@ main (int argc, char* argv[])
     // as well as use paranthesis to control evaluation order.
     //
     {
-      transaction t (db->begin_transaction ());
+      transaction t (db->begin ());
 
       result r (
         db->query<person> (
@@ -117,7 +117,7 @@ main (int argc, char* argv[])
     // Query that shows how to use by-reference parameter binding.
     //
     {
-      transaction t (db->begin_transaction ());
+      transaction t (db->begin ());
 
       unsigned short lower, upper;
 
@@ -144,7 +144,7 @@ main (int argc, char* argv[])
     // Query that shows how to use the in() function.
     //
     {
-      transaction t (db->begin_transaction ());
+      transaction t (db->begin ());
 
       result r (
         db->query<person> (
@@ -164,7 +164,7 @@ main (int argc, char* argv[])
       names.push_back ("Johnson");
       names.push_back ("Jockson");
 
-      transaction t (db->begin_transaction ());
+      transaction t (db->begin ());
 
       result r (
         db->query<person> (
