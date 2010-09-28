@@ -1,5 +1,5 @@
-In this document we use <database> as the name of the database system you
-would like to use. Valid values for <database> are:
+In this document we use <database> to refer to the name of the database
+system you would like to use. Valid values for <database> are:
 
   'mysql' - The MySQL database system
 
@@ -27,7 +27,7 @@ To see the available configuration options run configure with --help:
 
 ./configure --help
 
-The required --database option specify the database system you would
+The required --database option specifies the database system you would
 like to use.
 
 The configure script expects the directory where the ODB compiler
@@ -67,8 +67,7 @@ that should be used when running the examples. Run configure with
 --help to see the available options for your database.
 
 As another example, the following configure command uses the specified
-C++ compiler and compiles with optimization and without the debug 
-information:
+C++ compiler and compiles with optimization and without debug information:
 
 ./configure CXX=g++-4.5 CXXFLAGS=-O3
 
@@ -76,10 +75,10 @@ Once configuration is complete, run make to build the examples:
 
 make
 
-Once the build completes successfully, you can run each example manually
-from the command line. See the README file accompanying each example 
-for more information on how to do this. Alternatively, you can run all 
-the examples using the check target:
+Once the build is completed successfully, you can run each example
+manually from the command line. See the README file accompanying each
+example for more information on how to do this. Alternatively, you can
+run all the examples using the check target:
 
 make check
 
@@ -107,17 +106,17 @@ version of Visual Studio that you are using. Once the solution is open,
 select the desired build configuration (Debug or Release) and platform
 (Win32 or x64) and build the solution.
 
-Once the build completes successfully, you can run each example manually
-from the command line. See the README file accompanying each example 
-for more information on how to do this. Alternatively, you can run all
-the examples using the test.bat batch file located in the odb-examples\
-directory.
+Once the build is completed successfully, you can run each example
+manually from the command line. See the README file accompanying each
+example for more information on how to do this. Alternatively, you can
+run all the examples using the test.bat batch file located in the
+odb-examples\ directory.
 
 Before you can run test.bat, you may need to adjust the database system
 parameters, such as the login name, password, and database name, that
-should be used when running the examples. To do this edit the 
+should be used when running the examples. To do this, edit the 
 <database>.options and <database>-driver.bat files located in the
-odb-examples\ directory. Once this is done you can run the examples by
+odb-examples\ directory. Once this is done, you can run the examples by
 executing the following command from the command prompt:
 
 test.bat <database>
