@@ -34,17 +34,13 @@ main (int argc, char* argv[])
 
       transaction t (db->begin ());
 
-      db->persist (john);
-      db->persist (jane);
-      db->persist (joe);
+      // Make objects persistent and save their ids for later use.
+      //
+      john_id = db->persist (john);
+      jane_id = db->persist (jane);
+      joe_id = db->persist (joe);
 
       t.commit ();
-
-      // Save object ids for later use.
-      //
-      john_id = john.id ();
-      jane_id = jane.id ();
-      joe_id = joe.id ();
     }
 
     typedef odb::query<person> query;
