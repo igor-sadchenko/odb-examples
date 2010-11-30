@@ -18,6 +18,9 @@ query
   Shows how to use the ODB Query Language to search the database for
   persistent objects matching certain criteria.
 
+container
+  Shows how to use containers as data members in persistent objects.
+
 mapping
   Shows how to customize the mapping between C++ value types and database
   types.
