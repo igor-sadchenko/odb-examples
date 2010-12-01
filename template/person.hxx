@@ -38,13 +38,6 @@ public:
     return age_;
   }
 
-public:
-  unsigned long
-  id () const
-  {
-    return id_;
-  }
-
 private:
   friend class odb::access;
 

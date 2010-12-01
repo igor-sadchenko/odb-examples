@@ -16,8 +16,7 @@
 class person
 {
 public:
-  person (const std::string& first,
-          const std::string& last)
+  person (const std::string& first, const std::string& last)
       : first_ (first), last_ (last)
   {
   }
@@ -80,13 +79,6 @@ public:
   age_weight ()
   {
     return age_weight_;
-  }
-
-public:
-  unsigned long
-  id () const
-  {
-    return id_;
   }
 
 private:
