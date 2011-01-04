@@ -23,6 +23,7 @@ CLEANFILES = __path__(odb_header_stem)-odb.hxx __path__(odb_header_stem)-odb.ixx
 
 ODB = @ODB@
 ODBFLAGS = @ODBFLAGS@
+ODBCPPFLAGS = @ODBCPPFLAGS@
 
 __path__(odb_header_stem)-odb.hxx: __path__(odb_header_stem).hxx
 	$(ODB) $(ODBCPPFLAGS) $(CPPFLAGS) $(ODBFLAGS)  __value__(odb_options) $<
