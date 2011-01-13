@@ -12,6 +12,10 @@
 
 #include <odb/core.hxx>
 
+typedef std::vector<std::string> names;
+typedef std::set<std::string> emails;
+typedef std::map<unsigned short, float> age_weight_map;
+
 #pragma db object
 class person
 {
@@ -35,15 +39,13 @@ public:
 
   // Nicknames.
   //
-  typedef std::vector<std::string> name_list;
-
-  const name_list&
+  const names&
   nicknames () const
   {
     return nicknames_;
   }
 
-  name_list&
+  names&
   nicknames ()
   {
     return nicknames_;
@@ -51,15 +53,15 @@ public:
 
   // Emails.
   //
-  typedef std::set<std::string> email_set;
+  typedef ::emails emails_type;
 
-  const email_set&
+  const emails_type&
   emails () const
   {
     return emails_;
   }
 
-  email_set&
+  emails_type&
   emails ()
   {
     return emails_;
@@ -67,8 +69,6 @@ public:
 
   // Age-to-weight map.
   //
-  typedef std::map<unsigned short, float> age_weight_map;
-
   const age_weight_map&
   age_weight () const
   {
@@ -92,8 +92,8 @@ private:
   std::string first_;
   std::string last_;
 
-  name_list nicknames_;
-  email_set emails_;
+  names nicknames_;
+  emails_type emails_;
   age_weight_map age_weight_;
 };
 

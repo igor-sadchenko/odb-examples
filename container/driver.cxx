@@ -23,7 +23,7 @@ print (const person& p)
 
   // Print nicknames.
   //
-  for (person::name_list::const_iterator i (p.nicknames ().begin ());
+  for (names::const_iterator i (p.nicknames ().begin ());
        i != p.nicknames ().end (); ++i)
   {
     cout << "  nickname: " << *i << endl;
@@ -31,7 +31,7 @@ print (const person& p)
 
   // Print emails.
   //
-  for (person::email_set::const_iterator i (p.emails ().begin ());
+  for (emails::const_iterator i (p.emails ().begin ());
        i != p.emails ().end (); ++i)
   {
     cout << "  email: " << *i << endl;
@@ -39,7 +39,7 @@ print (const person& p)
 
   // Print weights.
   //
-  for (person::age_weight_map::const_iterator i (p.age_weight ().begin ());
+  for (age_weight_map::const_iterator i (p.age_weight ().begin ());
        i != p.age_weight ().end (); ++i)
   {
     cout << "  weight at " << i->first << ": " << i->second << endl;
