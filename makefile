@@ -5,18 +5,22 @@
 
 include $(dir $(lastword $(MAKEFILE_LIST)))build/bootstrap.make
 
-dirs := container hello query mapping template
-dist_dirs := $(filter-out template,$(dirs))
+dirs      := composite container hello query mapping
+tr1_dirs  := relationship inverse
+
+dist_dirs := $(dirs) $(tr1_dirs)
+all_dirs  := $(dirs) $(tr1_dirs) template
 
 default := $(out_base)/
 dist    := $(out_base)/.dist
 test    := $(out_base)/.test
 clean   := $(out_base)/.clean
 
-$(default): $(addprefix $(out_base)/,$(addsuffix /,$(dirs)))
+$(default): $(addprefix $(out_base)/,$(addsuffix /,$(all_dirs)))
 
 $(dist): name := examples
-$(dist): export dirs := $(dist_dirs)
+$(dist): export dirs := $(dirs)
+$(dist): export tr1_dirs := $(tr1_dirs)
 $(dist): data_dist := GPLv2 LICENSE README NEWS INSTALL version tester.bat \
 mysql-driver.bat mysql.options
 $(dist): exec_dist := bootstrap tester
@@ -34,8 +38,8 @@ $(dist): $(addprefix $(out_base)/,$(addsuffix /.dist,$(dist_dirs)))
 	$(call meta-vc10slns,$(name))
 	$(call meta-vctest,$(name)-mysql-vc10.sln,test.bat)
 
-$(test): $(addprefix $(out_base)/,$(addsuffix /.test,$(dirs)))
-$(clean): $(addprefix $(out_base)/,$(addsuffix /.clean,$(dirs)))
+$(test): $(addprefix $(out_base)/,$(addsuffix /.test,$(all_dirs)))
+$(clean): $(addprefix $(out_base)/,$(addsuffix /.clean,$(all_dirs)))
 
 $(call include,$(bld_root)/dist.make)
 $(call include,$(bld_root)/meta/vc9sln.make)
@@ -44,5 +48,4 @@ $(call include,$(bld_root)/meta/vctest.make)
 $(call include,$(bld_root)/meta/automake.make)
 $(call include,$(bld_root)/meta/autoconf.make)
 
-$(foreach d,$(dirs),$(call import,$(src_base)/$d/makefile))
-
+$(foreach d,$(all_dirs),$(call import,$(src_base)/$d/makefile))

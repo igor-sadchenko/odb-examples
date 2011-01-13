@@ -18,8 +18,19 @@ query
   Shows how to use the ODB Query Language to search the database for
   persistent objects matching certain criteria.
 
+composite
+  Shows how to declare and use composite value types.
+
 container
   Shows how to use containers as data members in persistent objects.
+
+relationship
+  Shows how to declare and use unidirectional to-one and to-many 
+  relationships.
+
+inverse
+  Shows how to declare and use bidirectional one-to-one, one-to-many, and
+  many-to-many relationships.
 
 mapping
   Shows how to customize the mapping between C++ value types and database

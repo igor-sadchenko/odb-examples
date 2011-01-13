@@ -5,5 +5,9 @@
 
 SUBDIRS = __path__(dirs)
 
+if HAVE_TR1_MEMORY
+SUBDIRS += __path__(tr1_dirs)
+endif
+
 EXTRA_DIST = __file__(extra_dist)
 ACLOCAL_AMFLAGS = -I m4

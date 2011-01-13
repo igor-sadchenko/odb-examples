@@ -34,6 +34,10 @@ AM_CONDITIONAL([ODB_EXAMPLES_THREADS], [test x$threads != xnone])
 #
 LIBODB([], [AC_MSG_ERROR([libodb is not found; consider using --with-libodb=DIR])])
 
+# Check for TR1 <memory> availability.
+#
+TR1_MEMORY
+
 # Check which database we are using.
 #
 DATABASE
