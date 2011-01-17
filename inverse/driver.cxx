@@ -6,6 +6,7 @@
 #include <iostream>
 
 #include <odb/database.hxx>
+#include <odb/session.hxx>
 #include <odb/transaction.hxx>
 
 #include "database.hxx" // create_database
