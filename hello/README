@@ -29,9 +29,9 @@ database.hxx
 
 driver.cxx
   Driver for the example. It includes the person.hxx and person-odb.hxx
-  headers to gain access to the 'person' class and the database support
-  code for this class. It also includes database.hxx for the 
-  create_database() function declaration.
+  headers to gain access to the persistent classes and their database support
+  code. It also includes database.hxx for the create_database() function
+  declaration.
     
   In main() the driver first calls create_database() to obtain the database
   instance. Then it executes a number of database transactions on persistent
