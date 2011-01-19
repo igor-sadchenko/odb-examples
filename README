@@ -32,6 +32,9 @@ inverse
   Shows how to declare and use bidirectional one-to-one, one-to-many, and
   many-to-many relationships.
 
+schema
+  Shows how to map persistent C++ classes to a custom database schema.
+
 mapping
   Shows how to customize the mapping between C++ value types and database
   types.
