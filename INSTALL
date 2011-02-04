@@ -6,9 +6,11 @@ system you would like to use. Valid values for <database> are:
 Prerequisites
 =============
   
-  - odb                http://www.codesynthesis.com/products/odb/
-  - libodb             http://www.codesynthesis.com/products/odb/
-  - libodb-<database>  http://www.codesynthesis.com/products/odb/  
+  - odb                     http://www.codesynthesis.com/products/odb/
+  - libodb                  http://www.codesynthesis.com/products/odb/
+  - libodb-<database>       http://www.codesynthesis.com/products/odb/
+  - libodb-boost (optional) http://www.codesynthesis.com/products/odb/
+  - boost (optional)        http://www.boost.org
 
 Building on UNIX
 ================
@@ -44,21 +46,25 @@ option to specify the build directory, for example:
 
 ./configure --with-odb=/tmp/odb
 
-The configure script also expects the libodb and libodb-<database>
+The configure script also expects the libodb, libodb-<database>, and,
+if you would like to build the boost example, libodb-boost and boost
 headers and libraries to be installed in a directory where the C++
 compiler and linker will search for them by default (normally /usr
-and  /usr/local). If these libraries are installed in other
-directories, you can use the CPPFLAGS and LDFLAGS configure variables
-to specify their locations, for example:
+and  /usr/local). If these libraries are installed in other directories,
+you can use the CPPFLAGS and LDFLAGS configure variables to specify
+their locations, for example:
 
 ./configure CPPFLAGS=-I/opt/libodb/include LDFLAGS=-L/opt/libodb/lib
 
 If these libraries are not installed and you would like to use their 
-build directories instead, you can use the --with-libodb and 
---with-libodb-<database> configure options to specify their locations,
-for example:
+build directories instead, you can use the --with-libodb, 
+--with-libodb-<database>, --with-libodb-boost, and --with-boost
+configure options to specify their locations, for example:
 
 ./configure --with-libodb=/tmp/libodb
+
+For the boost build directory the configure script expects to find the
+boost libraries in the stage/lib/ subdirectory.
 
 For each <database> value the configure script has a set of options in
 the form --with-<database>-* that allow you to specify various database
@@ -93,11 +99,12 @@ Cygwin or MinGW, refer to the "Building on UNIX" section above.
 The standard Visual Studio project and solution files are used on this
 platform. The provided project files expect the directory where the ODB
 compiler binary is installed to be in the executable search path (the
-PATH environment variable). They also expect the libodb and 
-libodb-<database> header and import library directories to be in the
-VC++ Directories Include and Library search lists. See the INSTALL
-files in the library packages for more information on how to setup
-the VC++ Directories.
+PATH environment variable). They also expect the libodb, libodb-<database>,
+and, if you would like to build the boost example, libodb-boost and boost
+header and import library directories to be in the VC++ Directories Include
+and Library search lists. See the INSTALL files in the ODB library packages
+for more information on how to setup their VC++ Directories. For boost,
+refer to the boost documentation.
 
 To build the examples, unpack the source code archive and open the
 examples-<database>-vc<N>.sln file located in the odb-examples package
@@ -105,6 +112,10 @@ directory (referred to as odb-examples\ from now on). Here <N> is the
 version of Visual Studio that you are using. Once the solution is open,
 select the desired build configuration (Debug or Release) and platform
 (Win32 or x64) and build the solution.
+
+If you would like to build the boost example (requires boost and
+libodb-boost), also open and build the solution in the boost/ 
+subdirectory.
 
 Once the build is completed successfully, you can run each example
 manually from the command line. See the README file accompanying each

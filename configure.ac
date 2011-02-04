@@ -38,6 +38,21 @@ LIBODB([], [AC_MSG_ERROR([libodb is not found; consider using --with-libodb=DIR]
 #
 TR1_MEMORY
 
+# Check for boost.
+#
+odb_example_boost=yes
+LIBBOOST([], [odb_example_boost=no])
+LIBBOOST_SMART_PTR([], [odb_example_boost=no])
+LIBBOOST_UNORDERED([], [odb_example_boost=no])
+LIBBOOST_DATE_TIME([], [odb_example_boost=no])
+LIBBOOST_SYSTEM
+
+# Check for libodb-boost.
+#
+LIBODB_BOOST([], [odb_example_boost=no])
+
+AM_CONDITIONAL([ODB_EXAMPLES_BOOST], [test x$odb_example_boost != xno])
+
 # Check which database we are using.
 #
 DATABASE

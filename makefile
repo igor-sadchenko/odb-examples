@@ -5,11 +5,12 @@
 
 include $(dir $(lastword $(MAKEFILE_LIST)))build/bootstrap.make
 
-dirs      := composite container hello query mapping
-tr1_dirs  := relationship inverse schema
+dirs       := composite container hello query mapping
+tr1_dirs   := relationship inverse schema
+boost_dirs := boost
 
-dist_dirs := $(dirs) $(tr1_dirs)
-all_dirs  := $(dirs) $(tr1_dirs) template
+dist_dirs  := $(dirs) $(tr1_dirs) $(boost_dirs)
+all_dirs   := $(dirs) $(tr1_dirs) $(boost_dirs) template
 
 default := $(out_base)/
 dist    := $(out_base)/.dist
@@ -21,6 +22,7 @@ $(default): $(addprefix $(out_base)/,$(addsuffix /,$(all_dirs)))
 $(dist): name := examples
 $(dist): export dirs := $(dirs)
 $(dist): export tr1_dirs := $(tr1_dirs)
+$(dist): export boost_dirs := $(boost_dirs)
 $(dist): data_dist := GPLv2 LICENSE README NEWS INSTALL version tester.bat \
 mysql-driver.bat mysql.options
 $(dist): exec_dist := bootstrap tester
