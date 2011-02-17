@@ -40,18 +40,18 @@ TR1_MEMORY
 
 # Check for boost.
 #
-odb_example_boost=yes
-LIBBOOST([], [odb_example_boost=no])
-LIBBOOST_SMART_PTR([], [odb_example_boost=no])
-LIBBOOST_UNORDERED([], [odb_example_boost=no])
-LIBBOOST_DATE_TIME([], [odb_example_boost=no])
+odb_examples_boost=yes
+LIBBOOST([], [odb_examples_boost=no])
 LIBBOOST_SYSTEM
+LIBBOOST_SMART_PTR([], [odb_examples_boost=no])
+LIBBOOST_UNORDERED([], [odb_examples_boost=no])
+LIBBOOST_DATE_TIME([], [odb_examples_boost=no])
 
 # Check for libodb-boost.
 #
-LIBODB_BOOST([], [odb_example_boost=no])
+LIBODB_BOOST([], [odb_examples_boost=no])
 
-AM_CONDITIONAL([ODB_EXAMPLES_BOOST], [test x$odb_example_boost != xno])
+AM_CONDITIONAL([ODB_EXAMPLES_BOOST], [test x$odb_examples_boost != xno])
 
 # Check which database we are using.
 #
