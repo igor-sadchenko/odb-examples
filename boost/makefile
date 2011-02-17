@@ -33,12 +33,15 @@ $(call import,\
   $(scf_root)/import/libboost/header-only/stub.make,\
   cpp-options: boost.l.cpp-options)
 
+$(call import,\
+  $(scf_root)/import/libboost/date-time/stub.make,\
+  l: boost_date_time.l)
+
 ifdef db_id
 $(call import,\
   $(scf_root)/import/libodb-$(db_id)/stub.make,\
   l: odb_db.l,cpp-options: odb_db.l.cpp-options)
 endif
-
 
 ifeq ($(odb_db.l.cpp-options),)
 odb_db.l.cpp-options := $(out_base)/.unbuildable
@@ -46,7 +49,7 @@ endif
 
 # Build.
 #
-$(driver): $(cxx_obj) $(odb_db.l) $(odb_boost.l) $(odb.l)
+$(driver): $(cxx_obj) $(odb_db.l) $(odb_boost.l) $(odb.l) $(boost_date_time.l)
 $(cxx_obj) $(cxx_od): cpp_options := -I$(out_base)
 $(cxx_obj) $(cxx_od): $(odb.l.cpp-options) $(odb_boost.l.cpp-options) \
 $(odb_db.l.cpp-options) $(boost.l.cpp-options)
