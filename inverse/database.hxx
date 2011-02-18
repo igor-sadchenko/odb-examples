@@ -24,7 +24,7 @@ inline std::auto_ptr<odb::database>
 create_database (int& argc, char* argv[])
 {
   using namespace std;
-  using namespace odb;
+  using namespace odb::core;
 
   if (argc > 1 && argv[1] == string ("--help"))
   {
@@ -32,14 +32,14 @@ create_database (int& argc, char* argv[])
          << "Options:" << endl;
 
 #if defined(DATABASE_MYSQL)
-    mysql::database::print_usage (cerr);
+    odb::mysql::database::print_usage (cerr);
 #endif
 
     exit (0);
   }
 
 #if defined(DATABASE_MYSQL)
-  return auto_ptr<database> (new mysql::database (argc, argv));
+  return auto_ptr<database> (new odb::mysql::database (argc, argv));
 #endif
 }
 

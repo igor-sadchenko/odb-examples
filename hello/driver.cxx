@@ -14,7 +14,7 @@
 #include "person-odb.hxx"
 
 using namespace std;
-using namespace odb;
+using namespace odb::core;
 
 int
 main (int argc, char* argv[])

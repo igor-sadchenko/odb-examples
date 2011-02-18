@@ -16,7 +16,7 @@
 
 using namespace std;
 using namespace boost::gregorian;
-using namespace odb;
+using namespace odb::core;
 
 int
 main (int argc, char* argv[])
