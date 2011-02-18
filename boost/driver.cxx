@@ -21,6 +21,8 @@ using namespace odb::core;
 int
 main (int argc, char* argv[])
 {
+  using boost::shared_ptr;
+
   try
   {
     auto_ptr<database> db (create_database (argc, argv));
