@@ -10,7 +10,7 @@ set "tests=__path__(dirs) __path__(tr1_dirs) __path__(boost_dirs)"
 set "confs=__path__(configurations)"
 set "plats=__path__(platforms)"
 set "curdir=%CD%"
-set "topdir=%curdir%\.."
+set "topdir=%curdir%"
 set "failed="
 
 if "_%1_" == "__" (
