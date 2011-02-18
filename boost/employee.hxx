@@ -15,7 +15,7 @@
 
 #include <odb/core.hxx>
 
-#include <odb/boost/smart-ptr/lazy-ptr.hxx>
+#include <odb/boost/lazy-ptr.hxx>
 
 using boost::shared_ptr;
 using boost::weak_ptr;
