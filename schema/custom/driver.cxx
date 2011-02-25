@@ -1,4 +1,4 @@
-// file      : schema/driver.cxx
+// file      : schema/custom/driver.cxx
 // author    : Boris Kolpackov <boris@codesynthesis.com>
 // copyright : not copyrighted - public domain
 

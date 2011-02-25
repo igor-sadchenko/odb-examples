@@ -1,9 +1,9 @@
-# file      : schema/makefile
+# file      : schema/custom/makefile
 # author    : Boris Kolpackov <boris@codesynthesis.com>
 # copyright : Copyright (c) 2009-2011 Code Synthesis Tools CC
 # license   : GNU GPL v2; see accompanying LICENSE file
 
-include $(dir $(lastword $(MAKEFILE_LIST)))../build/bootstrap.make
+include $(dir $(lastword $(MAKEFILE_LIST)))../../build/bootstrap.make
 
 cxx_tun := driver.cxx
 odb_hdr := employee.hxx
@@ -63,7 +63,7 @@ $(out_base)/: $(driver)
 
 # Dist
 #
-name := $(notdir $(src_base))
+name := $(subst /,-,$(subst $(src_root)/,,$(src_base)))
 
 $(dist): db_id := @database@
 $(dist): sources := $(cxx_tun)
@@ -74,13 +74,12 @@ $(dist): export extra_dist := README $(call vc9projs,$(name)) \
 $(call vc10projs,$(name))
 $(dist):
 	$(call dist-data,$(sources) $(headers) README database.hxx)
-	$(call meta-automake,../template/Makefile.am)
-	$(call meta-vc9projs,../template/template,$(name))
-	$(call meta-vc10projs,../template/template,$(name))
+	$(call meta-automake,../../template/Makefile.am)
+	$(call meta-vc9projs,../../template/template,$(name))
+	$(call meta-vc10projs,../../template/template,$(name))
 
 # Test.
 #
-$(test): schema := $(src_base)/$(basename $(odb_hdr)).sql
 $(test): $(driver)
 	$(call message,test $<,$< --options-file $(dcf_root)/db.options)
 

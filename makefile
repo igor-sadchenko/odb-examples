@@ -6,7 +6,7 @@
 include $(dir $(lastword $(MAKEFILE_LIST)))build/bootstrap.make
 
 dirs       := composite container hello query mapping
-tr1_dirs   := relationship inverse schema
+tr1_dirs   := relationship inverse schema/custom
 boost_dirs := boost
 
 dist_dirs  := $(dirs) $(tr1_dirs) $(boost_dirs)

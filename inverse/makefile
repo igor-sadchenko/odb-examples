@@ -63,7 +63,7 @@ $(out_base)/: $(driver)
 
 # Dist
 #
-name := $(notdir $(src_base))
+name := $(subst /,-,$(subst $(src_root)/,,$(src_base)))
 
 $(dist): db_id := @database@
 $(dist): sources := $(cxx_tun)

@@ -36,7 +36,7 @@ boost
   Shows how to persist objects that use Boost smart pointers, containers,
   and value types with the help of the Boost profile library (libodb-boost).
 
-schema
+schema/custom
   Shows how to map persistent C++ classes to a custom database schema.
 
 mapping
