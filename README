@@ -6,7 +6,7 @@ For more information see:
 
 http://www.codesynthesis.com/products/odb/
 
-This package contains the ODB examples. The following list gives an 
+This package contains the ODB examples. The following list gives an
 overview of the available examples. See the README file accompanying
 each example for more information.
 
@@ -25,7 +25,7 @@ container
   Shows how to use containers as data members in persistent objects.
 
 relationship
-  Shows how to declare and use unidirectional to-one and to-many 
+  Shows how to declare and use unidirectional to-one and to-many
   relationships.
 
 inverse
@@ -35,6 +35,10 @@ inverse
 boost
   Shows how to persist objects that use Boost smart pointers, containers,
   and value types with the help of the Boost profile library (libodb-boost).
+
+schema/embedded
+  Shows how to generate and use a database schema that is embedded into the
+  application.
 
 schema/custom
   Shows how to map persistent C++ classes to a custom database schema.
@@ -49,5 +53,5 @@ See the LICENSE file for distribution conditions.
 
 See the INSTALL file for prerequisites and installation instructions.
 
-Send questions, bug reports, or any other feedback to the 
+Send questions, bug reports, or any other feedback to the
 odb-users@codesynthesis.com mailing list.

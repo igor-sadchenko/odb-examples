@@ -5,7 +5,7 @@
 
 include $(dir $(lastword $(MAKEFILE_LIST)))build/bootstrap.make
 
-dirs       := composite container hello query mapping
+dirs       := composite container hello query mapping schema/embedded
 tr1_dirs   := relationship inverse schema/custom
 boost_dirs := boost
 
