@@ -38,7 +38,7 @@ endif
 # Build.
 #
 $(driver): $(cxx_obj) $(odb_db.l) $(odb.l)
-$(cxx_obj) $(cxx_od): cpp_options := -I$(out_base)
+$(cxx_obj) $(cxx_od): cpp_options := -I$(out_base) -I$(src_base)
 $(cxx_obj) $(cxx_od): $(odb.l.cpp-options) $(odb_db.l.cpp-options)
 
 ifeq ($(db_id),mysql)
@@ -52,7 +52,7 @@ $(gen): $(odb)
 $(gen): odb := $(odb)
 $(gen) $(dist): export odb_options += --database $(db_id) --generate-schema \
 --generate-query --hxx-prologue '\#include "traits.hxx"'
-$(gen): cpp_options := -I$(out_base)
+$(gen): cpp_options := -I$(src_base)
 $(gen): $(odb.l.cpp-options)
 
 $(call include-dep,$(cxx_od),$(cxx_obj),$(gen))
@@ -82,7 +82,7 @@ README database.hxx)
 
 # Test.
 #
-$(test): schema := $(src_base)/$(basename $(odb_hdr)).sql
+$(test): schema := $(out_base)/$(basename $(odb_hdr)).sql
 $(test): $(driver)
 	$(call message,sql $$1,$(dcf_root)/db-driver $$1,$(schema))
 	$(call message,test $<,$< --options-file $(dcf_root)/db.options)
