@@ -13,7 +13,16 @@ $(call -include,$(dcf_root)/configuration-dynamic.make)
 
 ifdef db_id
 
-$(out_root)/%: db_id := $(db_id)
+ifeq ($(db_id),mysql)
+db_macro := DATABASE_MYSQL
+endif
+
+ifeq ($(db_id),sqlite)
+db_macro := DATABASE_SQLITE
+endif
+
+$(out_root)/%: db_id    := $(db_id)
+$(out_root)/%: db_macro := $(db_macro)
 
 else
 

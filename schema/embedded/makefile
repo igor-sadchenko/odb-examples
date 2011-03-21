@@ -38,12 +38,8 @@ endif
 # Build.
 #
 $(driver): $(cxx_obj) $(odb_db.l) $(odb.l)
-$(cxx_obj) $(cxx_od): cpp_options := -I$(out_base) -I$(src_base)
+$(cxx_obj) $(cxx_od): cpp_options := -I$(out_base) -I$(src_base) -D$(db_macro)
 $(cxx_obj) $(cxx_od): $(odb.l.cpp-options) $(odb_db.l.cpp-options)
-
-ifeq ($(db_id),mysql)
-$(cxx_obj) $(cxx_od): cpp_options += -DDATABASE_MYSQL
-endif
 
 genf := $(addprefix $(odb_hdr:.hxx=-odb),.hxx .ixx .cxx)
 gen  := $(addprefix $(out_base)/,$(genf))
