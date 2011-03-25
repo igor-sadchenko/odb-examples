@@ -55,7 +55,7 @@ main (int argc, char* argv[])
 
     unsigned long id;
 
-    // Create a persistent person objects.
+    // Create a persistent person object.
     //
     {
       person joe ("Joe", "Dirt");

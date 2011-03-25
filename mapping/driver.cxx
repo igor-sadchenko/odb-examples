@@ -23,10 +23,12 @@ main (int argc, char* argv[])
   {
     auto_ptr<database> db (create_database (argc, argv));
 
+    // Create a few persistent person objects.
+    //
     {
       person john ("John", "Doe", date (1978, 10, 13), true);
-      person jane ("Jane", "Doe", date (1975, 11, 23), false);
-      person joe ("Joe", "Dirt", date (1973, 12, 28), true);
+      person jane ("Jane", "Doe", date (1975, 9, 23), false);
+      person joe ("Joe", "Dirt", date (1973, 12, 3), true);
 
       transaction t (db->begin ());
 
@@ -37,6 +39,8 @@ main (int argc, char* argv[])
       t.commit ();
     }
 
+    // Query for a person using data members of our custom-mapped types.
+    //
     {
       typedef odb::query<person> query;
       typedef odb::result<person> result;
@@ -48,7 +52,7 @@ main (int argc, char* argv[])
 
       for (result::iterator i (r.begin ()); i != r.end (); ++i)
       {
-        cout << i->first () << " " << i->last () << endl;
+        cout << i->first () << " " << i->last () << " " << i->born () << endl;
       }
 
       t.commit ();
