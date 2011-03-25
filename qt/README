@@ -4,13 +4,13 @@ containers, and value types with the help of the Qt profile library
 
 The example consists of the following files:
 
-employee.hxx
+person.hxx
   Describe contents.
 
-employee-odb.hxx
-employee-odb.ixx
-employee-odb.cxx
-employee.sql
+person-odb.hxx
+person-odb.ixx
+person-odb.cxx
+person.sql
   The first three files contain the database support code and the last file
   contains the database schema for the employee.hxx header.
 

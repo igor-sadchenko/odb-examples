@@ -11,8 +11,8 @@
 
 #include "database.hxx" // create_database
 
-#include "employee.hxx"
-#include "employee-odb.hxx"
+#include "person.hxx"
+#include "person-odb.hxx"
 
 using namespace std;
 using namespace odb::core;
@@ -24,18 +24,17 @@ main (int argc, char* argv[])
   {
     auto_ptr<database> db (create_database (argc, argv));
 
-    employee e;
-    e.name = "John Doe";
+    person p1;
+    p1.name = "Constantin Michael";
+    p1.date_of_birth.setDate (1979, 03, 07);
 
-    QChar* c = e.name.data ();
-
-    while (!c->isNull ())
+    // Persist.
+    //
     {
-      cout << c->toAscii ();
-      ++c;
+      transaction t (db->begin ());
+      db->persist (p1);
+      t.commit ();
     }
-
-    cout << endl;
   }
   catch (const odb::exception& e)
   {

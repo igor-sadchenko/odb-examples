@@ -6,7 +6,7 @@
 include $(dir $(lastword $(MAKEFILE_LIST)))../build/bootstrap.make
 
 cxx_tun := driver.cxx
-odb_hdr := employee.hxx
+odb_hdr := person.hxx
 cxx_obj := $(addprefix $(out_base)/,$(cxx_tun:.cxx=.o) $(odb_hdr:.hxx=-odb.o))
 cxx_od  := $(cxx_obj:.o=.o.d)
 
@@ -59,7 +59,7 @@ gen  := $(addprefix $(out_base)/,$(genf))
 
 $(gen): $(odb)
 $(gen): odb := $(odb)
-$(gen) $(dist): export odb_options += --database $(db_id) \
+$(gen) $(dist): export odb_options += --database $(db_id) --profile qt \
 --generate-query --generate-schema
 $(gen): cpp_options := -I$(out_base)
 $(gen): $(odb.l.cpp-options) $(odb_qt.l.cpp-options) $(qt.l.cpp-options)
