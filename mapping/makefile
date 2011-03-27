@@ -78,9 +78,9 @@ README database.hxx)
 
 # Test.
 #
-$(test): schema := $(out_base)/$(basename $(odb_hdr)).sql
+$(test): header := $(odb_hdr)
 $(test): $(driver)
-	$(call message,sql $$1,$(dcf_root)/db-driver $$1,$(schema))
+	$(call schema)
 	$(call message,test $<,$< --options-file $(dcf_root)/db.options)
 
 # Clean.

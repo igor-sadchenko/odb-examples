@@ -45,6 +45,14 @@ clean: $(out_base)/.clean
 
 endif
 
+# Database schema creation.
+#
+ifeq ($(filter $(db_id),sqlite),)
+$(out_base)/.test: schema = \
+$(call message,sql $$1,\
+$(dcf_root)/db-driver $$1,$(out_base)/$(basename $(header)).sql)
+endif
+
 # Dist setup.
 #
 ifneq ($(filter $(MAKECMDGOALS),dist),)

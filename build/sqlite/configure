@@ -19,10 +19,5 @@ $echo
 db=`read_value`
 
 opt=$dcf_root/db.options
-drv=$dcf_root/db-driver
 
 echo "--database '$db'" >$opt
-
-echo "#!/bin/sh"                                              >$drv
-echo "# dummy"                                               >>$drv
-chmod 755 $drv
