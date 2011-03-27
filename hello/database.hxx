@@ -19,6 +19,7 @@
 #if defined(DATABASE_MYSQL)
 #  include <odb/mysql/database.hxx>
 #elif defined(DATABASE_SQLITE)
+#  include <odb/transaction.hxx>
 #  include <odb/schema-catalog.hxx>
 #  include <odb/sqlite/database.hxx>
 #endif
