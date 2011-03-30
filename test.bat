@@ -6,7 +6,7 @@ rem license   : GNU GPL v2; see accompanying LICENSE file
 
 setlocal
 
-set "tests=__path__(dirs) __path__(tr1_dirs) __path__(boost_dirs)"
+set "tests=__path__(dirs) __path__(tr1_dirs) __path__(boost_dirs) __path__(qt_dirs)"
 set "confs=__path__(configurations)"
 set "plats=__path__(platforms)"
 set "curdir=%CD%"

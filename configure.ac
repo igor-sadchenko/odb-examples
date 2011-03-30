@@ -53,6 +53,17 @@ LIBODB_BOOST([], [odb_examples_boost=no])
 
 AM_CONDITIONAL([ODB_EXAMPLES_BOOST], [test x$odb_examples_boost != xno])
 
+# Check for Qt
+#
+odb_examples_qt=yes
+LIBQTCORE([],[odb_examples_qt=no])
+
+# Check for libodb-qt
+#
+LIBODB_QT([], [odb_examples_qt=no])
+
+AM_CONDITIONAL([ODB_EXAMPLES_QT], [test x$odb_examples_qt != xno])
+
 # Check which database we are using.
 #
 DATABASE

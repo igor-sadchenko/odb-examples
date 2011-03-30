@@ -13,5 +13,9 @@ if ODB_EXAMPLES_BOOST
 SUBDIRS += __path__(boost_dirs)
 endif
 
+if ODB_EXAMPLES_QT
+SUBDIRS += __path__(qt_dirs)
+endif
+
 EXTRA_DIST = __file__(extra_dist)
 ACLOCAL_AMFLAGS = -I m4
