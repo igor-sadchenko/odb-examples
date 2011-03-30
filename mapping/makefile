@@ -65,7 +65,7 @@ $(dist): db_id := @database@
 $(dist): sources := $(cxx_tun)
 $(dist): headers := $(odb_hdr)
 $(dist): export name := $(name)
-$(dist): export extra_headers := traits.hxx
+$(dist): export extra_headers := traits.hxx $(databases:%=traits-%.hxx)
 $(dist): export odb_header_stem := $(basename $(odb_hdr))
 $(dist): export extra_dist := README $(call vc9projs,$(name)) \
 $(call vc10projs,$(name))

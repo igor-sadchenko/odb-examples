@@ -7,8 +7,14 @@ EXTRA_DIST = __file__(extra_dist)
 noinst_PROGRAMS = driver
 driver_SOURCES = driver.cxx database.hxx __path__(extra_sources) __path__(extra_headers)
 
+AM_CPPFLAGS = -I'$(builddir)' -I'$(srcdir)'
+
 if DATABASE_MYSQL
-AM_CPPFLAGS = -DDATABASE_MYSQL
+AM_CPPFLAGS += -DDATABASE_MYSQL
+endif
+
+if DATABASE_SQLITE
+AM_CPPFLAGS += -DDATABASE_SQLITE
 endif
 
 TESTS=$(top_builddir)/tester
