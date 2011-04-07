@@ -4,13 +4,19 @@ containers, and value types with the help of the Qt profile library
 
 The example consists of the following files:
 
-person.hxx
-  Describe contents.
+employee.hxx
+  Header file defining the 'employee' and 'employer' persistent classes.
+  We use QSharedPointer/QWeakPointer smart pointers provided by Qt (as
+  well as their lazy versions provided by the Qt profile library) to
+  establish a bidirectional employee-employer relationship. We also use
+  the QDateTime type to store the employee's date of birth and QString
+  to store the employee's first and last name. Finally we use QByteArray
+  to represent the persons genetic fingerprint.
 
-person-odb.hxx
-person-odb.ixx
-person-odb.cxx
-person.sql
+employee-odb.hxx
+employee-odb.ixx
+employee-odb.cxx
+employee.sql
   The first three files contain the database support code and the last file
   contains the database schema for the employee.hxx header.
 
@@ -39,8 +45,8 @@ driver.cxx
   instance. It then creates a number of 'employee' and 'employer' objects and
   persists them in the database. The next transaction loads all the employees
   of a particular employer using the employee-employer relationship. Finally,
-  the driver performs a database query which uses a data member of the Boost
-  gregorian::date type in its criterion.
+  the driver performs a database query which uses a data member of the Qt
+  QString type in its criterion.
 
 To run the example we first need to create the database schema. Using MySQL
 as an example, this can be achieved with the following command:

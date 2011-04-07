@@ -6,7 +6,7 @@
 include $(dir $(lastword $(MAKEFILE_LIST)))../build/bootstrap.make
 
 cxx_tun := driver.cxx
-odb_hdr := person.hxx
+odb_hdr := employee.hxx
 cxx_obj := $(addprefix $(out_base)/,$(cxx_tun:.cxx=.o) $(odb_hdr:.hxx=-odb.o))
 cxx_od  := $(cxx_obj:.o=.o.d)
 
@@ -29,11 +29,11 @@ $(call import,\
   $(scf_root)/import/libodb-qt/stub.make,\
   l: odb_qt.l,cpp-options: odb_qt.l.cpp-options)
 
-ifdef db_id
 $(call import,\
   $(scf_root)/import/libqt/core/stub.make,\
   l: qt_core.l,cpp-options: qt_core.l.cpp-options)
 
+ifdef db_id
 $(call import,\
   $(scf_root)/import/libodb-$(db_id)/stub.make,\
   l: odb_db.l,cpp-options: odb_db.l.cpp-options)
@@ -45,14 +45,10 @@ endif
 
 # Build.
 #
-$(driver): $(cxx_obj) $(odb_db.l) $(odb_qt.l) $(odb.l)
-$(cxx_obj) $(cxx_od): cpp_options := -I$(out_base)
+$(driver): $(cxx_obj) $(odb_db.l) $(odb_qt.l) $(odb.l) $(qt_core.l)
+$(cxx_obj) $(cxx_od): cpp_options := -I$(out_base) -I$(src_base) -D$(db_macro)
 $(cxx_obj) $(cxx_od): $(odb.l.cpp-options) $(odb_qt.l.cpp-options) \
-$(odb_db.l.cpp-options)
-
-ifeq ($(db_id),mysql)
-$(cxx_obj) $(cxx_od): cpp_options += -DDATABASE_MYSQL
-endif
+$(odb_db.l.cpp-options) $(qt_core.l.cpp-options)
 
 genf := $(addprefix $(odb_hdr:.hxx=-odb),.hxx .ixx .cxx) $(odb_hdr:.hxx=.sql)
 gen  := $(addprefix $(out_base)/,$(genf))
@@ -60,9 +56,9 @@ gen  := $(addprefix $(out_base)/,$(genf))
 $(gen): $(odb)
 $(gen): odb := $(odb)
 $(gen) $(dist): export odb_options += --database $(db_id) --profile qt \
---generate-query --generate-schema
-$(gen): cpp_options := -I$(out_base)
-$(gen): $(odb.l.cpp-options) $(odb_qt.l.cpp-options) $(qt.l.cpp-options)
+--generate-query --generate-schema --default-pointer std::tr1::shared_ptr
+$(gen): cpp_options := -I$(src_base)
+$(gen): $(odb.l.cpp-options) $(odb_qt.l.cpp-options) $(qt_core.l.cpp-options)
 
 $(call include-dep,$(cxx_od),$(cxx_obj),$(gen))
 
@@ -91,9 +87,9 @@ $(dist):
 
 # Test.
 #
-$(test): schema := $(src_base)/$(basename $(odb_hdr)).sql
+$(test): header := $(odb_hdr)
 $(test): $(driver)
-	$(call message,sql $$1,$(dcf_root)/db-driver $$1,$(schema))
+	$(call schema)
 	$(call message,test $<,$< --options-file $(dcf_root)/db.options)
 
 # Clean.
