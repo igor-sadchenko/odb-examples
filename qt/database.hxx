@@ -18,6 +18,10 @@
 
 #if defined(DATABASE_MYSQL)
 #  include <odb/mysql/database.hxx>
+#elif defined(DATABASE_SQLITE)
+#  include <odb/transaction.hxx>
+#  include <odb/schema-catalog.hxx>
+#  include <odb/sqlite/database.hxx>
 #endif
 
 inline std::auto_ptr<odb::database>
@@ -33,14 +37,30 @@ create_database (int& argc, char* argv[])
 
 #if defined(DATABASE_MYSQL)
     odb::mysql::database::print_usage (cerr);
+#elif defined(DATABASE_SQLITE)
+    odb::sqlite::database::print_usage (cerr);
 #endif
 
     exit (0);
   }
 
 #if defined(DATABASE_MYSQL)
-  return auto_ptr<database> (new odb::mysql::database (argc, argv));
+  auto_ptr<database> db (new odb::mysql::database (argc, argv));
+#elif defined(DATABASE_SQLITE)
+  auto_ptr<database> db (
+    new odb::sqlite::database (
+      argc, argv, false, SQLITE_OPEN_READWRITE | SQLITE_OPEN_CREATE));
+
+  // Create the database schema.
+  //
+  {
+    transaction t (db->begin ());
+    schema_catalog::create_schema (*db);
+    t.commit ();
+  }
 #endif
+
+  return db;
 }
 
 #endif // DATABASE_HXX

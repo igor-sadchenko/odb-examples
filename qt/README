@@ -11,7 +11,7 @@ employee.hxx
   establish a bidirectional employee-employer relationship. We also use
   the QDateTime type to store the employee's date of birth and QString
   to store the employee's first and last name. Finally we use QByteArray
-  to represent the persons genetic fingerprint.
+  to store the person's public key.
 
 employee-odb.hxx
 employee-odb.ixx

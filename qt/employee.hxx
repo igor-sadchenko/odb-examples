@@ -86,7 +86,10 @@ public:
             const QDate& born,
             const QByteArray& public_key,
             shared_ptr<employer_type> employer)
-      : first_ (first), last_ (last), born_(born), public_key_(public_key),
+      : first_ (first),
+        last_ (last),
+        born_ (born),
+        public_key_ (public_key),
         employer_ (employer)
   {
   }

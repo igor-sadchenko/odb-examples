@@ -18,8 +18,7 @@ using namespace odb::core;
 
 ostream& operator << (ostream& os, const QString& s)
 {
-  os << s.toStdString ();
-  return os;
+  return os << s.toStdString ();
 }
 
 int
@@ -66,7 +65,7 @@ main (int argc, char* argv[])
         t.commit ();
       }
 
-      // Complex Systems Inc.dob
+      // Complex Systems Inc.
       //
       {
         shared_ptr<employer> er (new employer ("Complex Systems Inc"));
