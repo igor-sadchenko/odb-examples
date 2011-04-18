@@ -21,7 +21,7 @@ namespace odb
   namespace sqlite
   {
     template <>
-    class value_traits<bool, details::buffer, id_text>
+    class value_traits<bool, id_text>
     {
     public:
       typedef bool value_type;
@@ -58,7 +58,7 @@ namespace odb
     // doesn't do any error checking for brevity.
     //
     template <>
-    class value_traits<date, details::buffer, id_text>
+    class value_traits<date, id_text>
     {
     public:
       typedef date value_type;

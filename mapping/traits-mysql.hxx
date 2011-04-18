@@ -20,7 +20,7 @@ namespace odb
   namespace mysql
   {
     template <>
-    class value_traits<bool, details::buffer, id_string>
+    class value_traits<bool, id_string>
     {
     public:
       typedef bool value_type;
@@ -53,7 +53,7 @@ namespace odb
     };
 
     template <>
-    class value_traits<date, MYSQL_TIME, id_date>
+    class value_traits<date, id_date>
     {
     public:
       typedef date value_type;
