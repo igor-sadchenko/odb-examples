@@ -10,27 +10,18 @@
 #include <QString>
 #include <QByteArray>
 #include <QDateTime>
+#include <QSharedPointer>
 
 #include <odb/core.hxx>
 
-// Include TR1 <memory> header in a compiler-specific fashion. Fall back
-// on the Boost implementation if the compiler does not support TR1.
-//
-#include <odb/tr1/memory.hxx>
-
-#include <odb/tr1/lazy-ptr.hxx>
-
-using std::tr1::shared_ptr;
-
-using odb::tr1::lazy_shared_ptr;
-using odb::tr1::lazy_weak_ptr;
+#include <odb/qt/lazy-ptr.hxx>
 
 // Forward declarations.
 //
 class employer;
 class employee;
 
-typedef std::vector<lazy_weak_ptr<employee> > employees;
+typedef std::vector<QLazyWeakPointer<employee> > employees;
 
 #pragma db object
 class employer
@@ -85,7 +76,7 @@ public:
             const QString& last,
             const QDate& born,
             const QByteArray& public_key,
-            shared_ptr<employer_type> employer)
+            QSharedPointer<employer_type> employer)
       : first_ (first),
         last_ (last),
         born_ (born),
@@ -126,14 +117,14 @@ public:
 
   // Employer.
   //
-  lazy_shared_ptr<employer_type>
+  QLazySharedPointer<employer_type>
   employer () const
   {
     return employer_;
   }
 
   void
-  employer (shared_ptr<employer_type> employer)
+  employer (QSharedPointer<employer_type> employer)
   {
     employer_ = employer;
   }
@@ -154,7 +145,7 @@ private:
   QByteArray public_key_;
 
   #pragma db not_null
-  lazy_shared_ptr<employer_type> employer_;
+  QLazySharedPointer<employer_type> employer_;
 };
 
 #endif // EMPLOYEE_HXX

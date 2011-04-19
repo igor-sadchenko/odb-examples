@@ -34,16 +34,16 @@ main (int argc, char* argv[])
       // Simple Tech Ltd.
       //
       {
-        shared_ptr<employer> er (new employer ("Simple Tech Ltd"));
+        QSharedPointer<employer> er (new employer ("Simple Tech Ltd"));
 
-        shared_ptr<employee> john (
+        QSharedPointer<employee> john (
           new employee ("John",
                         "Doe",
                         QDate (1974, 5, 23),
                         QByteArray ("\0xF1\0x00\0x34\0x45\0x00\0xDE", 6),
                         er));
 
-        shared_ptr<employee> jane (
+        QSharedPointer<employee> jane (
           new employee ("Jane",
                         "Doe",
                         QDate (1983, 1, 18),
@@ -68,16 +68,16 @@ main (int argc, char* argv[])
       // Complex Systems Inc.
       //
       {
-        shared_ptr<employer> er (new employer ("Complex Systems Inc"));
+        QSharedPointer<employer> er (new employer ("Complex Systems Inc"));
 
-        shared_ptr<employee> john (
+        QSharedPointer<employee> john (
           new employee ("John",
                         "Smith",
                         QDate (1954, 8, 1),
                         QByteArray ("\0x23\0xFD\0x8F\0x00", 4),
                         er));
 
-        shared_ptr<employee> jane (
+        QSharedPointer<employee> jane (
           new employee ("Jane",
                         "Smith",
                         QDate (1976, 12, 31),
@@ -107,18 +107,18 @@ main (int argc, char* argv[])
       session s;
       transaction t (db->begin ());
 
-      shared_ptr<employer> stl (db->load<employer> ("Simple Tech Ltd"));
+      QSharedPointer<employer> stl (db->load<employer> ("Simple Tech Ltd"));
 
       employees& es (stl->employees ());
 
       for (employees::iterator i (es.begin ()); i != es.end (); ++i)
       {
-        lazy_weak_ptr<employee>& lwp (*i);
+        QLazyWeakPointer<employee>& lwp (*i);
 
         // Load and lock the employee and his employer.
         //
-        shared_ptr<employee> p (lwp.load ());
-        shared_ptr<employer> pe (p->employer ().load ());
+        QSharedPointer<employee> p (lwp.load ());
+        QSharedPointer<employer> pe (p->employer ().load ());
 
         cout << p->first () << " " << p->last ()  << endl
              << "  born: " << p->born ().toString () << endl
