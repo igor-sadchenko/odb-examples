@@ -25,7 +25,7 @@
 #endif
 
 inline std::auto_ptr<odb::database>
-create_database (int& argc, char* argv[])
+createDatabase (int& argc, char* argv[])
 {
   using namespace std;
   using namespace odb::core;

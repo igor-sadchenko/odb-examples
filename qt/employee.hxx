@@ -18,17 +18,17 @@
 
 // Forward declarations.
 //
-class employer;
-class employee;
+class Employee;
 
-typedef QSet<QString> emails;
-typedef QList<QLazyWeakPointer<employee> > employees;
+typedef QSet<QString> Emails;
+typedef QList<QLazyWeakPointer<Employee> > Employees;
 
 #pragma db object
-class employer
+class Employer
 {
 public:
-  employer (const QString& name)
+
+  Employer (const QString& name)
       : name_ (name)
   {
   }
@@ -39,17 +39,13 @@ public:
     return name_;
   }
 
-  // Employees of this employer.
-  //
-  typedef ::employees employees_type;
-
-  const employees_type&
+  const Employees&
   employees () const
   {
     return employees_;
   }
 
-  employees_type&
+  Employees&
   employees ()
   {
     return employees_;
@@ -58,30 +54,29 @@ public:
 private:
   friend class odb::access;
 
-  employer () {}
+  Employer () {}
 
   #pragma db id
   QString name_;
 
   #pragma db not_null inverse(employer_)
-  employees_type employees_;
+  Employees employees_;
 };
 
 #pragma db object
-class employee
+class Employee
 {
 public:
-  typedef ::employer employer_type;
 
-  employee (const QString& first,
+  Employee (const QString& first,
             const QString& last,
             const QDate& born,
-            const QByteArray& public_key,
-            QSharedPointer<employer_type> employer)
+            const QByteArray& publicKey,
+            QSharedPointer<Employer> employer)
       : first_ (first),
         last_ (last),
         born_ (born),
-        public_key_ (public_key),
+        publicKey_ (publicKey),
         employer_ (employer)
   {
   }
@@ -108,17 +103,13 @@ public:
     return born_;
   }
 
-  // Emails.
-  //
-  typedef ::emails emails_type;
-
-  const emails_type&
+  const Emails&
   emails () const
   {
     return emails_;
   }
 
-  emails_type&
+  Emails&
   emails ()
   {
     return emails_;
@@ -127,21 +118,21 @@ public:
   // Public key.
   //
   const QByteArray&
-  public_key () const
+  publicKey () const
   {
-    return public_key_;
+    return publicKey_;
   }
 
   // Employer.
   //
-  QLazySharedPointer<employer_type>
+  QLazySharedPointer<Employer>
   employer () const
   {
     return employer_;
   }
 
   void
-  employer (QSharedPointer<employer_type> employer)
+  employer (QSharedPointer<Employer> employer)
   {
     employer_ = employer;
   }
@@ -149,7 +140,7 @@ public:
 private:
   friend class odb::access;
 
-  employee () {}
+  Employee () {}
 
   #pragma db id auto
   unsigned long id_;
@@ -157,11 +148,11 @@ private:
   QString first_;
   QString last_;
   QDate born_;
-  emails_type emails_;
-  QByteArray public_key_;
+  Emails emails_;
+  QByteArray publicKey_;
 
   #pragma db not_null
-  QLazySharedPointer<employer_type> employer_;
+  QLazySharedPointer<Employer> employer_;
 };
 
 #endif // EMPLOYEE_HXX

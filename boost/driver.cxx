@@ -43,8 +43,8 @@ main (int argc, char* argv[])
 
         john->emails ().insert ("john_d@example.com");
         john->emails ().insert ("john.doe@example.com");
-        jane->emails ().insert ("jane_s@example.com");
-        jane->emails ().insert ("jane.smith@example.com");
+        jane->emails ().insert ("jane_d@example.com");
+        jane->emails ().insert ("jane.doe@example.com");
 
         // Set the inverse side of the employee-employer relationship.
         //

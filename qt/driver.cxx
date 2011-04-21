@@ -8,7 +8,7 @@
 #include <odb/session.hxx>
 #include <odb/transaction.hxx>
 
-#include "database.hxx" // create_database
+#include "database.hxx" // createDatabase
 
 #include "employee.hxx"
 #include "employee-odb.hxx"
@@ -16,7 +16,8 @@
 using namespace std;
 using namespace odb::core;
 
-ostream& operator << (ostream& os, const QString& s)
+ostream&
+operator<< (ostream& os, const QString& s)
 {
   return os << s.toStdString ();
 }
@@ -26,7 +27,7 @@ main (int argc, char* argv[])
 {
   try
   {
-    auto_ptr<database> db (create_database (argc, argv));
+    auto_ptr<database> db (createDatabase (argc, argv));
 
     // Create a few persistent objects.
     //
@@ -34,26 +35,26 @@ main (int argc, char* argv[])
       // Simple Tech Ltd.
       //
       {
-        QSharedPointer<employer> er (new employer ("Simple Tech Ltd"));
+        QSharedPointer<Employer> er (new Employer ("Simple Tech Ltd"));
 
-        QSharedPointer<employee> john (
-          new employee ("John",
+        QSharedPointer<Employee> john (
+          new Employee ("John",
                         "Doe",
                         QDate (1974, 5, 23),
                         QByteArray ("\0xF1\0x00\0x34\0x45\0x00\0xDE", 6),
                         er));
 
-        QSharedPointer<employee> jane (
-          new employee ("Jane",
-                        "Smith",
+        QSharedPointer<Employee> jane (
+          new Employee ("Jane",
+                        "Doe",
                         QDate (1983, 1, 18),
                         QByteArray ("\0xD7\0x00\0x14", 3),
                         er));
 
         john->emails ().insert ("john_d@example.com");
         john->emails ().insert ("john.doe@simple.com");
-        jane->emails ().insert ("jane_s@example.com");
-        jane->emails ().insert ("jane.smith@simple.com");
+        jane->emails ().insert ("jane_d@example.com");
+        jane->emails ().insert ("jane.doe@simple.com");
 
         // Set the inverse side of the employee-employer relationship.
         //
@@ -73,24 +74,24 @@ main (int argc, char* argv[])
       // Complex Systems Inc.
       //
       {
-        QSharedPointer<employer> er (new employer ("Complex Systems Inc"));
+        QSharedPointer<Employer> er (new Employer ("Complex Systems Inc"));
 
-        QSharedPointer<employee> john (
-          new employee ("John",
+        QSharedPointer<Employee> john (
+          new Employee ("John",
                         "Smith",
                         QDate (1954, 8, 1),
                         QByteArray ("\0x23\0xFD\0x8F\0x00", 4),
                         er));
 
-        QSharedPointer<employee> jane (
-          new employee ("Jane",
+        QSharedPointer<Employee> jane (
+          new Employee ("Jane",
                         "Smith",
                         QDate (1976, 12, 31),
                         QByteArray ("0x00\0x32\0x00\0x01\0x00", 5),
                         er));
 
-        john->emails ().insert ("john_d@example.com");
-        john->emails ().insert ("john.doe@complex.com");
+        john->emails ().insert ("john_s@example.com");
+        john->emails ().insert ("john.smith@complex.com");
         jane->emails ().insert ("jane_s@example.com");
         jane->emails ().insert ("jane.smith@complex.com");
 
@@ -117,31 +118,30 @@ main (int argc, char* argv[])
       session s;
       transaction t (db->begin ());
 
-      QSharedPointer<employer> stl (db->load<employer> ("Simple Tech Ltd"));
+      QSharedPointer<Employer> stl (db->load<Employer> ("Simple Tech Ltd"));
 
-      employees& es (stl->employees ());
+      Employees& es (stl->employees ());
 
-      for (employees::iterator i (es.begin ()); i != es.end (); ++i)
+      for (Employees::iterator i (es.begin ()); i != es.end (); ++i)
       {
-        QLazyWeakPointer<employee>& lwp (*i);
+        QLazyWeakPointer<Employee>& lwp (*i);
 
         // Load and lock the employee and his employer.
         //
-        QSharedPointer<employee> p (lwp.load ());
-        QSharedPointer<employer> pe (p->employer ().load ());
+        QSharedPointer<Employee> p (lwp.load ());
+        QSharedPointer<Employer> pe (p->employer ().load ());
 
         cout << p->first () << " " << p->last ()  << endl
              << "  born: " << p->born ().toString () << endl;
 
-        for (emails::const_iterator j (p->emails ().begin ()),
+        for (Emails::const_iterator j (p->emails ().begin ()),
                e (p->emails ().end ()); j != e; ++j)
         {
           cout << "  email: " << *j << endl;
         }
 
-        cout  << "  public key length: " << p->public_key ().size () << endl
-              << "  employer: "
-              << pe->name () << endl
+        cout  << "  public key length: " << p->publicKey ().size () << endl
+              << "  employer: " << pe->name () << endl
               << endl;
       }
 
@@ -151,13 +151,13 @@ main (int argc, char* argv[])
     // Search for Complex Systems Inc employees.
     //
     {
-      typedef odb::query<employee> query;
-      typedef odb::result<employee> result;
+      typedef odb::query<Employee> query;
+      typedef odb::result<Employee> result;
 
       session s;
       transaction t (db->begin ());
 
-      result r (db->query<employee> (
+      result r (db->query<Employee> (
                   query::employer::name == "Complex Systems Inc"));
 
       for (result::iterator i (r.begin ()); i != r.end (); ++i)
