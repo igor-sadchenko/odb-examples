@@ -8,10 +8,12 @@ employee.hxx
   Header file defining the 'employee' and 'employer' persistent classes.
   We use QSharedPointer/QWeakPointer smart pointers provided by Qt (as
   well as their lazy versions provided by the Qt profile library) to
-  establish a bidirectional employee-employer relationship. We also use
-  the QDateTime type to store the employee's date of birth and QString
-  to store the employee's first and last name. Finally we use QByteArray
-  to store the person's public key.
+  establish a bidirectional employee-employer relationship. The QList
+  type is used to store the collection of employees employed by the
+  employer. We also use the QDateTime type to store the employee's date
+  of birth and QString to store the employee's first and last name. A
+  QSet instance keeps track of the employee's email addresses. Finally
+  we use QByteArray to store the person's public key.
 
 employee-odb.hxx
 employee-odb.ixx

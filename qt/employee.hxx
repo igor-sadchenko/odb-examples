@@ -5,12 +5,12 @@
 #ifndef EMPLOYEE_HXX
 #define EMPLOYEE_HXX
 
-#include <vector>
-
 #include <QString>
 #include <QByteArray>
 #include <QDateTime>
 #include <QSharedPointer>
+#include <QList>
+#include <QSet>
 
 #include <odb/core.hxx>
 
@@ -21,7 +21,8 @@
 class employer;
 class employee;
 
-typedef std::vector<QLazyWeakPointer<employee> > employees;
+typedef QSet<QString> emails;
+typedef QList<QLazyWeakPointer<employee> > employees;
 
 #pragma db object
 class employer
@@ -107,6 +108,22 @@ public:
     return born_;
   }
 
+  // Emails.
+  //
+  typedef ::emails emails_type;
+
+  const emails_type&
+  emails () const
+  {
+    return emails_;
+  }
+
+  emails_type&
+  emails ()
+  {
+    return emails_;
+  }
+
   // Public key.
   //
   const QByteArray&
@@ -139,9 +156,8 @@ private:
 
   QString first_;
   QString last_;
-
   QDate born_;
-
+  emails_type emails_;
   QByteArray public_key_;
 
   #pragma db not_null

@@ -45,10 +45,15 @@ main (int argc, char* argv[])
 
         QSharedPointer<employee> jane (
           new employee ("Jane",
-                        "Doe",
+                        "Smith",
                         QDate (1983, 1, 18),
                         QByteArray ("\0xD7\0x00\0x14", 3),
                         er));
+
+        john->emails ().insert ("john_d@example.com");
+        john->emails ().insert ("john.doe@simple.com");
+        jane->emails ().insert ("jane_s@example.com");
+        jane->emails ().insert ("jane.smith@simple.com");
 
         // Set the inverse side of the employee-employer relationship.
         //
@@ -83,6 +88,11 @@ main (int argc, char* argv[])
                         QDate (1976, 12, 31),
                         QByteArray ("0x00\0x32\0x00\0x01\0x00", 5),
                         er));
+
+        john->emails ().insert ("john_d@example.com");
+        john->emails ().insert ("john.doe@complex.com");
+        jane->emails ().insert ("jane_s@example.com");
+        jane->emails ().insert ("jane.smith@complex.com");
 
         // Set the inverse side of the employee-employer relationship.
         //
@@ -121,12 +131,18 @@ main (int argc, char* argv[])
         QSharedPointer<employer> pe (p->employer ().load ());
 
         cout << p->first () << " " << p->last ()  << endl
-             << "  born: " << p->born ().toString () << endl
-             << "  public key length: " << p->public_key ().size () << endl
-             << "  employer: "
-             << pe->name ().toAscii ().data () << endl;
+             << "  born: " << p->born ().toString () << endl;
 
-        cout << endl;
+        for (emails::const_iterator j (p->emails ().begin ()),
+               e (p->emails ().end ()); j != e; ++j)
+        {
+          cout << "  email: " << *j << endl;
+        }
+
+        cout  << "  public key length: " << p->public_key ().size () << endl
+              << "  employer: "
+              << pe->name () << endl
+              << endl;
       }
 
       t.commit ();
