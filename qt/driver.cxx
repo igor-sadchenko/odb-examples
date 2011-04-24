@@ -40,14 +40,14 @@ main (int argc, char* argv[])
         QSharedPointer<Employee> john (
           new Employee ("John",
                         "Doe",
-                        QDate (1974, 5, 23),
+                        QDate (1975, 1, 1),
                         QByteArray ("\0xF1\0x00\0x34\0x45\0x00\0xDE", 6),
                         er));
 
         QSharedPointer<Employee> jane (
           new Employee ("Jane",
                         "Doe",
-                        QDate (1983, 1, 18),
+                        QDate (1976, 2, 2),
                         QByteArray ("\0xD7\0x00\0x14", 3),
                         er));
 
@@ -79,14 +79,14 @@ main (int argc, char* argv[])
         QSharedPointer<Employee> john (
           new Employee ("John",
                         "Smith",
-                        QDate (1954, 8, 1),
+                        QDate (1977, 3, 3),
                         QByteArray ("\0x23\0xFD\0x8F\0x00", 4),
                         er));
 
         QSharedPointer<Employee> jane (
           new Employee ("Jane",
                         "Smith",
-                        QDate (1976, 12, 31),
+                        QDate (1978, 4, 4),
                         QByteArray ("0x00\0x32\0x00\0x01\0x00", 5),
                         er));
 
@@ -148,7 +148,8 @@ main (int argc, char* argv[])
       t.commit ();
     }
 
-    // Search for Complex Systems Inc employees.
+    // Search for Complex Systems Inc employees that were born before
+    // April 1978.
     //
     {
       typedef odb::query<Employee> query;
@@ -158,10 +159,12 @@ main (int argc, char* argv[])
       transaction t (db->begin ());
 
       result r (db->query<Employee> (
-                  query::employer::name == "Complex Systems Inc"));
+                  query::employer::name == "Complex Systems Inc" &&
+                  query::born < QDate (1978, 4, 1)));
 
       for (result::iterator i (r.begin ()); i != r.end (); ++i)
-        cout << i->first () << " " << i->last () << endl;
+        cout << i->first () << " " << i->last ()
+             << " " << i->born ().toString () << endl;
 
       t.commit ();
     }
