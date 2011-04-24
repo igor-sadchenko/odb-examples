@@ -13,7 +13,7 @@ employee.hxx
   employer. We also use the QDateTime type to store the employee's date
   of birth and QString to store the employee's first and last name. A
   QSet instance keeps track of the employee's email addresses. Finally
-  we use QByteArray to store the person's public key.
+  we use QByteArray to store the employee's public key.
 
 employee-odb.hxx
 employee-odb.ixx
@@ -34,21 +34,21 @@ employee.sql
   profile.
 
 database.hxx
-  Contains the create_database() function which instantiates the concrete
+  Contains the createDatabase() function which instantiates the concrete
   database class corresponding to the database system we are using.
 
 driver.cxx
   Driver for the example. It includes the employee.hxx and employee-odb.hxx
   headers to gain access to the persistent classes and their database support
-  code. It also includes database.hxx for the create_database() function
+  code. It also includes database.hxx for the createDatabase() function
   declaration.
 
-  In main() the driver first calls create_database() to obtain the database
-  instance. It then creates a number of 'employee' and 'employer' objects and
+  In main() the driver first calls createDatabase() to obtain the database
+  instance. It then creates a number of 'Employee' and 'Employer' objects and
   persists them in the database. The next transaction loads all the employees
   of a particular employer using the employee-employer relationship. Finally,
-  the driver performs a database query which uses a data member of the Qt
-  QString type in its criterion.
+  the driver performs a database query which uses data member of the Qt
+  QString and QDate types in its criterion.
 
 To run the example we first need to create the database schema. Using MySQL
 as an example, this can be achieved with the following command:
