@@ -36,6 +36,10 @@ boost
   Shows how to persist objects that use Boost smart pointers, containers,
   and value types with the help of the Boost profile library (libodb-boost).
 
+qt
+  Shows how to persist objects that use Qt smart pointers, containers, and
+  value types with the help of the Qt profile library (libodb-qt).
+
 schema/embedded
   Shows how to generate and use a database schema that is embedded into the
   application.
