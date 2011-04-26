@@ -52,8 +52,10 @@ driver.cxx
   instance. It then persists a number of 'person' objects in the database
   and executes a query to find objects matching certain criteria.
 
-To run the example we first need to create the database schema. Using MySQL
-as an example, this can be achieved with the following command:
+To run the example we may first need to create the database schema (for some
+database systems, such as SQLite, the schema is embedded into the generated
+code which makes this step unnecessary). Using MySQL as an example, this
+can be achieved with the following command:
 
 mysql --user=odb_test --database=odb_test < person.sql
 

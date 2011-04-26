@@ -50,8 +50,10 @@ driver.cxx
   the driver performs a database query which uses data member of the Qt
   QString and QDate types in its criterion.
 
-To run the example we first need to create the database schema. Using MySQL
-as an example, this can be achieved with the following command:
+To run the example we may first need to create the database schema (for some
+database systems, such as SQLite, the schema is embedded into the generated
+code which makes this step unnecessary). Using MySQL as an example, this
+can be achieved with the following command:
 
 mysql --user=odb_test --database=odb_test < employee.sql
 

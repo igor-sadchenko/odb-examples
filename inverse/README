@@ -4,7 +4,7 @@ shows how to work with lazy pointers. All the relationships presented in
 this example declare one side as inverse in order to produce canonical
 database schema.
 
-The example uses the shared_ptr and weak_ptr smart pointers from TR1 and 
+The example uses the shared_ptr and weak_ptr smart pointers from TR1 and
 requires a C++ compiler with TR1 support or an external TR1 implementation,
 such as the one provided by Boost.
 
@@ -12,13 +12,13 @@ The example consists of the following files:
 
 employee.hxx
   Header file defining the 'employee', 'employer', 'position', and 'project'
-  persistent classes as well as the employer-employee (one-to-many), 
+  persistent classes as well as the employer-employee (one-to-many),
   employee-position (one-to-one), and employee-project (many-to-many)
   bidirectional relationships between them.
 
 employee-odb.hxx
 employee-odb.ixx
-employee-odb.cxx 
+employee-odb.cxx
 employee.sql
   The first three files contain the database support code and the last file
   contains the database schema for the employee.hxx header.
@@ -44,7 +44,7 @@ driver.cxx
   headers to gain access to the persistent classes and their database support
   code. It also includes database.hxx for the create_database() function
   declaration.
-    
+
   In main() the driver first calls create_database() to obtain the database
   instance. It then creates a number of 'employee', 'employer', 'position',
   and 'project' objects, sets the relationships between them, and persists
@@ -53,8 +53,10 @@ driver.cxx
   the driver performs a database query which uses a data member from a related
   object in its criterion.
 
-To run the example we first need to create the database schema. Using MySQL
-as an example, this can be achieved with the following command:
+To run the example we may first need to create the database schema (for some
+database systems, such as SQLite, the schema is embedded into the generated
+code which makes this step unnecessary). Using MySQL as an example, this
+can be achieved with the following command:
 
 mysql --user=odb_test --database=odb_test < employee.sql
 

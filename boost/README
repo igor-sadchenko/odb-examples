@@ -15,7 +15,7 @@ employee.hxx
 
 employee-odb.hxx
 employee-odb.ixx
-employee-odb.cxx 
+employee-odb.cxx
 employee.sql
   The first three files contain the database support code and the last file
   contains the database schema for the employee.hxx header.
@@ -40,16 +40,18 @@ driver.cxx
   headers to gain access to the persistent classes and their database support
   code. It also includes database.hxx for the create_database() function
   declaration.
-    
+
   In main() the driver first calls create_database() to obtain the database
   instance. It then creates a number of 'employee' and 'employer' objects and
   persists them in the database. The next transaction loads all the employees
   of a particular employer using the employee-employer relationship. Finally,
-  the driver performs a database query which uses a data member of the Boost 
+  the driver performs a database query which uses a data member of the Boost
   gregorian::date type in its criterion.
 
-To run the example we first need to create the database schema. Using MySQL
-as an example, this can be achieved with the following command:
+To run the example we may first need to create the database schema (for some
+database systems, such as SQLite, the schema is embedded into the generated
+code which makes this step unnecessary). Using MySQL as an example, this
+can be achieved with the following command:
 
 mysql --user=odb_test --database=odb_test < employee.sql
 
