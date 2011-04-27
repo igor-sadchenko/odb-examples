@@ -5,12 +5,12 @@
 #ifndef EMPLOYEE_HXX
 #define EMPLOYEE_HXX
 
-#include <QString>
-#include <QByteArray>
-#include <QDateTime>
-#include <QSharedPointer>
-#include <QList>
-#include <QSet>
+#include <QtCore/QString>
+#include <QtCore/QByteArray>
+#include <QtCore/QDateTime>
+#include <QtCore/QSharedPointer>
+#include <QtCore/QList>
+#include <QtCore/QSet>
 
 #include <odb/core.hxx>
 
