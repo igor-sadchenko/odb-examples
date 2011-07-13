@@ -1,4 +1,4 @@
-// file      : query/database.hxx
+// file      : template/database.hxx
 // author    : Boris Kolpackov <boris@codesynthesis.com>
 // copyright : not copyrighted - public domain
 
@@ -22,6 +22,8 @@
 #  include <odb/transaction.hxx>
 #  include <odb/schema-catalog.hxx>
 #  include <odb/sqlite/database.hxx>
+#elif defined(DATABASE_PGSQL)
+#  include <odb/pgsql/database.hxx>
 #endif
 
 inline std::auto_ptr<odb::database>
@@ -39,6 +41,8 @@ create_database (int& argc, char* argv[])
     odb::mysql::database::print_usage (cerr);
 #elif defined(DATABASE_SQLITE)
     odb::sqlite::database::print_usage (cerr);
+#elif defined(DATABASE_PGSQL)
+    odb::pgsql::database::print_usage (cerr);
 #endif
 
     exit (0);
@@ -58,6 +62,8 @@ create_database (int& argc, char* argv[])
     schema_catalog::create_schema (*db);
     t.commit ();
   }
+#elif defined(DATABASE_PGSQL)
+  auto_ptr<database> db (new odb::pgsql::database (argc, argv));
 #endif
 
   return db;

@@ -26,6 +26,7 @@ main (int argc, char* argv[])
 
     // Create the database schema.
     //
+#if defined(DATABASE_MYSQL) || defined(DATABASE_SQLITE)
     {
       transaction t (db->begin ());
 
@@ -60,6 +61,47 @@ main (int argc, char* argv[])
 
       t.commit ();
     }
+#elif defined(DATABASE_PGSQL)
+    {
+      // PostgreSQL-specific SQL.
+      //
+      transaction t (db->begin ());
+
+      db->execute ("DROP TABLE IF EXISTS \"Employer\" CASCADE");
+      db->execute ("DROP TABLE IF EXISTS \"Employee\" CASCADE");
+      db->execute ("DROP TABLE IF EXISTS \"EmployeeDegree\" CASCADE");
+
+      db->execute (
+        "CREATE TABLE \"Employer\" ("
+        "name VARCHAR (255) NOT NULL PRIMARY KEY)");
+
+      db->execute (
+        "CREATE TABLE \"Employee\" ("
+        "ssn INTEGER NOT NULL PRIMARY KEY,"
+        "first_name VARCHAR (255) NOT NULL,"
+        "last_name VARCHAR (255) NOT NULL,"
+        "employer VARCHAR (255) NOT NULL)");
+
+      db->execute (
+        "CREATE TABLE \"EmployeeDegree\" ("
+        "ssn INTEGER NOT NULL,"
+        "degree VARCHAR (255) NOT NULL)");
+
+      db->execute (
+        "ALTER TABLE \"Employee\" "
+        "ADD FOREIGN KEY (employer) "
+        "REFERENCES \"Employer\" "
+        "INITIALLY DEFERRED");
+
+      db->execute (
+        "ALTER TABLE \"EmployeeDegree\" "
+        "ADD FOREIGN KEY (ssn) "
+        "REFERENCES \"Employee\" "
+        "INITIALLY DEFERRED");
+
+      t.commit ();
+    }
+#endif
 
     // Create a few persistent objects.
     //

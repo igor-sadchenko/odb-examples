@@ -15,8 +15,10 @@ mapping         \
 schema/embedded
 
 tr1_dirs   := relationship inverse schema/custom
-boost_dirs := boost
-qt_dirs    := qt
+#boost_dirs := boost
+boost_dirs :=
+#qt_dirs    := qt
+qt_dirs :=
 
 dist_dirs  := $(dirs) $(tr1_dirs) $(boost_dirs) $(qt_dirs)
 all_dirs   := $(dirs) $(tr1_dirs) $(boost_dirs) $(qt_dirs) template
