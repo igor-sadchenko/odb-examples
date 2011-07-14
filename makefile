@@ -15,10 +15,16 @@ mapping         \
 schema/embedded
 
 tr1_dirs   := relationship inverse schema/custom
-#boost_dirs := boost
-boost_dirs :=
-#qt_dirs    := qt
-qt_dirs :=
+boost_dirs := boost
+qt_dirs    := qt
+
+# @@ Remove once boost and qt policies have been implemented
+# for PostgreSQL.
+#
+ifeq ($(db_id),pgsql)
+  boost_dirs :=
+  qt_dirs    :=
+endif
 
 dist_dirs  := $(dirs) $(tr1_dirs) $(boost_dirs) $(qt_dirs)
 all_dirs   := $(dirs) $(tr1_dirs) $(boost_dirs) $(qt_dirs) template
