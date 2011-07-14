@@ -1,4 +1,4 @@
-// file      : template/database.hxx
+// file      : mapping/database.hxx
 // author    : Boris Kolpackov <boris@codesynthesis.com>
 // copyright : not copyrighted - public domain
 
