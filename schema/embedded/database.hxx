@@ -1,4 +1,4 @@
-// file      : template/database.hxx
+// file      : schema/embedded/database.hxx
 // author    : Boris Kolpackov <boris@codesynthesis.com>
 // copyright : not copyrighted - public domain
 
@@ -52,14 +52,6 @@ create_database (int& argc, char* argv[])
   auto_ptr<database> db (
     new odb::sqlite::database (
       argc, argv, false, SQLITE_OPEN_READWRITE | SQLITE_OPEN_CREATE));
-
-  // Create the database schema.
-  //
-  {
-    transaction t (db->begin ());
-    schema_catalog::create_schema (*db);
-    t.commit ();
-  }
 #elif defined(DATABASE_PGSQL)
   auto_ptr<database> db (new odb::pgsql::database (argc, argv));
 #endif
