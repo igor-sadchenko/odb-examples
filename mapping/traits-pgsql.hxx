@@ -74,6 +74,9 @@ namespace odb
           return;
         }
 
+        tm pg_epoch_tm = {0, 0, 0, 1, 1, 100, 0, 0, 0, 0, 0};
+        time_t pg_epoch_tt (mktime (&pg_epoch_tm));
+
         time_t v_tt (pg_epoch_tt +
                      static_cast<time_t> (details::endian_traits::ntoh (i)) *
                      seconds_per_day);
@@ -96,6 +99,9 @@ namespace odb
         v_tm.tm_year = v.year () - 1900;
 
         time_t v_tt (mktime (&v_tm));
+
+        tm pg_epoch_tm = {0, 0, 0, 1, 1, 100, 0, 0, 0, 0, 0};
+        time_t pg_epoch_tt (mktime (&pg_epoch_tm));
 
         i = details::endian_traits::hton (
           static_cast<int> ((v_tt - pg_epoch_tt) / seconds_per_day));

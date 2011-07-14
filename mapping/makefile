@@ -5,7 +5,7 @@
 
 include $(dir $(lastword $(MAKEFILE_LIST)))../build/bootstrap.make
 
-cxx_tun := driver.cxx traits-pgsql.cxx
+cxx_tun := driver.cxx
 odb_hdr := person.hxx
 cxx_obj := $(addprefix $(out_base)/,$(cxx_tun:.cxx=.o) $(odb_hdr:.hxx=-odb.o))
 cxx_od  := $(cxx_obj:.o=.o.d)
