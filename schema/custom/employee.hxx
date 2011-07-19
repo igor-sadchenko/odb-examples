@@ -43,10 +43,10 @@ public:
 private:
   friend class odb::access;
 
-  #pragma db type("VARCHAR(255) NOT NULL") column("first_name")
+  #pragma db type("VARCHAR(255)") column("first_name")
   std::string first_;
 
-  #pragma db type("VARCHAR(255) NOT NULL") column("last_name")
+  #pragma db type("VARCHAR(255)") column("last_name")
   std::string last_;
 };
 
@@ -70,7 +70,7 @@ private:
 
   employer () {}
 
-  #pragma db id type("VARCHAR(255) NOT NULL") column("name")
+  #pragma db id type("VARCHAR(255)") column("name")
   std::string name_;
 };
 
@@ -133,14 +133,14 @@ private:
 
   employee (): name_ ("", "") {}
 
-  #pragma db id type("INTEGER UNSIGNED NOT NULL") column("ssn")
+  #pragma db id type("INTEGER UNSIGNED") column("ssn")
   unsigned long id_;
 
   #pragma db column("") // No column prefix.
   name_type name_;
 
   #pragma db unordered table("EmployeeDegree") id_column("ssn") \
-    value_type("VARCHAR(255) NOT NULL") value_column("degree")
+    value_type("VARCHAR(255)") value_column("degree")
   degrees_type degrees_;
 
   #pragma db not_null column("employer")

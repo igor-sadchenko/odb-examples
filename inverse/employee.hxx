@@ -84,7 +84,7 @@ private:
   #pragma db id
   std::string name_;
 
-  #pragma db not_null inverse(employer_)
+  #pragma db value_not_null inverse(employer_)
   employees_type employees_;
 };
 
@@ -172,7 +172,7 @@ private:
   #pragma db id
   std::string name_;
 
-  #pragma db not_null inverse(projects_)
+  #pragma db value_not_null inverse(projects_)
   employees_type employees_;
 };
 
@@ -268,7 +268,7 @@ private:
   #pragma db not_null
   lazy_shared_ptr<position_type> position_;
 
-  #pragma db not_null unordered
+  #pragma db value_not_null unordered
   projects_type projects_;
 };
 

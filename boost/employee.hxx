@@ -72,7 +72,7 @@ private:
   #pragma db id
   std::string name_;
 
-  #pragma db not_null inverse(employer_)
+  #pragma db value_not_null inverse(employer_)
   employees_type employees_;
 };
 

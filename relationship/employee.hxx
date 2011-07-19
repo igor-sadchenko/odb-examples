@@ -154,7 +154,7 @@ private:
   #pragma db not_null
   shared_ptr<employer_type> employer_;
 
-  #pragma db not_null unordered
+  #pragma db value_not_null unordered
   projects_type projects_;
 };
 

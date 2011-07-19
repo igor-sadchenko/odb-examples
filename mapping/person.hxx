@@ -13,9 +13,9 @@
 // In our database boolean values are stored as strings with valid
 // values being "true" and "false".
 //
-#pragma db value(bool) type("VARCHAR(5) NOT NULL")
+#pragma db value(bool) type("VARCHAR(5)")
 
-#pragma db value type("DATE NOT NULL")
+#pragma db value type("DATE")
 class date
 {
 public:

@@ -59,7 +59,7 @@ private:
   #pragma db id
   QString name_;
 
-  #pragma db not_null inverse(employer_)
+  #pragma db value_not_null inverse(employer_)
   Employees employees_;
 };
 
