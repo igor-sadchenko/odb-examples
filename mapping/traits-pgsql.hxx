@@ -54,6 +54,9 @@ namespace odb
       }
     };
 
+    // Mapping of date to PostgreSQL DATE. DATE is stored as the number
+    // of days since the PostgreSQL epoch 2000-01-01.
+    //
     template <>
     class value_traits<date, id_date>
     {
@@ -62,7 +65,11 @@ namespace odb
       typedef date query_type;
       typedef int image_type;
 
-      static const time_t pg_epoch_tt;
+      // The difference between the PostgreSQL epoch and the Unix epoch
+      // in seconds.
+      //
+      static const time_t epoch_diff = 946684800;
+
       static const time_t seconds_per_day = 86400;
 
       static void
@@ -74,13 +81,14 @@ namespace odb
           return;
         }
 
-        tm pg_epoch_tm = {0, 0, 0, 1, 1, 100, 0, 0, 0, 0, 0};
-        time_t pg_epoch_tt (mktime (&pg_epoch_tm));
-
-        time_t v_tt (pg_epoch_tt +
+        time_t v_tt (epoch_diff +
                      static_cast<time_t> (details::endian_traits::ntoh (i)) *
                      seconds_per_day);
 
+        // Assume that the date is specified as UTC. Use localtime so as
+        // to avoid any timeshift that could be introduced by the system
+        // time locale not being UTC.
+        //
         tm v_tm (*localtime (&v_tt));
 
         v = date (v_tm.tm_year + 1900, v_tm.tm_mon, v_tm.tm_mday);
@@ -100,11 +108,8 @@ namespace odb
 
         time_t v_tt (mktime (&v_tm));
 
-        tm pg_epoch_tm = {0, 0, 0, 1, 1, 100, 0, 0, 0, 0, 0};
-        time_t pg_epoch_tt (mktime (&pg_epoch_tm));
-
         i = details::endian_traits::hton (
-          static_cast<int> ((v_tt - pg_epoch_tt) / seconds_per_day));
+          static_cast<int> ((v_tt - epoch_diff) / seconds_per_day));
       }
     };
   }
