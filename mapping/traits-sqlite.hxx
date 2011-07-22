@@ -9,7 +9,8 @@
 // SQLite implementation.
 //
 
-#include <cstring>
+#include <cstddef> // std::size_t
+#include <cstring> // std::strncmp, std::memcpy
 #include <sstream>
 
 #include <odb/sqlite/traits.hxx>
