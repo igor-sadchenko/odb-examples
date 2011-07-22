@@ -9,7 +9,8 @@
 // PostgreSQL implementation.
 //
 
-#include <cstring>
+#include <cstddef> // std::size_t
+#include <cstring> // std::strncmp, std::memset, std::memcpy
 #include <ctime>   // localtime, mktime, time_t, tm
 
 #include <odb/pgsql/traits.hxx>
