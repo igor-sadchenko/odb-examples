@@ -10,7 +10,7 @@
 //
 
 #include <cstring>
-#include <ctime>
+#include <ctime>   // localtime, mktime, time_t, tm
 
 #include <odb/pgsql/traits.hxx>
 #include <odb/pgsql/details/endian-traits.hxx>
@@ -91,7 +91,7 @@ namespace odb
         //
         tm v_tm (*localtime (&v_tt));
 
-        v = date (v_tm.tm_year + 1900, v_tm.tm_mon, v_tm.tm_mday);
+        v = date (v_tm.tm_year + 1900, v_tm.tm_mon + 1, v_tm.tm_mday);
       }
 
       static void
@@ -100,10 +100,10 @@ namespace odb
         is_null = false;
 
         tm v_tm;
-        memset (&v_tm, 0, sizeof (v_tm));
+        std::memset (&v_tm, 0, sizeof (v_tm));
 
         v_tm.tm_mday = v.day ();
-        v_tm.tm_mon = v.month ();
+        v_tm.tm_mon = v.month () - 1;
         v_tm.tm_year = v.year () - 1900;
 
         time_t v_tt (mktime (&v_tm));
