@@ -17,6 +17,10 @@ if DATABASE_SQLITE
 AM_CPPFLAGS += -DDATABASE_SQLITE
 endif
 
+if DATABASE_PGSQL
+AM_CPPFLAGS += -DDATABASE_PGSQL
+endif
+
 TESTS=$(top_builddir)/tester
 TESTS_ENVIRONMENT=top_builddir=$(top_builddir); export top_builddir;
 
