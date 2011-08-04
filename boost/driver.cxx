@@ -39,7 +39,7 @@ main (int argc, char* argv[])
           new employee ("John", "Doe", date (1975, Jan, 1), er));
 
         shared_ptr<employee> jane (
-          new employee ("Jane", "Doe", date (1976, Feb, 2), er));
+          new employee ("Jane", "Q", "Doe", date (1976, Feb, 2), er));
 
         john->emails ().insert ("john_d@example.com");
         john->emails ().insert ("john.doe@example.com");
@@ -67,7 +67,7 @@ main (int argc, char* argv[])
         shared_ptr<employer> er (new employer ("Complex Systems Inc"));
 
         shared_ptr<employee> john (
-          new employee ("John", "Smith", date (1977, Mar, 3), er));
+          new employee ("John", "Z", "Smith", date (1977, Mar, 3), er));
 
         shared_ptr<employee> jane (
           new employee ("Jane", "Smith", date (1978, Apr, 4), er));
@@ -109,8 +109,14 @@ main (int argc, char* argv[])
         lazy_weak_ptr<employee>& lwp (*i);
         shared_ptr<employee> p (lwp.load ()); // Load and lock.
 
-        cout << p->first () << " " << p->last () << endl
-             << "  born: " << p->born () << endl
+        cout << p->first () << " ";
+
+        if (p->middle ())
+          cout << *p->middle () << " ";
+
+        cout << p->last () << endl;
+
+        cout << "  born: " << p->born () << endl
              << "  employer: " << p->employer ()->name () << endl;
 
         for (emails::const_iterator j (p->emails ().begin ());
@@ -125,13 +131,13 @@ main (int argc, char* argv[])
       t.commit ();
     }
 
+    typedef odb::query<employee> query;
+    typedef odb::result<employee> result;
+
     // Search for Complex Systems Inc employees that were born before
     // April 1978.
     //
     {
-      typedef odb::query<employee> query;
-      typedef odb::result<employee> result;
-
       session s;
       transaction t (db->begin ());
 
@@ -141,6 +147,21 @@ main (int argc, char* argv[])
 
       for (result::iterator i (r.begin ()); i != r.end (); ++i)
         cout << i->first () << " " << i->last () << " " << i->born () << endl;
+
+      cout << endl;
+      t.commit ();
+    }
+
+    // Search for all the employees that don't have a middle name.
+    //
+    {
+      session s;
+      transaction t (db->begin ());
+
+      result r (db->query<employee> (query::middle.is_null ()));
+
+      for (result::iterator i (r.begin ()); i != r.end (); ++i)
+        cout << i->first () << " " << i->last () << endl;
 
       t.commit ();
     }

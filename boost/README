@@ -9,9 +9,11 @@ employee.hxx
   We use shared_ptr/weak_ptr smart pointers provided by Boost (as well
   as their lazy versions provided by the Boost profile library) to
   establish a bidirectional employee-employer relationship. We also use
-  the boost::gregorian::date type to store the employee's date of birth.
-  Finally, we use the boost::unordered_set container to keep track of
-  the employee's email addresses.
+  the boost::gregorian::date type to store the employee's date of birth
+  and the boost::unordered_set container to keep track of the employee's
+  email addresses Finally, we use boost::optional for the optional middle
+  name. If the middle name is not present, it will be represented in the
+  database as a NULL value.
 
 employee-odb.hxx
 employee-odb.ixx
@@ -45,8 +47,8 @@ driver.cxx
   instance. It then creates a number of 'employee' and 'employer' objects and
   persists them in the database. The next transaction loads all the employees
   of a particular employer using the employee-employer relationship. Finally,
-  the driver performs a database query which uses a data member of the Boost
-  gregorian::date type in its criterion.
+  the driver performs a few database queries which use data members of the
+  various Boost value types in their criterion.
 
 To run the example we may first need to create the database schema (for some
 database systems, such as SQLite, the schema is embedded into the generated

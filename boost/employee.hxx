@@ -10,6 +10,7 @@
 
 #include <boost/shared_ptr.hpp>
 #include <boost/weak_ptr.hpp>
+#include <boost/optional.hpp>
 #include <boost/unordered_set.hpp>
 #include <boost/date_time/gregorian/gregorian.hpp>
 
@@ -86,7 +87,20 @@ public:
             const std::string& last,
             const date& born,
             shared_ptr<employer_type> employer)
-      : first_ (first), last_ (last), born_ (born), employer_ (employer)
+      : first_ (first), last_ (last),
+        born_ (born),
+        employer_ (employer)
+  {
+  }
+
+  employee (const std::string& first,
+            const std::string& middle,
+            const std::string& last,
+            const date& born,
+            shared_ptr<employer_type> employer)
+      : first_ (first), middle_ (middle), last_ (last),
+        born_ (born),
+        employer_ (employer)
   {
   }
 
@@ -96,6 +110,12 @@ public:
   first () const
   {
     return first_;
+  }
+
+  const boost::optional<std::string>&
+  middle () const
+  {
+    return middle_;
   }
 
   const std::string&
@@ -151,6 +171,7 @@ private:
   unsigned long id_;
 
   std::string first_;
+  boost::optional<std::string> middle_;
   std::string last_;
 
   date born_;
