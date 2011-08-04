@@ -27,7 +27,12 @@ print (result& r)
 {
   for (result::iterator i (r.begin ()); i != r.end (); ++i)
   {
-    cout << i->first () << " " << i->last () << " " << i->age () << endl;
+    cout << i->first () << " ";
+
+    if (!i->middle ().null ())
+      cout << i->middle ().get () << " ";
+
+    cout << i->last () << " " << i->age () << endl;
   }
 
   cout << endl;
@@ -48,9 +53,9 @@ main (int argc, char* argv[])
       p.push_back (person ("John", "Doe", 21));
       p.push_back (person ("John", "Smith", 22));
       p.push_back (person ("Jack", "Johnson", 31));
-      p.push_back (person ("John", "Jackson", 32));
-      p.push_back (person ("Jane", "Doe", 23));
-      p.push_back (person ("Jane", "Smith", 24));
+      p.push_back (person ("John", "JJ", "Jackson", 32));
+      p.push_back (person ("Jane", "JD", "Doe", 23));
+      p.push_back (person ("Jane", "JS", "Smith", 24));
 
       transaction t (db->begin ());
 
@@ -174,6 +179,17 @@ main (int argc, char* argv[])
 
       t.commit ();
     }
+
+    // Query that shows how to test for NULL values using the
+    // is_null()/is_not_null() functions.
+    //
+    {
+      transaction t (db->begin ());
+      result r (db->query<person> (query::middle.is_not_null ()));
+      print (r);
+      t.commit ();
+    }
+
   }
   catch (const odb::exception& e)
   {

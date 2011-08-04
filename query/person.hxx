@@ -8,6 +8,7 @@
 #include <string>
 
 #include <odb/core.hxx>
+#include <odb/nullable.hxx>
 
 #pragma db object
 class person
@@ -20,10 +21,24 @@ public:
   {
   }
 
+  person (const std::string& first,
+          const std::string& middle,
+          const std::string& last,
+          unsigned short age)
+      : first_ (first), middle_ (middle), last_ (last), age_ (age)
+  {
+  }
+
   const std::string&
   first () const
   {
     return first_;
+  }
+
+  const odb::nullable<std::string>&
+  middle () const
+  {
+    return middle_;
   }
 
   const std::string&
@@ -47,6 +62,7 @@ private:
   unsigned long id_;
 
   std::string first_;
+  odb::nullable<std::string> middle_;
   std::string last_;
   unsigned short age_;
 };
