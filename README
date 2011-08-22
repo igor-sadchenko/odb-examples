@@ -10,6 +10,12 @@ This package contains the ODB examples. The following list gives an
 overview of the available examples. See the README file accompanying
 each example for more information.
 
+Note also that most of the examples use the --table-prefix ODB compiler
+option to assign a unique prefix to tables created by each example. This
+is done to allow examples to run against the same  database without
+causing any schema conflicts. You don't have to use this option in your
+own applications.
+
 hello
   A "Hello World" example that shows how to use ODB to perform basic
   database operations.
