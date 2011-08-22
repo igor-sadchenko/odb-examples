@@ -6,6 +6,7 @@
 #include <iostream>
 
 #include <odb/database.hxx>
+#include <odb/connection.hxx>
 #include <odb/session.hxx>
 #include <odb/transaction.hxx>
 
@@ -28,7 +29,17 @@ main (int argc, char* argv[])
     //
 #if defined(DATABASE_MYSQL) || defined(DATABASE_SQLITE)
     {
-      transaction t (db->begin ());
+
+      // Due to bugs in SQLite foreign key support for DDL statements,
+      // we need to temporarily disable foreign keys.
+      //
+      connection_ptr c (db->connection ());
+
+#ifdef DATABASE_SQLITE
+      c->execute ("PRAGMA foreign_keys=OFF");
+#endif
+
+      transaction t (c->begin ());
 
       // Try to drop the tables if they exist and ignore the error
       // if they don't.
@@ -60,6 +71,10 @@ main (int argc, char* argv[])
         "degree VARCHAR (255) NOT NULL)");
 
       t.commit ();
+
+#ifdef DATABASE_SQLITE
+      c->execute ("PRAGMA foreign_keys=ON");
+#endif
     }
 #elif defined(DATABASE_PGSQL)
     {
@@ -101,6 +116,8 @@ main (int argc, char* argv[])
 
       t.commit ();
     }
+#else
+#  error unknown database
 #endif
 
     // Create a few persistent objects.
