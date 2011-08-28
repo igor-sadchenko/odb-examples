@@ -49,8 +49,9 @@ endif
 #
 ifeq ($(filter $(db_id),sqlite),)
 $(out_base)/.test: schema = \
-$(call message,sql $$1,\
-$(dcf_root)/db-driver $$1,$(out_base)/$(basename $(header)).sql)
+$(foreach h,$(header),$(call \
+message,sql $$1,$(dcf_root)/db-driver \
+$$1,$(out_base)/$(basename $h).sql)$(literal_newline)$(literal_tab))
 endif
 
 # Dist setup.
