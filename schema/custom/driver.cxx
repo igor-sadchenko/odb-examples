@@ -150,7 +150,7 @@ main (int argc, char* argv[])
       session s;
       transaction t (db->begin ());
 
-      result r (db->query<employee> (query::name::last == "Doe"));
+      result r (db->query<employee> (query::name.last == "Doe"));
 
       for (result::iterator i (r.begin ()); i != r.end (); ++i)
       {

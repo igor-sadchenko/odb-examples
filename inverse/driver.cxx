@@ -243,7 +243,7 @@ main (int argc, char* argv[])
       transaction t (db->begin ());
 
       result r (db->query<employee> (
-                  query::employer::name == "Complex Systems Inc"));
+                  query::employer->name == "Complex Systems Inc"));
 
       for (result::iterator i (r.begin ()); i != r.end (); ++i)
         print (*i);

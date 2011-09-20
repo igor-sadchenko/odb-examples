@@ -159,7 +159,7 @@ main (int argc, char* argv[])
       transaction t (db->begin ());
 
       result r (db->query<Employee> (
-                  query::employer::name == "Complex Systems Inc" &&
+                  query::employer->name == "Complex Systems Inc" &&
                   query::born < QDate (1978, 4, 1)));
 
       for (result::iterator i (r.begin ()); i != r.end (); ++i)

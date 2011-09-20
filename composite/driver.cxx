@@ -82,7 +82,7 @@ main (int argc, char* argv[])
       transaction t (db->begin ());
 
       result r (db->query<person> (
-                  query::name::extras::nickname == "Squeaky"));
+                  query::name.extras.nickname == "Squeaky"));
 
       if (!r.empty ())
       {
