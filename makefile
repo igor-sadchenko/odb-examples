@@ -14,7 +14,7 @@ query           \
 mapping         \
 schema/embedded
 
-tr1_dirs   := relationship inverse schema/custom
+tr1_dirs   := relationship inverse schema/custom view
 boost_dirs := boost
 qt_dirs    := qt
 
