@@ -30,7 +30,7 @@ After unpacking the source code archive, change to the odb-examples
 package directory (referred to as odb-examples/ from now on) and run
 the configure script, for example:
 
-./configure --database <database>
+./configure --with-database <database>
 
 To see the available configuration options run configure with --help:
 
