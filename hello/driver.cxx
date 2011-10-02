@@ -95,6 +95,24 @@ main (int argc, char* argv[])
     }
     */
 
+    // Print some statistics about all the people in our database.
+    //
+    {
+      transaction t (db->begin ());
+
+      odb::result<person_stat> r (db->query<person_stat> ());
+
+      // The result of this query always has exactly one element.
+      //
+      const person_stat& ps (*r.begin ());
+
+      cout << endl
+           << "count  : " << ps.count << endl
+           << "min age: " << ps.min_age << endl
+           << "max age: " << ps.max_age << endl;
+
+      t.commit ();
+    }
 
     // John Doe is no longer in our database.
     //

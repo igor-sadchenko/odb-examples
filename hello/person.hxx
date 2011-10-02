@@ -6,6 +6,7 @@
 #define PERSON_HXX
 
 #include <string>
+#include <cstddef> // std::size_t
 
 #include <odb/core.hxx>
 
@@ -55,6 +56,19 @@ private:
   std::string first_;
   std::string last_;
   unsigned short age_;
+};
+
+#pragma db view object(person)
+struct person_stat
+{
+  #pragma db column("count(" + person::id_ + ")")
+  std::size_t count;
+
+  #pragma db column("min(" + person::age_ + ")")
+  unsigned short min_age;
+
+  #pragma db column("max(" + person::age_ + ")")
+  unsigned short max_age;
 };
 
 #endif // PERSON_HXX

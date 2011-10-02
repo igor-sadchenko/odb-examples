@@ -1,12 +1,14 @@
 This is a "Hello World" example that shows how to use ODB to perform basic
 database operations, such as making objects persistent, loading, updating
 and deleting persistent objects, as well as querying the database for
-objects matching a certain criteria.
+objects matching a certain criteria. It also includes an example of a
+simple view.
 
 The example consists of the following files:
 
 person.hxx
-  Header file defining the 'person' persistent class.
+  Header file defining the 'person' persistent class as well as the
+  'person_stat' view.
 
 person-odb.hxx
 person-odb.ixx
