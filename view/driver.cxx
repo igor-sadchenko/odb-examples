@@ -143,7 +143,7 @@ main (int argc, char* argv[])
       result<employee_count> r (
         db->query<employee_count> (query<employee_count>::last == "Doe"));
 
-      // Results of this aggregate query contains only one element.
+      // Result of this aggregate query contains only one element.
       //
       cout << r.begin ()->count << " employees with the Doe last name" << endl
            << endl;
@@ -151,7 +151,7 @@ main (int argc, char* argv[])
       t.commit ();
     }
 
-    // Load the employee-employer information for all the employess with the
+    // Load the employee-employer information for all the employees with the
     // Doe last name using the employee_employer view.
     //
     {
@@ -175,7 +175,7 @@ main (int argc, char* argv[])
       t.commit ();
     }
 
-    // Calculate average ages of all employees for each employer.
+    // Calculate min/max employee ages for each employer.
     //
     {
       typedef odb::query<employer_age> query;
@@ -198,7 +198,7 @@ main (int argc, char* argv[])
       //             query::employee::last == "Doe"));
       //
 
-      cout << "Man/max employee ages" << endl;
+      cout << "Min/max employee ages" << endl;
 
       for (result::iterator i (r.begin ()); i != r.end (); ++i)
         cout << "  " << i->employer_name << " "
@@ -209,8 +209,8 @@ main (int argc, char* argv[])
       t.commit ();
     }
 
-    // Load the country information employees different residence and
-    // nationality.
+    // Load the country information for employees with different residence
+    // and nationality.
     //
     {
       typedef odb::query<employee_country> query;
@@ -218,7 +218,8 @@ main (int argc, char* argv[])
 
       transaction t (db->begin ());
 
-      // Note that we use the alias given in the object pragma after query::.
+      // Note that we use the alias given in the db object pragma after
+      // query::.
       //
       result r (db->query<employee_country> (
                   query::res_country::name != query::nat_country::name));
@@ -241,9 +242,9 @@ main (int argc, char* argv[])
 
       transaction t (db->begin ());
 
-      // With native views we have to use the native query syntax.
+      // With native views we have to use the native SQL query syntax.
       //
-      result r (db->query<employee_vacation> ("vacation_days != 0"));
+      result r (db->query<employee_vacation> ("vacation_days <> 0"));
 
       cout << "Employees with accumulated vacation days" << endl;
 
@@ -255,15 +256,15 @@ main (int argc, char* argv[])
       t.commit ();
     }
 
-    // Get the list of employees that have accumulated vacation days,
-    // this time using the improved employee_vacation2 view.
+    // Get the list of employees that have accumulated vacation days, this
+    // time using the improved employee_vacation2 view.
     //
     {
       typedef odb::result<employee_vacation2> result;
 
       transaction t (db->begin ());
 
-      result r (db->query<employee_vacation2> ("vacation_days != 0"));
+      result r (db->query<employee_vacation2> ("vacation_days <> 0"));
 
       cout << "Employees with accumulated vacation days (take 2)" << endl;
 

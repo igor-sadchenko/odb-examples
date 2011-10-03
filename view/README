@@ -1,7 +1,7 @@
-This example shows how to declare and use views in ODB. It includes views
-that show how to load a subset of data member from objects and tables,
-perform aggregate queries, and join multiple objects and tables using
-object relationships and custom join conditions.
+This example shows how to define and use views in ODB. It includes views
+that show how to load a subset of data members from objects or columns
+from tables, perform aggregate queries, and join multiple objects and
+tables using object relationships and custom join conditions.
 
 The example uses the shared_ptr smart pointer from TR1 and requires a C++
 compiler with TR1 support or an external TR1 implementation, such as the
@@ -11,7 +11,7 @@ The example consists of the following files:
 
 employee.hxx
   Header file defining the 'country', 'employer', and 'employee' persistent
-  classes. The example also uses a "legacy" 'employee_extra' table that is
+  classes. The example also uses the "legacy" 'employee_extra' table that is
   not mapped to a persistent class.
 
   After the persistent classes, this header defines a number of views that
@@ -42,14 +42,14 @@ database.hxx
 
 driver.cxx
   Driver for the example. It includes the employee.hxx and employee-odb.hxx
-  headers to gain access to the persistent classes and their database support
-  code. It also includes database.hxx for the create_database() function
-  declaration.
+  headers to gain access to the persistent classes and views as well as
+  their database support code. It also includes database.hxx for the
+  create_database() function declaration.
 
   In main() the driver first calls create_database() to obtain the database
   instance. It then creates the legacy 'employee_extra' table and proceeds
-  to populate the database with a number of 'employee', 'employer', and
-  'project' objects. Once this is done, the driver uses views defined in
+  to populate the database with a number of 'country', 'employer', and
+  'employee' objects. Once this is done, the driver uses views defined in
   employee.hxx to load and print various information about the object model.
 
 To run the example we may first need to create the database schema (for some

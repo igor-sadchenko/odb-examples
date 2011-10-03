@@ -143,8 +143,8 @@ private:
   shared_ptr<employer> employed_by_;
 };
 
-// We also have a "legacy" employee_extra table that is not mapped to any
-// object. It has the following columns:
+// We also have the "legacy" employee_extra table that is not mapped to any
+// persistent class. It has the following columns:
 //
 // CREATE TABLE employee_extra(
 //   employee_id INTEGER NOT NULL,
@@ -153,10 +153,10 @@ private:
 //
 
 // A simple view with a single associated object. It allows us to get
-// the name of an employee without loading any of the other data, such
-// as the country and employer objects. The first and last data members
-// in the view are automatically assumed to correspond to the first_ and
-// last_ members in the employee object.
+// the name of an employee without loading any of the other parts, such
+// as the referenced country and employer objects. The first and last
+// data members in the view are automatically associated to the first_
+// and last_ members in the employee object.
 //
 #pragma db view object(employee)
 struct employee_name
@@ -177,14 +177,13 @@ struct employee_count
 };
 
 // A simple view with two associated object. It allows us to get the
-// name of an employee and its employer without loading any other data.
-// Because there is a relationship between the employee and employer
-// objects (employee::employed_by_), the ODB compiler automatically
-// used this relationship as a join condition. Also, similar to the
-// employee_name view, the first and last data members are automatically
-// assumed to correspond to the first_ and last_ members in the employee
-// object. For the employer_name member we provide an explicit member
-// reference.
+// name of an employee and its employer without loading any other parts.
+// Because there is an unambiguous relationship between the employee and
+// employer objects (employee::employed_by_), the ODB compiler is able to
+// automatically use this relationship as a join condition. Also, similar
+// to the employee_name view, the first and last data members are auto-
+// associated to the first_ and last_ members in the employee object.
+// For the employer_name member we provide an explicit member reference.
 //
 #pragma db view object(employee) object(employer)
 struct employee_employer
@@ -196,10 +195,9 @@ struct employee_employer
   std::string employer_name;
 };
 
-// A more interesting aggregate view using GROUP BY. It allows us to
-// calculate the min/max age of employees for each employer. Here we
-// use the C++-integrated syntax for the query condition template with
-// a placeholder (?).
+// A more interesting aggregate view that uses the GROUP BY clause. It
+// allows us to calculate the min/max ages of employees for each employer.
+// Here we use the query condition with a placeholder (?).
 //
 #pragma db view object(employee) object(employer) \
   query ((?) + "GROUP BY" + employer::name_)
@@ -216,8 +214,8 @@ struct employer_age
 };
 
 // A more complex view with three associated objects, two of which are
-// of the same type, which requires us to use aliases and disambiguate
-// the relationships used to join each object.
+// of the same type. This requires us to use aliases and disambiguate
+// the relationships used to associate each object.
 //
 #pragma db view object(employee) \
   object(country = res_country: employee::residence_) \
@@ -234,9 +232,9 @@ struct employee_country
   std::string nat_country_name;
 };
 
-// A native view. A native view provides a complete query and is normally
-// based on an ad-hoc table. This view allows us to load the employee
-// vacation information from the legacy employee_extra table.
+// An example of a native view that provides a complete query and is based
+// on an ad-hoc table. This view allows us to load the employee vacation
+// information from the legacy employee_extra table.
 //
 #pragma db view query("SELECT employee_id, vacation_days " \
                       "FROM view_employee_extra")
@@ -246,6 +244,19 @@ struct employee_vacation
   unsigned long id;
 
   #pragma db type("INTEGER")
+  unsigned short days;
+};
+
+// A more robust implementation of the above view as a table view instead
+// of a native view.
+//
+#pragma db view table("view_employee_extra")
+struct employee_vacation1
+{
+  #pragma db column("employee_id") type("INTEGER")
+  unsigned long id;
+
+  #pragma db column("vacation_days") type("INTEGER")
   unsigned short days;
 };
 
@@ -265,7 +276,7 @@ struct employee_vacation2
   unsigned short days;
 };
 
-// An advanced view that joins two objects via a legacy table. It returns
+// A mixed view that associates two objects and a legacy table. It returns
 // the previous employer information for each employee.
 //
 #pragma db view object(employee) \
