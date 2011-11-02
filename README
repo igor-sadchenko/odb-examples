@@ -44,6 +44,9 @@ inheritance
 view
   Shows how to define and use object, table, mixed, and native views.
 
+optimistic
+  Shows how to use optimistic concurrency in ODB.
+
 boost
   Shows how to persist objects that use Boost smart pointers, containers,
   and value types with the help of the Boost profile library (libodb-boost).

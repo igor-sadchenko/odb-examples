@@ -12,6 +12,7 @@ hello           \
 inheritance     \
 query           \
 mapping         \
+optimistic      \
 schema/embedded
 
 tr1_dirs   := relationship inverse schema/custom view
