@@ -25,6 +25,8 @@
 #  include <odb/sqlite/database.hxx>
 #elif defined(DATABASE_PGSQL)
 #  include <odb/pgsql/database.hxx>
+#elif defined(DATABASE_ORACLE)
+#  include <odb/oracle/database.hxx>
 #endif
 
 inline std::auto_ptr<odb::database>
@@ -44,6 +46,8 @@ create_database (int& argc, char* argv[])
     odb::sqlite::database::print_usage (cerr);
 #elif defined(DATABASE_PGSQL)
     odb::pgsql::database::print_usage (cerr);
+#elif defined(DATABASE_ORACLE)
+    odb::oracle::database::print_usage (cerr);
 #endif
 
     exit (0);
@@ -73,6 +77,9 @@ create_database (int& argc, char* argv[])
   }
 #elif defined(DATABASE_PGSQL)
   auto_ptr<database> db (new odb::pgsql::database (argc, argv));
+#elif defined(DATABASE_ORACLE)
+  auto_ptr<database> db (
+    new odb::oracle::database (argc, argv, false, 873, 873));
 #endif
 
   return db;

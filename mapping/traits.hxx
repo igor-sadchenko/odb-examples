@@ -13,6 +13,8 @@
 #  include "traits-sqlite.hxx"
 #elif defined(DATABASE_PGSQL)
 #  include "traits-pgsql.hxx"
+#elif defined(DATABASE_ORACLE)
+#  include "traits-oracle.hxx"
 #endif
 
 #endif // TRAITS_HXX

@@ -133,8 +133,8 @@ private:
 
   employee (): name_ ("", "") {}
 
-  #pragma db id type("INTEGER UNSIGNED") column("ssn")
-  unsigned long id_;
+  #pragma db id type("INTEGER") column("ssn")
+  long id_;
 
   #pragma db column("") // No column prefix.
   name_type name_;

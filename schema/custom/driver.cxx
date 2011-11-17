@@ -116,6 +116,65 @@ main (int argc, char* argv[])
 
       t.commit ();
     }
+#elif defined(DATABASE_ORACLE)
+    {
+      // Oracle-specific PL/SQL.
+      //
+      transaction t (db->begin ());
+
+      db->execute ("BEGIN "
+                   "  EXECUTE IMMEDIATE "
+                   "    'DROP TABLE \"Employer\" CASCADE CONSTRAINTS';"
+                   "  EXCEPTION "
+                   "    WHEN OTHERS THEN "
+                   "      IF SQLCODE != -942 THEN RAISE; END IF;"
+                   "END;");
+
+      db->execute ("BEGIN "
+                   "  EXECUTE IMMEDIATE "
+                   "    'DROP TABLE \"Employee\" CASCADE CONSTRAINTS';"
+                   "  EXCEPTION "
+                   "    WHEN OTHERS THEN "
+                   "      IF SQLCODE != -942 THEN RAISE; END IF;"
+                   "END;");
+
+      db->execute ("BEGIN "
+                   "  EXECUTE IMMEDIATE 'DROP TABLE \"EmployeeDegree\"';"
+                   "  EXCEPTION "
+                   "    WHEN OTHERS THEN "
+                   "      IF SQLCODE != -942 THEN RAISE; END IF;"
+                   "END;");
+
+      db->execute (
+        "CREATE TABLE \"Employer\" ("
+        "\"name\" VARCHAR (255) PRIMARY KEY)");
+
+      db->execute (
+        "CREATE TABLE \"Employee\" ("
+        "\"ssn\" NUMBER(10) PRIMARY KEY,"
+        "\"first_name\" VARCHAR (255) NOT NULL,"
+        "\"last_name\" VARCHAR (255) NOT NULL,"
+        "\"employer\" VARCHAR (255) NOT NULL)");
+
+      db->execute (
+        "CREATE TABLE \"EmployeeDegree\" ("
+        "\"ssn\" NUMBER(10) NOT NULL,"
+        "\"degree\" VARCHAR (255) NOT NULL)");
+
+      db->execute (
+        "ALTER TABLE \"Employee\" "
+        "ADD FOREIGN KEY (\"employer\") "
+        "REFERENCES \"Employer\" "
+        "INITIALLY DEFERRED");
+
+      db->execute (
+        "ALTER TABLE \"EmployeeDegree\" "
+        "ADD FOREIGN KEY (\"ssn\") "
+        "REFERENCES \"Employee\" "
+        "INITIALLY DEFERRED");
+
+      t.commit ();
+    }
 #else
 #  error unknown database
 #endif

@@ -25,6 +25,10 @@ ifeq ($(db_id),pgsql)
 db_macro := DATABASE_PGSQL
 endif
 
+ifeq ($(db_id),oracle)
+db_macro := DATABASE_ORACLE
+endif
+
 $(out_root)/%: db_id    := $(db_id)
 $(out_root)/%: db_macro := $(db_macro)
 

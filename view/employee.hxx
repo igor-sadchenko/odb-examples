@@ -236,8 +236,13 @@ struct employee_country
 // on an ad-hoc table. This view allows us to load the employee vacation
 // information from the legacy employee_extra table.
 //
-#pragma db view query("SELECT employee_id, vacation_days " \
-                      "FROM view_employee_extra")
+#ifndef ODB_DATABASE_ORACLE
+  #pragma db view query("SELECT employee_id, vacation_days " \
+                        "FROM view_employee_extra")
+#else
+  #pragma db view query("SELECT \"employee_id\", \"vacation_days\" " \
+                        "FROM \"view_employee_extra\"")
+#endif
 struct employee_vacation
 {
   #pragma db type("INTEGER")
@@ -265,8 +270,14 @@ struct employee_vacation1
 // add the employee object to this view and use a custom join condition
 // to tie it up with our legacy table.
 //
-#pragma db view table("view_employee_extra") \
-  object(employee: "view_employee_extra.employee_id = " + employee::id_)
+#ifndef ODB_DATABASE_ORACLE
+  #pragma db view table("view_employee_extra") \
+    object(employee: "view_employee_extra.employee_id = " + employee::id_)
+#else
+  #pragma db view table("view_employee_extra") \
+    object(employee: "\"view_employee_extra\".\"employee_id\" = " +  \
+           employee::id_)
+#endif
 struct employee_vacation2
 {
   std::string first;
@@ -279,10 +290,17 @@ struct employee_vacation2
 // A mixed view that associates two objects and a legacy table. It returns
 // the previous employer information for each employee.
 //
-#pragma db view object(employee) \
-  table("view_employee_extra" = "extra": \
-        "extra.employee_id = " + employee::id_) \
-  object(employer: "extra.previous_employer_id = " + employer::id_)
+#ifndef ODB_DATABASE_ORACLE
+  #pragma db view object(employee) \
+    table("view_employee_extra" = "extra": \
+          "extra.employee_id = " + employee::id_) \
+    object(employer: "extra.previous_employer_id = " + employer::id_)
+#else
+  #pragma db view object(employee) \
+    table("view_employee_extra" = "extra": \
+          "\"extra\".\"employee_id\" = " + employee::id_) \
+    object(employer: "\"extra\".\"previous_employer_id\" = " + employer::id_)
+#endif
 struct employee_prev_employer
 {
   std::string first;

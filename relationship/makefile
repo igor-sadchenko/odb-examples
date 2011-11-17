@@ -48,7 +48,7 @@ $(gen): $(odb)
 $(gen): odb := $(odb)
 $(gen) $(dist): export odb_options += --database $(db_id) --generate-query \
 --generate-schema --default-pointer std::tr1::shared_ptr \
---table-prefix relationship_
+--table-prefix r_
 $(gen): cpp_options := -I$(src_base)
 $(gen): $(odb.l.cpp-options)
 

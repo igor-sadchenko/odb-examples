@@ -33,7 +33,18 @@ main (int argc, char* argv[])
         transaction t (db->begin ());
         try
         {
-          db->execute ("DROP TABLE view_employee_extra");
+#ifndef DATABASE_ORACLE
+          db->execute ("DROP TABLE \"view_employee_extra\"");
+#else
+          db->execute ("BEGIN "
+                       "  EXECUTE IMMEDIATE "
+                       "    'DROP TABLE \"view_employee_extra\" "
+                       "       CASCADE CONSTRAINTS';"
+                       "  EXCEPTION "
+                       "    WHEN OTHERS THEN "
+                       "      IF SQLCODE != -942 THEN RAISE; END IF;"
+                       "END;");
+#endif
           t.commit ();
         }
         catch (const odb::exception&)
@@ -44,11 +55,19 @@ main (int argc, char* argv[])
       {
         transaction t (db->begin ());
 
+#ifndef DATABASE_ORACLE
         db->execute (
           "CREATE TABLE view_employee_extra ("
           "employee_id INTEGER NOT NULL,"
           "vacation_days INTEGER NOT NULL,"
           "previous_employer_id INTEGER)");
+#else
+        db->execute (
+          "CREATE TABLE \"view_employee_extra\" ("
+          "\"employee_id\" INTEGER NOT NULL,"
+          "\"vacation_days\" INTEGER NOT NULL,"
+          "\"previous_employer_id\" INTEGER)");
+#endif
 
         t.commit ();
       }
@@ -94,6 +113,7 @@ main (int argc, char* argv[])
 
       // Populate the legacy table.
       //
+#ifndef DATABASE_ORACLE
       db->execute ("INSERT INTO view_employee_extra ("
                    "employee_id, vacation_days, previous_employer_id)"
                    "VALUES (1, 5, 2)");
@@ -109,6 +129,31 @@ main (int argc, char* argv[])
       db->execute ("INSERT INTO view_employee_extra ("
                    "employee_id, vacation_days, previous_employer_id)"
                    "VALUES (4, 15, 1)");
+#else
+      db->execute ("INSERT INTO \"view_employee_extra\" ("
+                   "\"employee_id\", "
+                   "\"vacation_days\", "
+                   "\"previous_employer_id\") "
+                   "VALUES (1, 5, 2)");
+
+      db->execute ("INSERT INTO \"view_employee_extra\" ("
+                   "\"employee_id\", "
+                   "\"vacation_days\", "
+                   "\"previous_employer_id\") "
+                   "VALUES (2, 10, NULL)");
+
+      db->execute ("INSERT INTO \"view_employee_extra\" ("
+                   "\"employee_id\", "
+                   "\"vacation_days\", "
+                   "\"previous_employer_id\") "
+                   "VALUES (3, 0, NULL)");
+
+      db->execute ("INSERT INTO \"view_employee_extra\" ("
+                   "\"employee_id\", "
+                   "\"vacation_days\", "
+                   "\"previous_employer_id\") "
+                   "VALUES (4, 15, 1)");
+#endif
 
       t.commit ();
     }
@@ -244,7 +289,11 @@ main (int argc, char* argv[])
 
       // With native views we have to use the native SQL query syntax.
       //
+#ifndef DATABASE_ORACLE
       result r (db->query<employee_vacation> ("vacation_days <> 0"));
+#else
+      result r (db->query<employee_vacation> ("\"vacation_days\" <> 0"));
+#endif
 
       cout << "Employees with accumulated vacation days" << endl;
 
@@ -264,7 +313,11 @@ main (int argc, char* argv[])
 
       transaction t (db->begin ());
 
+#ifndef DATABASE_ORACLE
       result r (db->query<employee_vacation2> ("vacation_days <> 0"));
+#else
+      result r (db->query<employee_vacation2> ("\"vacation_days\" <> 0"));
+#endif
 
       cout << "Employees with accumulated vacation days (take 2)" << endl;
 
