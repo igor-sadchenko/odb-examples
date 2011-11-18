@@ -79,7 +79,7 @@ create_database (int& argc, char* argv[])
   auto_ptr<database> db (new odb::pgsql::database (argc, argv));
 #elif defined(DATABASE_ORACLE)
   auto_ptr<database> db (
-    new odb::oracle::database (argc, argv, false, 873, 873));
+    new odb::oracle::database (argc, argv));
 #endif
 
   return db;
