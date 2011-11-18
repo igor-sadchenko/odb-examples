@@ -36,14 +36,7 @@ main (int argc, char* argv[])
 #ifndef DATABASE_ORACLE
           db->execute ("DROP TABLE view_employee_extra");
 #else
-          db->execute ("BEGIN "
-                       "  EXECUTE IMMEDIATE "
-                       "    'DROP TABLE \"view_employee_extra\" "
-                       "       CASCADE CONSTRAINTS';"
-                       "  EXCEPTION "
-                       "    WHEN OTHERS THEN "
-                       "      IF SQLCODE != -942 THEN RAISE; END IF;"
-                       "END;");
+          db->execute ("DROP TABLE \"view_employee_extra\"");
 #endif
           t.commit ();
         }
