@@ -11,6 +11,7 @@
 
 #include <cstddef> // std::size_t
 #include <cstring> // std::strncmp, std::memcpy
+#include <cassert>
 
 #include <odb/oracle/traits.hxx>
 #include <odb/oracle/details/date.hxx>
