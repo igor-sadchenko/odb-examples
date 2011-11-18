@@ -34,7 +34,7 @@ main (int argc, char* argv[])
         try
         {
 #ifndef DATABASE_ORACLE
-          db->execute ("DROP TABLE \"view_employee_extra\"");
+          db->execute ("DROP TABLE view_employee_extra");
 #else
           db->execute ("BEGIN "
                        "  EXECUTE IMMEDIATE "
