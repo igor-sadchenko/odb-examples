@@ -108,19 +108,19 @@ main (int argc, char* argv[])
       //
 #ifndef DATABASE_ORACLE
       db->execute ("INSERT INTO view_employee_extra ("
-                   "employee_id, vacation_days, previous_employer_id)"
+                   "employee_id, vacation_days, previous_employer_id) "
                    "VALUES (1, 5, 2)");
 
       db->execute ("INSERT INTO view_employee_extra ("
-                   "employee_id, vacation_days, previous_employer_id)"
+                   "employee_id, vacation_days, previous_employer_id) "
                    "VALUES (2, 10, NULL)");
 
       db->execute ("INSERT INTO view_employee_extra ("
-                   "employee_id, vacation_days, previous_employer_id)"
+                   "employee_id, vacation_days, previous_employer_id) "
                    "VALUES (3, 0, NULL)");
 
       db->execute ("INSERT INTO view_employee_extra ("
-                   "employee_id, vacation_days, previous_employer_id)"
+                   "employee_id, vacation_days, previous_employer_id) "
                    "VALUES (4, 15, 1)");
 #else
       db->execute ("INSERT INTO \"view_employee_extra\" ("

@@ -111,7 +111,6 @@ main (int argc, char* argv[])
       }
     }
 
-
     // Load Simple Tech Ltd and print its employees.
     //
     {
