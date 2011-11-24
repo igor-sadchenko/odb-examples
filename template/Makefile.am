@@ -21,6 +21,10 @@ if DATABASE_PGSQL
 AM_CPPFLAGS += -DDATABASE_PGSQL
 endif
 
+if DATABASE_ORACLE
+AM_CPPFLAGS += -DDATABASE_ORACLE
+endif
+
 TESTS=$(top_builddir)/tester
 TESTS_ENVIRONMENT=top_builddir=$(top_builddir); export top_builddir;
 
