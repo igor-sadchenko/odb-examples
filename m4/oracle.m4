@@ -69,7 +69,7 @@ fi
 AC_MSG_CHECKING([for oracle database password])
 AC_ARG_WITH(
   [oracle-password],
-  [AC_HELP_STRING([--with-oracle-password=login], [Oracle database password])],
+  [AC_HELP_STRING([--with-oracle-password=login], [Oracle database password (odb_test by default)])],
   [case $withval in
      yes)
        oracle_password=
@@ -91,7 +91,7 @@ elif test x$oracle_user = xodb_test; then
   oracle_password=odb_test
   oracle_password_set=yes
   AC_MSG_RESULT(['$oracle_password'])
-else
+elif test x$oracle_user != x/; then
   AC_MSG_RESULT([none])
   AC_MSG_ERROR([password not specfied; Oracle requires a password])
 fi
@@ -101,7 +101,7 @@ fi
 AC_MSG_CHECKING([for oracle service name])
 AC_ARG_WITH(
   [oracle-service],
-  [AC_HELP_STRING([--with-oracle-service=name], [Oracle service name (default service if left empty). Note that all data in the database associated with the test user on this service WILL BE LOST!])],
+  [AC_HELP_STRING([--with-oracle-service=name], [Oracle service name (default service if left empty). Note that all data associated with this user on this service WILL BE LOST!])],
   [case $withval in
      yes)
        oracle_service=
@@ -115,13 +115,12 @@ AC_ARG_WITH(
        oracle_service_set=yes
        ;;
    esac],
-  [oracle_service=
-   oracle_service_set=yes])
+  [oracle_service_set=no])
 
 if test x$oracle_service_set = xyes; then
   AC_MSG_RESULT(['$oracle_service'])
 else
-  AC_MSG_RESULT([none])
+  AC_MSG_RESULT([default])
 fi
 
 # Host.
@@ -143,13 +142,12 @@ AC_ARG_WITH(
        oracle_host_set=yes
        ;;
    esac],
-  [oracle_host=localhost
-   oracle_host_set=yes])
+  [oracle_host_set=no])
 
 if test x$oracle_host_set = xyes; then
   AC_MSG_RESULT(['$oracle_host'])
 else
-  AC_MSG_RESULT([localhost])
+  AC_MSG_RESULT([default])
 fi
 
 # Port.
@@ -216,7 +214,7 @@ AC_CONFIG_COMMANDS([oracle.options],
    fi
 
    echo 'if test x$[]1 != x; then' >>db-driver
-   echo "  exec $oracle_client -L -S "'$conn_str <$[]1' >>db-driver
+   echo "  exec $oracle_client -L -S "'$conn_str @$[]1' >>db-driver
    echo "else" >>db-driver
    echo "  exec $oracle_client -L -S "'$conn_str' >>db-driver
    echo "fi" >>db-driver
