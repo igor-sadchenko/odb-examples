@@ -30,6 +30,10 @@ THREADS
 
 AM_CONDITIONAL([ODB_EXAMPLES_THREADS], [test x$threads != xnone])
 
+# Check for the ODB compiler.
+#
+ODB_COMPILER([], [AC_MSG_ERROR([odb compiler is not found; consider setting ODB variable or using --with-odb=DIR])])
+
 # Check for the ODB libs.
 #
 LIBODB([], [AC_MSG_ERROR([libodb is not found; consider using --with-libodb=DIR])])
@@ -86,10 +90,6 @@ case $database in
     ORACLE
     ;;
 esac
-
-# Check for the ODB compiler.
-#
-ODB_COMPILER([], [AC_MSG_ERROR([odb compiler is not found; consider setting ODB variable or using --with-odb=DIR])])
 
 # Output.
 #
