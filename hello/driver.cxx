@@ -23,7 +23,7 @@ main (int argc, char* argv[])
   {
     auto_ptr<database> db (create_database (argc, argv));
 
-    unsigned long john_id, jane_id, joe_id;
+    unsigned long john_id, joe_id;
 
     // Create a few persistent person objects.
     //
@@ -37,7 +37,7 @@ main (int argc, char* argv[])
       // Make objects persistent and save their ids for later use.
       //
       john_id = db->persist (john);
-      jane_id = db->persist (jane);
+      db->persist (jane);
       joe_id = db->persist (joe);
 
       t.commit ();
