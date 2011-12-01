@@ -4,6 +4,8 @@
 
 #include <iostream>
 
+#include <QtCore/QCoreApplication>
+
 #include <odb/database.hxx>
 #include <odb/session.hxx>
 #include <odb/transaction.hxx>
@@ -25,6 +27,8 @@ operator<< (ostream& os, const QString& s)
 int
 main (int argc, char* argv[])
 {
+  QCoreApplication app (argc, argv);
+
   try
   {
     auto_ptr<database> db (createDatabase (argc, argv));
