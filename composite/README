@@ -7,8 +7,10 @@ The example consists of the following files:
 
 person.hxx
   Header file defining the 'basic_name', 'name_extras', and 'name' composite
-  value types. It also defines the 'person' persistent class which use the
-  'name' value type in one of its data members.
+  value types. It also defines the 'phone_numbers' composite value type as
+  an instantiation of the 'std::pair' class template. Finally it defines
+  the 'person' persistent class which uses the 'name' and 'phone_numbers'
+  value types in its data members.
 
 person-odb.hxx
 person-odb.ixx

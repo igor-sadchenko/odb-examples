@@ -123,6 +123,12 @@ private:
   name_extras extras_;
 };
 
+// We can also define a composite value type as a class template
+// instantiation. Here we use std::pair to store person's phone
+// numbers, in the order of preference.
+//
+typedef std::pair<std::string, std::string> phone_numbers;
+#pragma db value(phone_numbers)
 
 #pragma db object
 class person
@@ -130,8 +136,9 @@ class person
 public:
   person (const std::string& first,
           const std::string& last,
-          const std::string& title)
-      : name_ (first, last, title)
+          const std::string& title,
+          const phone_numbers& phone)
+      : name_ (first, last, title), phone_ (phone)
   {
   }
 
@@ -151,6 +158,14 @@ public:
     return name_;
   }
 
+  // Phone.
+  //
+  const phone_numbers&
+  phone () const
+  {
+    return phone_;
+  }
+
 private:
   friend class odb::access;
 
@@ -160,6 +175,7 @@ private:
   unsigned long id_;
 
   name_type name_;
+  phone_numbers phone_;
 };
 
 #endif // PERSON_HXX

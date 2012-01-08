@@ -27,7 +27,7 @@ main (int argc, char* argv[])
     //
     unsigned int id;
     {
-      person p ("Joe", "Dirt", "Mr");
+      person p ("Joe", "Dirt", "Mr", phone_numbers ("555 5555", "666 6666"));
 
       transaction t (db->begin ());
       id = db->persist (p);
@@ -49,7 +49,7 @@ main (int argc, char* argv[])
       t.commit ();
     }
 
-    // Print the name information.
+    // Print the name and phone numbers.
     //
     {
       transaction t (db->begin ());
@@ -71,6 +71,9 @@ main (int argc, char* argv[])
       {
         cout << "  alias: " << i->first () << " " << i->last () << endl;
       }
+
+      cout << "  phone 1: " << joe->phone ().first << endl;
+      cout << "  phone 2: " << joe->phone ().second << endl;
     }
 
     // Query the database for a person object.
