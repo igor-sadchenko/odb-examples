@@ -15,18 +15,14 @@ ifdef db_id
 
 ifeq ($(db_id),mysql)
 db_macro := DATABASE_MYSQL
-endif
-
-ifeq ($(db_id),sqlite)
+else ifeq ($(db_id),sqlite)
 db_macro := DATABASE_SQLITE
-endif
-
-ifeq ($(db_id),pgsql)
+else ifeq ($(db_id),pgsql)
 db_macro := DATABASE_PGSQL
-endif
-
-ifeq ($(db_id),oracle)
+else ifeq ($(db_id),oracle)
 db_macro := DATABASE_ORACLE
+else ifeq ($(db_id),mssql)
+db_macro := DATABASE_MSSQL
 endif
 
 $(out_root)/%: db_id    := $(db_id)

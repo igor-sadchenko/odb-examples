@@ -15,6 +15,8 @@
 #  include "traits-pgsql.hxx"
 #elif defined(DATABASE_ORACLE)
 #  include "traits-oracle.hxx"
+#elif defined(DATABASE_MSSQL)
+#  include "traits-mssql.hxx"
 #endif
 
 #endif // TRAITS_HXX

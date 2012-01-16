@@ -27,6 +27,8 @@
 #  include <odb/pgsql/database.hxx>
 #elif defined(DATABASE_ORACLE)
 #  include <odb/oracle/database.hxx>
+#elif defined(DATABASE_MSSQL)
+#  include <odb/mssql/database.hxx>
 #endif
 
 inline std::auto_ptr<odb::database>
@@ -48,6 +50,8 @@ create_database (int& argc, char* argv[])
     odb::pgsql::database::print_usage (cerr);
 #elif defined(DATABASE_ORACLE)
     odb::oracle::database::print_usage (cerr);
+#elif defined(DATABASE_MSSQL)
+    odb::mssql::database::print_usage (cerr);
 #endif
 
     exit (0);
@@ -78,8 +82,9 @@ create_database (int& argc, char* argv[])
 #elif defined(DATABASE_PGSQL)
   auto_ptr<database> db (new odb::pgsql::database (argc, argv));
 #elif defined(DATABASE_ORACLE)
-  auto_ptr<database> db (
-    new odb::oracle::database (argc, argv));
+  auto_ptr<database> db (new odb::oracle::database (argc, argv));
+#elif defined(DATABASE_MSSQL)
+  auto_ptr<database> db (new odb::mssql::database (argc, argv));
 #endif
 
   return db;

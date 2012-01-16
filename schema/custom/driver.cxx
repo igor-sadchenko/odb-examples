@@ -27,7 +27,9 @@ main (int argc, char* argv[])
 
     // Create the database schema.
     //
-#if defined(DATABASE_MYSQL) || defined(DATABASE_SQLITE)
+#if defined(DATABASE_MYSQL)  || \
+    defined(DATABASE_SQLITE) || \
+    defined(DATABASE_MSSQL)
     {
 
       // Due to bugs in SQLite foreign key support for DDL statements,
@@ -46,9 +48,9 @@ main (int argc, char* argv[])
       //
       try
       {
-        db->execute ("DROP TABLE Employer");
-        db->execute ("DROP TABLE Employee");
         db->execute ("DROP TABLE EmployeeDegree");
+        db->execute ("DROP TABLE Employee");
+        db->execute ("DROP TABLE Employer");
       }
       catch (const odb::exception&)
       {
@@ -60,14 +62,14 @@ main (int argc, char* argv[])
 
       db->execute (
         "CREATE TABLE Employee ("
-        "ssn INTEGER UNSIGNED NOT NULL PRIMARY KEY,"
+        "ssn INTEGER NOT NULL PRIMARY KEY,"
         "first_name VARCHAR (255) NOT NULL,"
         "last_name VARCHAR (255) NOT NULL,"
         "employer VARCHAR (255) NOT NULL REFERENCES Employer (name))");
 
       db->execute (
         "CREATE TABLE EmployeeDegree ("
-        "ssn INTEGER UNSIGNED NOT NULL REFERENCES Employee (ssn),"
+        "ssn INTEGER NOT NULL REFERENCES Employee (ssn),"
         "degree VARCHAR (255) NOT NULL)");
 
       t.commit ();
