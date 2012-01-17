@@ -25,6 +25,10 @@ if DATABASE_ORACLE
 AM_CPPFLAGS += -DDATABASE_ORACLE
 endif
 
+if DATABASE_MSSQL
+AM_CPPFLAGS += -DDATABASE_MSSQL
+endif
+
 TESTS=$(top_builddir)/tester
 TESTS_ENVIRONMENT=top_builddir=$(top_builddir); export top_builddir;
 

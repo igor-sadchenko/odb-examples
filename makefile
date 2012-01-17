@@ -36,7 +36,8 @@ $(dist): export boost_dirs := $(boost_dirs)
 $(dist): export qt_dirs := $(qt_dirs)
 $(dist): data_dist := GPLv2 LICENSE README NEWS INSTALL version tester.bat \
 mysql-driver.bat mysql.options sqlite-driver.bat sqlite.options \
-pgsql-driver.bat pgsql.options oracle-driver.bat oracle.options
+pgsql-driver.bat pgsql.options oracle-driver.bat oracle.options \
+mssql-driver.bat mssql.options
 $(dist): exec_dist := bootstrap tester
 $(dist): export extra_dist := $(data_dist) $(exec_dist) test.bat \
 $(call vc9slns,$(name)) $(call vc10slns,$(name))
