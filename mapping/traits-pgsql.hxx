@@ -1,5 +1,4 @@
 // file      : mapping/traits-pgsql.hxx
-// author    : Constantin Michael <constantin@codesynthesis.com>
 // copyright : not copyrighted - public domain
 
 #ifndef TRAITS_PGSQL_HXX

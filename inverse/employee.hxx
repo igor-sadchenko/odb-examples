@@ -1,5 +1,4 @@
 // file      : inverse/employee.hxx
-// author    : Boris Kolpackov <boris@codesynthesis.com>
 // copyright : not copyrighted - public domain
 
 #ifndef EMPLOYEE_HXX

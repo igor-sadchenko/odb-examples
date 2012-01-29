@@ -1,5 +1,4 @@
 // file      : mapping/traits-mysql.hxx
-// author    : Boris Kolpackov <boris@codesynthesis.com>
 // copyright : not copyrighted - public domain
 
 #ifndef TRAITS_MYSQL_HXX

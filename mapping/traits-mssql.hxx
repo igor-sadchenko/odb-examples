@@ -1,5 +1,4 @@
 // file      : mapping/traits-mssql.hxx
-// author    : Constantin Michael <constantin@codesynthesis.com>
 // copyright : not copyrighted - public domain
 
 #ifndef TRAITS_MSSQL_HXX

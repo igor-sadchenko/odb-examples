@@ -1,5 +1,4 @@
 # file      : template/Makefile.am
-# author    : Boris Kolpackov <boris@codesynthesis.com>
 # copyright : not copyrighted - public domain
 
 EXTRA_DIST = __file__(extra_dist)

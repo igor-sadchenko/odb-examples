@@ -1,5 +1,4 @@
 // file      : qt/driver.cxx
-// author    : Constantin Michael <constantin@codesynthesis.com>
 // copyright : not copyrighted - public domain
 
 #include <iostream>

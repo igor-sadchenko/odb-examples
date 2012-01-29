@@ -1,5 +1,4 @@
 // file      : mapping/traits-sqlite.hxx
-// author    : Boris Kolpackov <boris@codesynthesis.com>
 // copyright : not copyrighted - public domain
 
 #ifndef TRAITS_SQLITE_HXX

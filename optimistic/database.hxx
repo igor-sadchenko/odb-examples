@@ -1,5 +1,4 @@
 // file      : optimistic/database.hxx
-// author    : Boris Kolpackov <boris@codesynthesis.com>
 // copyright : not copyrighted - public domain
 
 //
