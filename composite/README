@@ -1,16 +1,17 @@
 This example shows how to use composite value types as data members in objects
-and other value types, as element types in containers, and as base types for
-other composite value types. It also shows how to use composite value type
-data members in queries.
+(including as object id members) and other value types, as element types in
+containers, and as base types for other composite value types. It also shows
+how to use composite value type data members in queries.
 
 The example consists of the following files:
 
 person.hxx
-  Header file defining the 'basic_name', 'name_extras', and 'name' composite
-  value types. It also defines the 'phone_numbers' composite value type as
-  an instantiation of the 'std::pair' class template. Finally it defines
-  the 'person' persistent class which uses the 'name' and 'phone_numbers'
-  value types in its data members.
+  Header file defining the 'basic_name', 'name_extras', 'name', and
+  'email_address' composite value types. It also defines the 'phone_numbers'
+  composite value type as an instantiation of the 'std::pair' class template
+  Finally it defines the 'person' persistent class which uses 'email_address'
+  as its object id as well as 'name' and 'phone_numbers' in its other data
+  members.
 
 person-odb.hxx
 person-odb.ixx

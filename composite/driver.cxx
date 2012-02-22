@@ -24,9 +24,13 @@ main (int argc, char* argv[])
 
     // Create a person object.
     //
-    unsigned int id;
+    email_address id;
     {
-      person p ("Joe", "Dirt", "Mr", phone_numbers ("555 5555", "666 6666"));
+      person p ("joe@example.com",
+                "Joe",
+                "Dirt",
+                "Mr",
+                phone_numbers ("555 5555", "666 6666"));
 
       transaction t (db->begin ());
       id = db->persist (p);
@@ -57,7 +61,8 @@ main (int argc, char* argv[])
 
       name& n (joe->name ());
 
-      cout << n.title () << " " << n.first () << " " << n.last () << endl;
+      cout << n.title () << " " << n.first () << " " << n.last () << " "
+           << '<' << joe->email ().address () << '>' << endl;
 
       name_extras& ne (n.extras ());
 

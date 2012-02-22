@@ -129,16 +129,71 @@ private:
 typedef std::pair<std::string, std::string> phone_numbers;
 #pragma db value(phone_numbers)
 
+// We can also use a composite value type as an object id.
+//
+#pragma db value
+class email_address
+{
+public:
+  email_address () {}
+  email_address (const std::string& address)
+  {
+    std::string::size_type p (address.find ('@'));
+    recipient_.assign (address, 0, p);
+    domain_.assign (address, p + 1, std::string::npos);
+  }
+
+  const std::string&
+  recipient () const
+  {
+    return recipient_;
+  }
+
+  const std::string&
+  domain () const
+  {
+    return domain_;
+  }
+
+  std::string
+  address () const
+  {
+    return recipient_ + '@' + domain_;
+  }
+
+private:
+  friend class odb::access;
+
+  std::string recipient_;
+  std::string domain_;
+};
+
+inline bool
+operator< (const email_address& x, const email_address& y)
+{
+  return x.recipient () < y.recipient () ||
+    (x.recipient () == y.recipient () && x.domain() < y.domain ());
+}
+
 #pragma db object
 class person
 {
 public:
-  person (const std::string& first,
+  person (const std::string& email,
+          const std::string& first,
           const std::string& last,
           const std::string& title,
           const phone_numbers& phone)
-      : name_ (first, last, title), phone_ (phone)
+      : email_ (email), name_ (first, last, title), phone_ (phone)
   {
+  }
+
+  // Email address.
+  //
+  const email_address&
+  email () const
+  {
+    return email_;
   }
 
   // Name.
@@ -170,8 +225,8 @@ private:
 
   person (): name_ ("", "", "") {}
 
-  #pragma db id auto
-  unsigned long id_;
+  #pragma db id
+  email_address email_;
 
   name_type name_;
   phone_numbers phone_;
