@@ -26,7 +26,7 @@ print (const employee& e)
 
   for (projects::const_iterator i (ps.begin ()); i != ps.end (); ++i)
   {
-    shared_ptr<project> p (*i);
+    tr1::shared_ptr<project> p (*i);
     cout << "  project: " << p->name () << endl;
   }
 
@@ -36,6 +36,8 @@ print (const employee& e)
 int
 main (int argc, char* argv[])
 {
+  using tr1::shared_ptr;
+
   try
   {
     auto_ptr<database> db (create_database (argc, argv));
