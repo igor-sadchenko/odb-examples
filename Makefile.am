@@ -8,6 +8,10 @@ if HAVE_TR1_MEMORY
 SUBDIRS += __path__(tr1_dirs)
 endif
 
+if HAVE_CXX11
+SUBDIRS += __path__(cxx11_dirs)
+endif
+
 if ODB_EXAMPLES_BOOST
 SUBDIRS += __path__(boost_dirs)
 endif

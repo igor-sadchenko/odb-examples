@@ -15,22 +15,34 @@ optimistic      \
 schema/embedded
 
 tr1_dirs   := relationship inverse schema/custom view
+cxx11_dirs := c++11
 boost_dirs := boost
 qt_dirs    := qt
-
-dist_dirs  := $(dirs) $(tr1_dirs) $(boost_dirs) $(qt_dirs)
-all_dirs   := $(dirs) $(tr1_dirs) $(boost_dirs) $(qt_dirs) template
 
 default := $(out_base)/
 dist    := $(out_base)/.dist
 test    := $(out_base)/.test
 clean   := $(out_base)/.clean
 
-$(default): $(addprefix $(out_base)/,$(addsuffix /,$(all_dirs)))
+$(default):
+$(call include,$(bld_root)/cxx/standard.make) # cxx_standard
+
+dist_dirs  := $(dirs) $(tr1_dirs) $(cxx11_dirs) $(boost_dirs) $(qt_dirs)
+all_dirs   := $(dirs) $(tr1_dirs) $(cxx11_dirs) $(boost_dirs) $(qt_dirs) \
+template
+
+build_dirs := $(dirs) $(tr1_dirs) $(boost_dirs) $(qt_dirs) template
+
+ifeq ($(cxx_standard),c++11)
+build_dirs += c++11
+endif
+
+$(default): $(addprefix $(out_base)/,$(addsuffix /,$(build_dirs)))
 
 $(dist): name := examples
 $(dist): export dirs := $(dirs)
 $(dist): export tr1_dirs := $(tr1_dirs)
+$(dist): export cxx11_dirs := $(cxx11_dirs)
 $(dist): export boost_dirs := $(boost_dirs)
 $(dist): export qt_dirs := $(qt_dirs)
 $(dist): data_dist := GPLv2 LICENSE README NEWS INSTALL version tester.bat \
@@ -52,7 +64,7 @@ $(dist): $(addprefix $(out_base)/,$(addsuffix /.dist,$(dist_dirs)))
 	$(call meta-vc10slns,$(name))
 	$(call meta-vctest,$(name)-mysql-vc10.sln,test.bat)
 
-$(test): $(addprefix $(out_base)/,$(addsuffix /.test,$(all_dirs)))
+$(test): $(addprefix $(out_base)/,$(addsuffix /.test,$(build_dirs)))
 $(clean): $(addprefix $(out_base)/,$(addsuffix /.clean,$(all_dirs)))
 
 $(call include,$(bld_root)/dist.make)

@@ -29,6 +29,10 @@ THREADS
 
 AM_CONDITIONAL([ODB_EXAMPLES_THREADS], [test x$threads != xnone])
 
+# Check for C++11.
+#
+CXX11([HAVE_CXX11], [Compiling in the C++11 mode.])
+
 # Check for the ODB compiler.
 #
 ODB_COMPILER([], [AC_MSG_ERROR([odb compiler is not found; consider setting ODB variable or using --with-odb=DIR])])

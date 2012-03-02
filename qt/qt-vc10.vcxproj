@@ -154,7 +154,7 @@
 __custom_build_entry__(
 __path__(odb_header_stem).hxx,
 odb __path__(odb_header_stem).hxx,
-odb.exe __xml__(__shell_quotes__(m4_patsubst(__value__(odb_options), @database@, __value__(database)))) __path__(odb_header_stem).hxx,
+odb.exe --std c++11 __xml__(__shell_quotes__(m4_patsubst(__value__(odb_options), @database@, __value__(database)))) __path__(odb_header_stem).hxx,
 __path__(odb_header_stem)-odb.hxx;__path__(odb_header_stem)-odb.ixx;__path__(odb_header_stem)-odb.cxx)
   </ItemGroup>
   <ItemGroup>
