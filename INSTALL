@@ -90,6 +90,12 @@ C++ compiler and compiles with optimization and without debug information:
 
 ./configure CXX=g++-4.5 CXXFLAGS=-O3
 
+If you would like to build the 'c++11' example as well as other examples
+in the C++11 mode, then you will need to pass the necessary options to
+turn the C++ compiler into this mode. For example:
+
+./configure CXXFLAGS=-std=c++0x
+
 Once configuration is complete, run make to build the examples:
 
 make
@@ -131,7 +137,8 @@ examples-<database>-vc<N>.sln file located in the odb-examples package
 directory (referred to as odb-examples\ from now on). Here <N> is the
 version of Visual Studio that you are using. Once the solution is open,
 select the desired build configuration (Debug or Release) and platform
-(Win32 or x64) and build the solution.
+(Win32 or x64) and build the solution. Note that with Visual Studio 10
+(2010) and later the examples are built in the C++11 mode.
 
 If you would like to build the boost example (requires Boost and
 libodb-boost), also open and build the solution in the boost/
