@@ -21,7 +21,11 @@ person-odb.cxx
 
   The --generate-schema option requests the generation of the database schema.
   The --schema-format option is used to instruct the ODB compiler to embed the
-  schema into the generated C++ files.
+  schema into the generated C++ files. It is also possible to generate the
+  schema creation code into a separate source file by passing the 'separate'
+  value instead of 'embedded' to the --schema-format option. This is primarily
+  useful if you want to place the schema creation functionality into a
+  separate program or library.
 
 database.hxx
   Contains the create_database() function which instantiates the concrete
