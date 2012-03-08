@@ -38,19 +38,19 @@ createDatabase (int& argc, char* argv[])
 
   if (argc > 1 && argv[1] == string ("--help"))
   {
-    cerr << "Usage: " << argv[0] << " [options]" << endl
+    cout << "Usage: " << argv[0] << " [options]" << endl
          << "Options:" << endl;
 
 #if defined(DATABASE_MYSQL)
-    odb::mysql::database::print_usage (cerr);
+    odb::mysql::database::print_usage (cout);
 #elif defined(DATABASE_SQLITE)
-    odb::sqlite::database::print_usage (cerr);
+    odb::sqlite::database::print_usage (cout);
 #elif defined(DATABASE_PGSQL)
-    odb::pgsql::database::print_usage (cerr);
+    odb::pgsql::database::print_usage (cout);
 #elif defined(DATABASE_ORACLE)
-    odb::oracle::database::print_usage (cerr);
+    odb::oracle::database::print_usage (cout);
 #elif defined(DATABASE_MSSQL)
-    odb::mssql::database::print_usage (cerr);
+    odb::mssql::database::print_usage (cout);
 #endif
 
     exit (0);
