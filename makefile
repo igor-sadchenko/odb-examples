@@ -4,14 +4,15 @@
 
 include $(dir $(lastword $(MAKEFILE_LIST)))build/bootstrap.make
 
-dirs       :=   \
-composite       \
-container       \
-hello           \
-inheritance     \
-query           \
-mapping         \
-optimistic      \
+dirs :=                  \
+composite                \
+container                \
+hello                    \
+inheritance/polymorphism \
+inheritance/reuse        \
+query                    \
+mapping                  \
+optimistic               \
 schema/embedded
 
 tr1_dirs   := relationship inverse schema/custom view

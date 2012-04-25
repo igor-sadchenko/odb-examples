@@ -1,4 +1,4 @@
-// file      : inheritance/database.hxx
+// file      : inheritance/polymorphism/database.hxx
 // copyright : not copyrighted - public domain
 
 //

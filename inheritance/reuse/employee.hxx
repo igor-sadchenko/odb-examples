@@ -1,4 +1,4 @@
-// file      : inheritance/employee.hxx
+// file      : inheritance/reuse/employee.hxx
 // copyright : not copyrighted - public domain
 
 #ifndef EMPLOYEE_HXX

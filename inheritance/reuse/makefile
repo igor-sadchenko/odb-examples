@@ -1,8 +1,8 @@
-# file      : inheritance/makefile
+# file      : inheritance/reuse/makefile
 # copyright : Copyright (c) 2009-2012 Code Synthesis Tools CC
 # license   : GNU GPL v2; see accompanying LICENSE file
 
-include $(dir $(lastword $(MAKEFILE_LIST)))../build/bootstrap.make
+include $(dir $(lastword $(MAKEFILE_LIST)))../../build/bootstrap.make
 
 cxx_tun := driver.cxx
 odb_hdr := employee.hxx
@@ -46,7 +46,7 @@ gen  := $(addprefix $(out_base)/,$(genf))
 $(gen): $(odb)
 $(gen): odb := $(odb)
 $(gen) $(dist): export odb_options += --database $(db_id) --generate-schema \
---generate-query --table-prefix inherit_
+--generate-query --table-prefix inh_reuse_
 $(gen): cpp_options := -I$(src_base)
 $(gen): $(odb.l.cpp-options)
 

@@ -38,8 +38,11 @@ inverse
   Shows how to declare and use bidirectional one-to-one, one-to-many, and
   many-to-many relationships.
 
-inheritance
-  Shows how to use persistent class inheritance.
+inheritance/reuse
+  Shows how to use reuse inheritance with ODB.
+
+inheritance/polymorphism
+  Shows how to use polymorphism inheritance with ODB.
 
 view
   Shows how to define and use object, table, mixed, and native views.

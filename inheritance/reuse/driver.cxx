@@ -1,4 +1,4 @@
-// file      : inheritance/driver.cxx
+// file      : inheritance/reuse/driver.cxx
 // copyright : not copyrighted - public domain
 
 #include <memory>   // std::auto_ptr
@@ -54,7 +54,7 @@ main (int argc, char* argv[])
       cout << c->first () << " " << c->last () << " " << c->email () << endl;
     }
 
-    // Query for temporary employees that have John as first name.
+    // Query for temporary employees that have John as the first name.
     //
     {
       typedef odb::query<temporary_employee> query;
