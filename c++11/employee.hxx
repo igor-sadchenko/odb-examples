@@ -17,7 +17,7 @@
 class employer;
 class employee;
 
-#pragma db object pointer(std::shared_ptr)
+#pragma db object pointer(std::shared_ptr) session
 class employer
 {
 public:
@@ -60,7 +60,7 @@ private:
   employees_type employees_;
 };
 
-#pragma db object pointer(std::shared_ptr)
+#pragma db object pointer(std::shared_ptr) session
 class employee
 {
 public:

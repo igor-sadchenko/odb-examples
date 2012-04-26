@@ -59,7 +59,7 @@ gen  := $(addprefix $(out_base)/,$(genf))
 $(gen): $(odb)
 $(gen): odb := $(odb)
 $(gen) $(dist): export odb_options += --database $(db_id) --profile boost \
---generate-query --generate-schema --table-prefix boost_
+--generate-query --generate-schema --generate-session --table-prefix boost_
 $(gen): cpp_options := -I$(src_base)
 $(gen): $(odb.l.cpp-options) $(odb_boost.l.cpp-options) $(boost.l.cpp-options)
 

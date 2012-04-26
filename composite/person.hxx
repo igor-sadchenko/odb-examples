@@ -168,13 +168,6 @@ private:
   std::string domain_;
 };
 
-inline bool
-operator< (const email_address& x, const email_address& y)
-{
-  return x.recipient () < y.recipient () ||
-    (x.recipient () == y.recipient () && x.domain() < y.domain ());
-}
-
 #pragma db object
 class person
 {

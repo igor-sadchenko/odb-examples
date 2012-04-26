@@ -10,10 +10,12 @@ employee.hxx
   Header file defining the 'employee', 'employer', and 'pension_fund'
   persistent classes. We use the standard std::shared_ptr/weak_ptr smart
   pointers as well as their lazy versions provided by ODB to establish a
-  bidirectional employee-employer relationship. Because we don't share the
-  'pension_fund' objects, we use std::unique_ptr as an object pointer for
-  this persistent class. We also use the std::unordered_set container to
-  keep track of the employee's email addresses.
+  bidirectional employee-employer relationship. We also enable session
+  support for these two classes using the 'db session' pragma. Because
+  we don't share the 'pension_fund' objects, we use std::unique_ptr
+  as an object pointer for this persistent class. We also use the
+  std::unordered_set container to keep track of the employee's email
+  addresses.
 
 employee-odb.hxx
 employee-odb.ixx
