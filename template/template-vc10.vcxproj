@@ -160,7 +160,7 @@ __path__(odb_header_stem)-odb.hxx;__path__(odb_header_stem)-odb.ixx;__path__(odb
   <ItemGroup>
 __header_entry__(__path__(odb_header_stem)-odb.hxx)
 __header_entry__(__path__(odb_header_stem)-odb.ixx)
-__header_entries__(database.hxx)
+__header_entry__(database.hxx)
 __header_entries__(extra_headers)
   </ItemGroup>
   <ItemGroup>

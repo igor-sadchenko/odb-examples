@@ -348,7 +348,7 @@ odb.exe __xml__(__shell_quotes__(m4_patsubst(__value__(odb_options), @database@,
 __path__(odb_header_stem)-odb.hxx;__path__(odb_header_stem)-odb.ixx;__path__(odb_header_stem)-odb.cxx)
 __file_entry__(__path__(odb_header_stem)-odb.hxx)
 __file_entry__(__path__(odb_header_stem)-odb.ixx)
-__file_entries__(database.hxx)
+__file_entry__(database.hxx)
 __file_entries__(extra_headers)
 		</Filter>
 	</Files>
