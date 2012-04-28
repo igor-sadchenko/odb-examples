@@ -69,9 +69,9 @@ $(dist): export extra_dist := README $(call vc9projs,$(name)) \
 $(call vc10projs,$(name))
 $(dist):
 	$(call dist-data,$(sources) $(headers) README database.hxx)
-	$(call meta-automake,../template/Makefile.am)
-	$(call meta-vc9projs,../template/template,$(name))
-	$(call meta-vc10projs,../template/template,$(name))
+	$(call meta-automake,../../template/Makefile.am)
+	$(call meta-vc9projs,../../template/template,$(name))
+	$(call meta-vc10projs,../../template/template,$(name))
 
 # Test.
 #
