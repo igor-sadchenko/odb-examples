@@ -20,6 +20,8 @@ if "_%3_" == "_Win32_" (
   set "dir=%3\%2"
 )
 
+rem Globbing returns files in alphabetic order.
+rem
 if exist *.sql (
   for %%f in (*.sql) do (
     call %topdir%\%1-driver.bat %%f
@@ -38,4 +40,3 @@ exit /b 1
 
 :end
 endlocal
-

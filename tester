@@ -9,15 +9,17 @@
 # The data files, if any, are in $srcdir.
 #
 
-schema=`echo *.sql`
+# Globbing returns files in alphabetic order.
+#
+for f in `echo *.sql`; do
+  if test -f $f; then
+    $top_builddir/db-driver $f
 
-if test -f $schema; then
-  $top_builddir/db-driver $schema
-
-  if test $? -ne 0; then
-    exit 1
+    if test $? -ne 0; then
+      exit 1
+    fi
   fi
-fi
+done
 
 echo ./driver --options-file "$top_builddir/db.options"
 ./driver --options-file "$top_builddir/db.options"
