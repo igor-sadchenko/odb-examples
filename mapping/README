@@ -28,7 +28,7 @@ person.sql
   following command line:
 
   odb -d <database> --generate-query --generate-schema \
-  --hxx-prologue '#include "traits.hxx"' person.hxx
+  --hxx-prologue "#include \"traits.hxx\"" person.hxx
 
   Where <database> stands for the database system we are using, for example,
   'mysql'.
