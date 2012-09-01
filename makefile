@@ -5,6 +5,7 @@
 include $(dir $(lastword $(MAKEFILE_LIST)))build/bootstrap.make
 
 dirs :=                  \
+access                   \
 composite                \
 container                \
 hello                    \
@@ -13,6 +14,7 @@ inheritance/reuse        \
 query                    \
 mapping                  \
 optimistic               \
+pimpl                    \
 schema/embedded
 
 tr1_dirs   := relationship inverse schema/custom view

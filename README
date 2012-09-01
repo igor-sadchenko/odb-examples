@@ -50,8 +50,16 @@ view
 optimistic
   Shows how to use optimistic concurrency in ODB.
 
+pimpl
+  Shows how to use virtual data members to implement a persistent class that
+  employes the pimpl C++ idiom.
+
 c++11
   Shows how to use ODB with C++11.
+
+access
+  Shows various approaches used by ODB to access data members that cannot be
+  accessed directly.
 
 boost
   Shows how to persist objects that use Boost smart pointers, containers,
