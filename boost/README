@@ -11,9 +11,9 @@ employee.hxx
   establish a bidirectional employee-employer relationship. We also use
   the boost::gregorian::date type to store the employee's date of birth
   and the boost::unordered_set container to keep track of the employee's
-  email addresses. Finally, we use boost::optional for the optional middle
-  name. If the middle name is not present, it will be represented in the
-  database as a NULL value.
+  email addresses. The employee's object id is boost::uuids::uuid. Finally,
+  we use boost::optional for the optional middle name. If the middle name
+  is not present, it will be represented in the database as a NULL value.
 
 employee-odb.hxx
 employee-odb.ixx

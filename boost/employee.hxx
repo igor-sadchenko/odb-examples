@@ -11,6 +11,8 @@
 #include <boost/weak_ptr.hpp>
 #include <boost/optional.hpp>
 #include <boost/unordered_set.hpp>
+#include <boost/uuid/uuid.hpp>
+#include <boost/uuid/uuid_generators.hpp>
 #include <boost/date_time/gregorian/gregorian.hpp>
 
 #include <odb/core.hxx>
@@ -23,6 +25,7 @@ using boost::weak_ptr;
 using odb::boost::lazy_shared_ptr;
 using odb::boost::lazy_weak_ptr;
 
+using boost::uuids::uuid;
 using boost::gregorian::date;
 
 // Forward declarations.
@@ -86,7 +89,8 @@ public:
             const std::string& last,
             const date& born,
             shared_ptr<employer_type> employer)
-      : first_ (first), last_ (last),
+      : id_ (boost::uuids::random_generator () ()),
+        first_ (first), last_ (last),
         born_ (born),
         employer_ (employer)
   {
@@ -97,10 +101,19 @@ public:
             const std::string& last,
             const date& born,
             shared_ptr<employer_type> employer)
-      : first_ (first), middle_ (middle), last_ (last),
+      : id_ (boost::uuids::random_generator () ()),
+        first_ (first), middle_ (middle), last_ (last),
         born_ (born),
         employer_ (employer)
   {
+  }
+
+  // Id.
+  //
+  const uuid&
+  id () const
+  {
+    return id_;
   }
 
   // Name.
@@ -166,8 +179,8 @@ private:
 
   employee () {}
 
-  #pragma db id auto
-  unsigned long id_;
+  #pragma db id
+  uuid id_;
 
   std::string first_;
   boost::optional<std::string> middle_;

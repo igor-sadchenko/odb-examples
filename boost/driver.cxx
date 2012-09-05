@@ -4,6 +4,8 @@
 #include <memory>   // std::auto_ptr
 #include <iostream>
 
+#include <boost/uuid/uuid_io.hpp>
+
 #include <odb/database.hxx>
 #include <odb/session.hxx>
 #include <odb/transaction.hxx>
@@ -124,7 +126,8 @@ main (int argc, char* argv[])
           cout << "  email: " << *j << endl;
         }
 
-        cout << endl;
+        cout << "  id: {" << p->id () << '}' << endl
+             << endl;
       }
 
       t.commit ();
