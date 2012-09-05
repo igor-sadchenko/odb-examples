@@ -11,9 +11,10 @@ employee.hxx
   establish a bidirectional employee-employer relationship. The QList
   type is used to store the collection of employees employed by the
   employer. We also use the QDateTime type to store the employee's date
-  of birth and QString to store the employee's first and last name. A
-  QSet instance keeps track of the employee's email addresses. Finally
-  we use QByteArray to store the employee's public key.
+  of birth and QString to store the employee's first and last name. While
+  the employee's object id is QUuid and a QSet instance keeps track of
+  the employee's email addresses. Finally we use QByteArray to store the
+  employee's public key.
 
 employee-odb.hxx
 employee-odb.ixx

@@ -144,6 +144,7 @@ main (int argc, char* argv[])
 
         cout  << "  public key length: " << p->publicKey ().size () << endl
               << "  employer: " << pe->name () << endl
+              << "  id: " << p->id ().toString () << endl
               << endl;
       }
 

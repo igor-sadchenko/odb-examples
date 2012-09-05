@@ -6,6 +6,7 @@
 
 #include <QtCore/QString>
 #include <QtCore/QByteArray>
+#include <QtCore/QUuid>
 #include <QtCore/QDateTime>
 #include <QtCore/QSharedPointer>
 #include <QtCore/QList>
@@ -72,12 +73,21 @@ public:
             const QDate& born,
             const QByteArray& publicKey,
             QSharedPointer<Employer> employer)
-      : first_ (first),
+      : id_ (QUuid::createUuid ()),
+        first_ (first),
         last_ (last),
         born_ (born),
         publicKey_ (publicKey),
         employer_ (employer)
   {
+  }
+
+  // Id.
+  //
+  const QUuid&
+  id () const
+  {
+    return id_;
   }
 
   // Name.
@@ -141,8 +151,8 @@ private:
 
   Employee () {}
 
-  #pragma db id auto
-  unsigned long id_;
+  #pragma db id
+  QUuid id_;
 
   QString first_;
   QString last_;
