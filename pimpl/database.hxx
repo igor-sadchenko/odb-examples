@@ -28,6 +28,8 @@
 #  include <odb/oracle/database.hxx>
 #elif defined(DATABASE_MSSQL)
 #  include <odb/mssql/database.hxx>
+#else
+#  error unknown database; did you forget to define the DATABASE_* macros?
 #endif
 
 inline std::auto_ptr<odb::database>
