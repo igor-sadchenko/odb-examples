@@ -52,7 +52,7 @@ optimistic
 
 pimpl
   Shows how to use virtual data members to implement a persistent class that
-  employes the pimpl C++ idiom.
+  employs the pimpl C++ idiom.
 
 c++11
   Shows how to use ODB with C++11.
