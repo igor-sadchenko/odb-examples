@@ -35,6 +35,14 @@ driver.cxx
   instance. It then persists a number of 'person' objects in the database
   and executes a number of queries to find objects matching various criteria.
 
+To compile and link the example manually from the command line we can use
+the following commands (using  MySQL as an example; replace 'c++' with your
+C++ compiler name):
+
+c++ -c person-odb.cxx
+c++ -DDATABASE_MYSQL -c driver.cxx
+c++ -o driver driver.o person-odb.o -lodb-mysql -lodb
+
 To run the example we may first need to create the database schema (for some
 database systems, such as SQLite, the schema is embedded into the generated
 code which makes this step unnecessary). Using MySQL as an example, this

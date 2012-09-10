@@ -16,6 +16,8 @@
 #  include "traits-oracle.hxx"
 #elif defined(DATABASE_MSSQL)
 #  include "traits-mssql.hxx"
+#else
+#  error unknown database; did you forget to define the DATABASE_* macros?
 #endif
 
 #endif // TRAITS_HXX

@@ -54,6 +54,14 @@ driver.cxx
   relationships. Finally, the driver performs a database query and iterates
   over the result printing basic information about the returned objects.
 
+To compile and link the example manually from the command line we can use
+the following commands (using  MySQL as an example; replace 'c++ -std=c++11'
+with your C++ compiler in C++11 mode):
+
+c++ -std=c++11 -c employee-odb.cxx
+c++ -std=c++11 -DDATABASE_MYSQL -c driver.cxx
+c++ -std=c++11 -o driver driver.o employee-odb.o -lodb-mysql -lodb
+
 To run the example we may first need to create the database schema (for some
 database systems, such as SQLite, the schema is embedded into the generated
 code which makes this step unnecessary). Using MySQL as an example, this
