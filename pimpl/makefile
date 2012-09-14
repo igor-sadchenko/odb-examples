@@ -65,6 +65,7 @@ $(dist): sources := $(cxx_tun)
 $(dist): headers := $(odb_hdr)
 $(dist): export name := $(name)
 $(dist): export odb_header_stem := $(basename $(odb_hdr))
+$(dist): export extra_sources := $(filter-out driver.cxx,$(cxx_tun))
 $(dist): export extra_dist := README $(call vc9projs,$(name)) \
 $(call vc10projs,$(name))
 $(dist):
