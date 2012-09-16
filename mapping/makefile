@@ -68,13 +68,14 @@ $(dist): export name := $(name)
 $(dist): export extra_headers := traits.hxx $(databases:%=traits-%.hxx)
 $(dist): export odb_header_stem := $(basename $(odb_hdr))
 $(dist): export extra_dist := README $(call vc9projs,$(name)) \
-$(call vc10projs,$(name))
+$(call vc10projs,$(name)) $(call vc11projs,$(name))
 $(dist):
 	$(call dist-data,$(sources) $(headers) $(extra_headers) \
 README database.hxx)
 	$(call meta-automake,../template/Makefile.am)
 	$(call meta-vc9projs,../template/template,$(name))
 	$(call meta-vc10projs,../template/template,$(name))
+	$(call meta-vc11projs,../template/template,$(name))
 
 # Test.
 #
@@ -107,6 +108,7 @@ endif
 $(call include,$(bld_root)/dist.make)
 $(call include,$(bld_root)/meta/vc9proj.make)
 $(call include,$(bld_root)/meta/vc10proj.make)
+$(call include,$(bld_root)/meta/vc11proj.make)
 $(call include,$(bld_root)/meta/automake.make)
 
 $(call include,$(bld_root)/cxx/standard.make) # cxx_standard
