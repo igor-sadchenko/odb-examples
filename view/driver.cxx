@@ -217,7 +217,6 @@ main (int argc, char* argv[])
     // Calculate min/max employee ages for each employer.
     //
     {
-      typedef odb::query<employer_age> query;
       typedef odb::result<employer_age> result;
 
       transaction t (db->begin ());
@@ -227,6 +226,8 @@ main (int argc, char* argv[])
       // Some other interesting queries to try:
       //
       // This one restricts the calculation to a specific employer:
+      //
+      // typedef odb::query<employer_age> query;
       //
       // result r (db->query<employer_age> (
       //             query::employer::name == "Simple Tech Ltd"));
@@ -326,7 +327,6 @@ main (int argc, char* argv[])
     // Show the previous employers using the employee_prev_employer view.
     //
     {
-      typedef odb::query<employee_prev_employer> query;
       typedef odb::result<employee_prev_employer> result;
 
       transaction t (db->begin ());
