@@ -15,6 +15,7 @@ query                    \
 mapping                  \
 optimistic               \
 pimpl                    \
+prepared                 \
 schema/embedded
 
 tr1_dirs   := relationship inverse schema/custom view

@@ -47,6 +47,9 @@ inheritance/polymorphism
 view
   Shows how to define and use object, table, mixed, and native views.
 
+prepared
+  Shows how to use prepared queries.
+
 optimistic
   Shows how to use optimistic concurrency in ODB.
 
