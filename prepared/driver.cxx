@@ -192,11 +192,11 @@ main (int argc, char* argv[])
       "person-age-name-query",
       [] (const char* name, connection& c)
       {
-        auto_ptr<params> p (new params);
+        unique_ptr<params> p (new params);
         query q (query::age > query::_ref (p->age) &&
                  query::first == query::_ref (p->first));
         prepared_query<person> pq (c.prepare_query<person> (name, q));
-        c.cache_query (pq, p);
+        c.cache_query (pq, std::move (p));
       });
     */
 
