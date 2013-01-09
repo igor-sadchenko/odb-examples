@@ -38,7 +38,7 @@ template
 build_dirs := $(dirs) $(tr1_dirs) $(boost_dirs) $(qt_dirs) template
 
 ifeq ($(cxx_standard),c++11)
-build_dirs += c++11
+build_dirs += $(cxx11_dirs)
 endif
 
 $(default): $(addprefix $(out_base)/,$(addsuffix /,$(build_dirs)))
