@@ -93,7 +93,7 @@ $(dist):
 	$(call meta-vc10slns,$(name)4,4)
 	$(call meta-vc10slns,$(name)5,5)
 	$(call meta-vc11slns,$(name)4,4)
-	$(call meta-vc10slns,$(name)5,5)
+	$(call meta-vc11slns,$(name)5,5)
 
 # Test.
 #
