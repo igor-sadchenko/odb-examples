@@ -101,6 +101,14 @@ public:
     return last_;
   }
 
+  // Age.
+  //
+  unsigned short
+  age () const
+  {
+    return age_;
+  }
+
   // Employer.
   //
   shared_ptr<employer>
