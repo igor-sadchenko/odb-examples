@@ -64,7 +64,7 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="odb-__value__(database)-d.lib odb-qt-d.lib odb-d.lib QtCored5.lib"
+				AdditionalDependencies="odb-__value__(database)-d.lib odb-qt-d.lib odb-d.lib Qt5Cored.lib"
 				OutputFile="$(OutDir)\driver.exe"
 				LinkIncremental="2"
 				GenerateDebugInformation="true"
@@ -139,7 +139,7 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="odb-__value__(database).lib odb-qt.lib odb.lib QtCore5.lib"
+				AdditionalDependencies="odb-__value__(database).lib odb-qt.lib odb.lib Qt5Core.lib"
 				OutputFile="$(OutDir)\driver.exe"
 				LinkIncremental="1"
 				GenerateDebugInformation="true"
@@ -216,7 +216,7 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="odb-__value__(database)-d.lib odb-qt-d.lib odb-d.lib QtCored5.lib"
+				AdditionalDependencies="odb-__value__(database)-d.lib odb-qt-d.lib odb-d.lib Qt5Cored.lib"
 				OutputFile="$(OutDir)\driver.exe"
 				LinkIncremental="2"
 				GenerateDebugInformation="true"
@@ -292,7 +292,7 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="odb-__value__(database).lib odb-qt.lib odb.lib QtCore5.lib"
+				AdditionalDependencies="odb-__value__(database).lib odb-qt.lib odb.lib Qt5Core.lib"
 				OutputFile="$(OutDir)\driver.exe"
 				LinkIncremental="1"
 				GenerateDebugInformation="true"
