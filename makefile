@@ -53,7 +53,7 @@ $(dist): data_dist := GPLv2 LICENSE README NEWS INSTALL version tester.bat \
 mysql-driver.bat mysql.options sqlite-driver.bat sqlite.options \
 pgsql-driver.bat pgsql.options oracle-driver.bat oracle.options \
 mssql-driver.bat mssql.options
-$(dist): exec_dist := bootstrap tester
+$(dist): exec_dist := bootstrap tester.in
 $(dist): export extra_dist := $(data_dist) $(exec_dist) test.bat \
 $(call vc9slns,$(name)) $(call vc10slns,$(name)) $(call vc11slns,$(name))
 $(dist): export version = $(shell cat $(src_root)/version)

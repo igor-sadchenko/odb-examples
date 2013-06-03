@@ -103,4 +103,5 @@ esac
 #
 AC_CONFIG_HEADERS([config.h])
 AC_CONFIG_FILES([__path__(config_files)])
+AC_CONFIG_COMMANDS([tester-mode], [chmod +x tester])
 AC_OUTPUT

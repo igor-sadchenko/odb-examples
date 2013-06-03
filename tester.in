@@ -1,6 +1,6 @@
 #! /bin/sh
 
-# file      : tester
+# file      : tester.in
 # copyright : Copyright (c) 2009-2013 Code Synthesis Tools CC
 # license   : GNU GPL v2; see accompanying LICENSE file
 
@@ -9,11 +9,14 @@
 # The data files, if any, are in $srcdir.
 #
 
+db_driver="$top_builddir/@database@-driver"
+db_options="$top_builddir/@database@.options"
+
 # Globbing returns files in alphabetic order.
 #
 for f in `echo *.sql`; do
   if test -f $f; then
-    $top_builddir/db-driver $f
+    $db_driver $f
 
     if test $? -ne 0; then
       exit 1
@@ -21,5 +24,5 @@ for f in `echo *.sql`; do
   fi
 done
 
-echo ./driver --options-file "$top_builddir/db.options"
-./driver --options-file "$top_builddir/db.options"
+echo ./driver --options-file "db_options"
+./driver --options-file "db_options"
