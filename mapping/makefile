@@ -82,7 +82,7 @@ README database.hxx)
 $(test): header := $(odb_hdr)
 $(test): $(driver)
 	$(call schema)
-	$(call message,test $<,$< --options-file $(dcf_root)/db.options)
+	$(call message,test $<,$< --options-file $(dcf_root)/$(db_id).options)
 
 # Clean.
 #

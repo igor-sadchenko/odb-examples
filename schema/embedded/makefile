@@ -78,7 +78,7 @@ $(dist):
 # Test.
 #
 $(test): $(driver)
-	$(call message,test $<,$< --options-file $(dcf_root)/db.options)
+	$(call message,test $<,$< --options-file $(dcf_root)/$(db_id).options)
 
 # Clean.
 #

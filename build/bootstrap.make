@@ -49,7 +49,7 @@ endif
 ifeq ($(filter $(db_id),sqlite),)
 $(out_base)/.test: schema = \
 $(foreach h,$(header),$(call \
-message,sql $$1,$(dcf_root)/db-driver \
+message,sql $$1,$(dcf_root)/$(db_id)-driver \
 $$1,$(out_base)/$(basename $h).sql)$(literal_newline)$(literal_tab))
 endif
 
