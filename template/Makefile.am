@@ -47,4 +47,4 @@ ODBFLAGS += --std c++11
 endif
 
 __path__(odb_header_stem)-odb.hxx: __path__(odb_header_stem).hxx
-	$(ODB) $(ODBCPPFLAGS) $(CPPFLAGS) $(ODBFLAGS)  __value__(odb_options) $<
+	$(ODB) $(ODBCPPFLAGS) $(CPPFLAGS) $(ODBFLAGS) --database @database@ __value__(odb_options) $<

@@ -58,10 +58,12 @@ gen  := $(addprefix $(out_base)/,$(genf))
 
 $(gen): $(odb)
 $(gen): odb := $(odb)
-$(gen) $(dist): export odb_options += --database $(db_id) --profile boost \
+$(gen) $(dist): export odb_options += --profile boost \
 --generate-query --generate-schema --generate-session --table-prefix boost_
 $(gen): cpp_options := -I$(src_base)
 $(gen): $(odb.l.cpp-options) $(odb_boost.l.cpp-options) $(boost.l.cpp-options)
+
+$(gen): odb_options += --database $(db_id)
 
 $(call include-dep,$(cxx_od),$(cxx_obj),$(gen))
 
@@ -73,7 +75,7 @@ $(out_base)/: $(driver)
 #
 name := $(subst /,-,$(subst $(src_root)/,,$(src_base)))
 
-$(dist): db_id := @database@
+
 $(dist): sources := $(cxx_tun)
 $(dist): headers := $(odb_hdr)
 $(dist): export name := $(name)

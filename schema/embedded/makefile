@@ -45,11 +45,13 @@ gen  := $(addprefix $(out_base)/,$(genf))
 
 $(gen): $(odb)
 $(gen): odb := $(odb)
-$(gen) $(dist): export odb_options += --database $(db_id) --generate-query \
---generate-schema --schema-format embedded --table-prefix schema_embedded_
+$(gen) $(dist): export odb_options += --generate-query --generate-schema \
+--schema-format embedded --table-prefix schema_embedded_
 
 $(gen): cpp_options := -I$(src_base)
 $(gen): $(odb.l.cpp-options)
+
+$(gen): odb_options += --database $(db_id)
 
 $(call include-dep,$(cxx_od),$(cxx_obj),$(gen))
 
@@ -61,7 +63,6 @@ $(out_base)/: $(driver)
 #
 name := $(subst /,-,$(subst $(src_root)/,,$(src_base)))
 
-$(dist): db_id := @database@
 $(dist): sources := $(cxx_tun)
 $(dist): headers := $(odb_hdr)
 $(dist): export name := $(name)
