@@ -55,7 +55,8 @@ pgsql-driver.bat pgsql.options oracle-driver.bat oracle.options \
 mssql-driver.bat mssql.options
 $(dist): exec_dist := bootstrap tester.in
 $(dist): export extra_dist := $(data_dist) $(exec_dist) test.bat \
-$(call vc9slns,$(name)) $(call vc10slns,$(name)) $(call vc11slns,$(name))
+$(call vc8slns,$(name)) $(call vc9slns,$(name)) $(call vc10slns,$(name)) \
+$(call vc11slns,$(name))
 $(dist): export version = $(shell cat $(src_root)/version)
 
 $(dist): $(addprefix $(out_base)/,$(addsuffix /.dist,$(dist_dirs)))
@@ -64,6 +65,7 @@ $(dist): $(addprefix $(out_base)/,$(addsuffix /.dist,$(dist_dirs)))
 	$(call dist-dir,m4)
 	$(call meta-automake)
 	$(call meta-autoconf)
+	$(call meta-vc8slns,$(name))
 	$(call meta-vc9slns,$(name))
 	$(call meta-vc10slns,$(name))
 	$(call meta-vc11slns,$(name))
@@ -73,6 +75,7 @@ $(test): $(addprefix $(out_base)/,$(addsuffix /.test,$(build_dirs)))
 $(clean): $(addprefix $(out_base)/,$(addsuffix /.clean,$(all_dirs)))
 
 $(call include,$(bld_root)/dist.make)
+$(call include,$(bld_root)/meta/vc8sln.make)
 $(call include,$(bld_root)/meta/vc9sln.make)
 $(call include,$(bld_root)/meta/vc10sln.make)
 $(call include,$(bld_root)/meta/vc11sln.make)
