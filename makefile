@@ -16,7 +16,8 @@ mapping                  \
 optimistic               \
 pimpl                    \
 prepared                 \
-schema/embedded
+schema/embedded          \
+section
 
 tr1_dirs   := relationship inverse schema/custom view
 cxx11_dirs := c++11

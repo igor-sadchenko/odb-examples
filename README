@@ -44,6 +44,10 @@ inheritance/reuse
 inheritance/polymorphism
   Shows how to use polymorphism inheritance with ODB.
 
+section
+  Shows how to use object sections to implement lazy-loading and change-
+  updating of a subset of data members in a persistent class.
+
 view
   Shows how to define and use object, table, mixed, and native views.
 
