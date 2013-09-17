@@ -24,5 +24,5 @@ for f in `echo *.sql`; do
   fi
 done
 
-echo ./driver --options-file "db_options"
-./driver --options-file "db_options"
+echo ./driver --options-file "$db_options"
+./driver --options-file "$db_options"
