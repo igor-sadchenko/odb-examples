@@ -76,12 +76,24 @@ $(dist): headers := $(odb_hdr)
 $(dist): export name := $(name)
 $(dist): export odb_header_stem := $(basename $(odb_hdr))
 $(dist): export extra_dist := README \
-$(call vc8projs,$(name)4) $(call vc9projs,$(name)4) $(call vc10projs,$(name)4) \
+$(call vc8projs,$(name)4)  \
+$(call vc9projs,$(name)4)  \
+$(call vc10projs,$(name)4) \
 $(call vc11projs,$(name)4) \
-$(call vc9projs,$(name)5) $(call vc10projs,$(name)5) $(call vc11projs,$(name)5) \
-$(call vc8slns,$(name)4) $(call vc9slns,$(name)4) $(call vc10slns,$(name)4) \
-$(call vc11slns,$(name)4) \
-$(call vc9slns,$(name)5) $(call vc10slns,$(name)5) $(call vc11slns,$(name)5)
+$(call vc12projs,$(name)4) \
+$(call vc9projs,$(name)5)  \
+$(call vc10projs,$(name)5) \
+$(call vc11projs,$(name)5) \
+$(call vc12projs,$(name)5) \
+$(call vc8slns,$(name)4)   \
+$(call vc9slns,$(name)4)   \
+$(call vc10slns,$(name)4)  \
+$(call vc11slns,$(name)4)  \
+$(call vc12slns,$(name)4)  \
+$(call vc9slns,$(name)5)   \
+$(call vc10slns,$(name)5)  \
+$(call vc11slns,$(name)5)  \
+$(call vc12slns,$(name)5)
 $(dist):
 	$(call dist-data,$(sources) $(headers) README database.hxx)
 	$(call meta-automake,../template/Makefile.am)
@@ -92,6 +104,8 @@ $(dist):
 	$(call meta-vc10projs,$(name)5,$(name)5)
 	$(call meta-vc11projs,$(name)4,$(name)4)
 	$(call meta-vc11projs,$(name)5,$(name)5)
+	$(call meta-vc12projs,$(name)4,$(name)4)
+	$(call meta-vc12projs,$(name)5,$(name)5)
 	$(call meta-vc8slns,$(name)4,4)
 	$(call meta-vc9slns,$(name)4,4)
 	$(call meta-vc9slns,$(name)5,5)
@@ -99,6 +113,8 @@ $(dist):
 	$(call meta-vc10slns,$(name)5,5)
 	$(call meta-vc11slns,$(name)4,4)
 	$(call meta-vc11slns,$(name)5,5)
+	$(call meta-vc12slns,$(name)4,4)
+	$(call meta-vc12slns,$(name)5,5)
 
 # Test.
 #
@@ -133,10 +149,12 @@ $(call include,$(bld_root)/meta/vc8sln.make)
 $(call include,$(bld_root)/meta/vc9sln.make)
 $(call include,$(bld_root)/meta/vc10sln.make)
 $(call include,$(bld_root)/meta/vc11sln.make)
+$(call include,$(bld_root)/meta/vc12sln.make)
 $(call include,$(bld_root)/meta/vc8proj.make)
 $(call include,$(bld_root)/meta/vc9proj.make)
 $(call include,$(bld_root)/meta/vc10proj.make)
 $(call include,$(bld_root)/meta/vc11proj.make)
+$(call include,$(bld_root)/meta/vc12proj.make)
 $(call include,$(bld_root)/meta/automake.make)
 
 $(call include,$(bld_root)/cxx/standard.make) # cxx_standard
