@@ -115,27 +115,27 @@ $(addprefix $1-,$(addsuffix -vc12.vcxproj.filters,$(databases)))
 #
 $(dist): meta-vc8slns = \
 $(foreach d,$(databases),$(call \
-meta-vc8sln,$1-vc8.sln,$1-$d-vc8.sln,$2-$d-vc8.vcproj,database,$d)$(literal_newline)\
+meta-vc8sln,$(src_root)/template-vc8.sln,$1-$d-vc8.sln,$2-$d-vc8.vcproj,database,$d)$(literal_newline)\
 $(literal_tab))@:
 
 $(dist): meta-vc9slns = \
 $(foreach d,$(databases),$(call \
-meta-vc9sln,$1-vc9.sln,$1-$d-vc9.sln,$2-$d-vc9.vcproj,database,$d)$(literal_newline)\
+meta-vc9sln,$(src_root)/template-vc9.sln,$1-$d-vc9.sln,$2-$d-vc9.vcproj,database,$d)$(literal_newline)\
 $(literal_tab))@:
 
 $(dist): meta-vc10slns = \
 $(foreach d,$(databases),$(call \
-meta-vc10sln,$1-vc10.sln,$1-$d-vc10.sln,$2-$d-vc10.vcxproj,database,$d)$(literal_newline)\
+meta-vc10sln,$(src_root)/template-vc10.sln,$1-$d-vc10.sln,$2-$d-vc10.vcxproj,database,$d)$(literal_newline)\
 $(literal_tab))@:
 
 $(dist): meta-vc11slns = \
 $(foreach d,$(databases),$(call \
-meta-vc11sln,$1-vc11.sln,$1-$d-vc11.sln,$2-$d-vc11.vcxproj,database,$d)$(literal_newline)\
+meta-vc11sln,$(src_root)/template-vc11.sln,$1-$d-vc11.sln,$2-$d-vc11.vcxproj,database,$d)$(literal_newline)\
 $(literal_tab))@:
 
 $(dist): meta-vc12slns = \
 $(foreach d,$(databases),$(call \
-meta-vc12sln,$1-vc12.sln,$1-$d-vc12.sln,$2-$d-vc12.vcxproj,database,$d)$(literal_newline)\
+meta-vc12sln,$(src_root)/template-vc12.sln,$1-$d-vc12.sln,$2-$d-vc12.vcxproj,database,$d)$(literal_newline)\
 $(literal_tab))@:
 
 vc8slns = $(addprefix $1-,$(addsuffix -vc8.sln,$(databases)))
