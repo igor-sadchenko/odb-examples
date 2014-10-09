@@ -98,6 +98,23 @@ main (int argc, char* argv[])
 
       t.commit ();
     }
+
+    {
+      transaction t (db->begin ());
+
+      unsigned long ids[] = {
+        pp[0]->id,
+        pp[1]->id,
+        pp[2]->id,
+        pp[3]->id,
+        pp[4]->id,
+        123
+      };
+
+      db->erase<person> (ids, ids + sizeof (ids)/sizeof (ids[0]));
+
+      t.commit ();
+    }
   }
   catch (const odb::exception& e)
   {
