@@ -132,10 +132,9 @@ main (int argc, char* argv[])
       shared_ptr<employer> csi (db->load<employer> ("Complex Systems Inc"));
       shared_ptr<project> ch (db->load<project> ("Complex Hardware"));
 
-      result r (db->query<employee> (query::first == "John" &&
-                                     query::last == "Doe"));
-
-      shared_ptr<employee> john (r.begin ().load ());
+      shared_ptr<employee> john (
+        db->query_one<employee> (query::first == "John" &&
+                                 query::last == "Doe"));
 
       john->employer (csi);
       john->projects ().clear ();

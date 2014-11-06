@@ -202,7 +202,6 @@ main (int argc, char* argv[])
     //
     {
       typedef odb::query<employee> query;
-      typedef odb::result<employee> result;
 
       session s;
       transaction t (db->begin ());
@@ -216,10 +215,9 @@ main (int argc, char* argv[])
       //
       shared_ptr<position> se (new position ("Software Engineer"));
 
-      result r (db->query<employee> (query::first == "John" &&
-                                     query::last == "Doe"));
-
-      shared_ptr<employee> john (r.begin ().load ());
+      shared_ptr<employee> john (
+        db->query_one<employee> (query::first == "John" &&
+                                 query::last == "Doe"));
 
       john->employer (csi);
       john->position (se);

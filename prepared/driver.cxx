@@ -206,7 +206,6 @@ main (int argc, char* argv[])
     {
       typedef odb::query<person_count> query;
       typedef odb::prepared_query<person_count> prep_query;
-      typedef odb::result<person_count> result;
 
       transaction t (db->begin ());
 
@@ -215,11 +214,11 @@ main (int argc, char* argv[])
       prep_query pq (
         db->prepare_query<person_count> ("person-count-age-query", q));
 
+      // Because an aggregate query result always contains one element,
+      // we use execute_value() insetad of execute() as a shortcut:
+      //
       for (age = 90; age > 40; age -= 10)
-      {
-        result r (pq.execute ());
-        cout << "over " << age << ": " << r.begin ()->count << endl;
-      }
+        cout << "over " << age << ": " << pq.execute_value ().count << endl;
 
       t.commit ();
     }

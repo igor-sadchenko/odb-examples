@@ -22,17 +22,21 @@ typedef odb::query<person> query;
 typedef odb::result<person> result;
 
 static void
+print (person& p)
+{
+  cout << p.first () << " ";
+
+  if (!p.middle ().null ())
+    cout << p.middle ().get () << " ";
+
+  cout << p.last () << " " << p.age () << endl;
+}
+
+static void
 print (result& r)
 {
   for (result::iterator i (r.begin ()); i != r.end (); ++i)
-  {
-    cout << i->first () << " ";
-
-    if (!i->middle ().null ())
-      cout << i->middle ().get () << " ";
-
-    cout << i->last () << " " << i->age () << endl;
-  }
+    print (*i);
 
   cout << endl;
 }
@@ -90,7 +94,6 @@ main (int argc, char* argv[])
       //
       /*
       person p ("", "", 0);
-
       for (result::iterator i (r.begin ()); i != r.end (); ++i)
       {
         i.load (p);
@@ -99,6 +102,35 @@ main (int argc, char* argv[])
       */
 
       cout << endl;
+
+      t.commit ();
+    }
+
+    // Use query_one() as a shortcut when there's no more than one element
+    // in the result.
+    //
+    {
+      transaction t (db->begin ());
+
+      auto_ptr<person> p (db->query_one<person> (query::age == 21));
+
+      if (p.get () != 0)
+      {
+        print (*p);
+        cout << endl;
+      }
+
+      // Or we can load the state into an existing object.
+      //
+      /*
+      person p ("", "", 0);
+
+      if (db->query_one<person> (query::age == 21, p))
+      {
+        print (p);
+        cout << endl;
+      }
+      */
 
       t.commit ();
     }

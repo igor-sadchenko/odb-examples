@@ -84,16 +84,16 @@ main (int argc, char* argv[])
     //
     {
       typedef odb::query<person> query;
-      typedef odb::result<person> result;
 
       transaction t (db->begin ());
 
-      result r (db->query<person> (
-                  query::name.extras.nickname == "Squeaky"));
+      auto_ptr<person> p (
+        db->query_one<person> (
+          query::name.extras.nickname == "Squeaky"));
 
-      if (!r.empty ())
+      if (p.get () != 0)
       {
-        name& n (r.begin ()->name ());
+        name& n (p->name ());
         cout << n.title () << " " << n.first () << " " << n.last () << endl;
       }
 

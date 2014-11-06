@@ -78,14 +78,16 @@ main (int argc, char* argv[])
     {
       transaction t (db->begin ());
 
-      result r (db->query<person> (query::first == "Joe" &&
-                                   query::last == "Dirt"));
+      // Here we know that there can be only one Joe Dirt in our
+      // database so we use the query_one() shortcut instead of
+      // manually iterating over the result returned by query().
+      //
+      auto_ptr<person> joe (
+        db->query_one<person> (query::first == "Joe" &&
+                               query::last == "Dirt"));
 
-      result::iterator i (r.begin ());
-
-      if (i != r.end ())
+      if (joe.get () != 0)
       {
-        auto_ptr<person> joe (i.load ());
         joe->age (joe->age () + 1);
         db->update (*joe);
       }
@@ -99,11 +101,10 @@ main (int argc, char* argv[])
     {
       transaction t (db->begin ());
 
-      odb::result<person_stat> r (db->query<person_stat> ());
-
-      // The result of this query always has exactly one element.
+      // The result of this (aggregate) query always has exactly one element
+      // so use the query_value() shortcut.
       //
-      const person_stat& ps (*r.begin ());
+      person_stat ps (db->query_value<person_stat> ());
 
       cout << endl
            << "count  : " << ps.count << endl

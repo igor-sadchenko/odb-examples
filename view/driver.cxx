@@ -179,12 +179,14 @@ main (int argc, char* argv[])
     {
       transaction t (db->begin ());
 
-      result<employee_count> r (
-        db->query<employee_count> (query<employee_count>::last == "Doe"));
-
-      // Result of this aggregate query contains only one element.
+      // Result of an aggregate query contains only one element so let's
+      // use the query_value() shortcut.
       //
-      cout << r.begin ()->count << " employees with the Doe last name" << endl
+      employee_count ec (
+        db->query_value<employee_count> (
+          query<employee_count>::last == "Doe"));
+
+      cout << ec.count << " employees with the Doe last name" << endl
            << endl;
 
       t.commit ();
