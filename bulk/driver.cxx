@@ -99,6 +99,9 @@ main (int argc, char* argv[])
       t.commit ();
     }
 
+    // Erase via id.
+    //
+#if 0
     {
       transaction t (db->begin ());
 
@@ -106,15 +109,67 @@ main (int argc, char* argv[])
         pp[0]->id,
         pp[1]->id,
         pp[2]->id,
+        /*
         pp[3]->id,
         pp[4]->id,
+        */
         123
+
+        /*
+        123,
+        pp[4]->id,
+        125,
+
+        126,
+        pp[3]->id,
+        127
+        */
       };
 
       db->erase<person> (ids, ids + sizeof (ids)/sizeof (ids[0]));
 
       t.commit ();
     }
+#endif
+
+
+    // Erase via references/pointers.
+    //
+    {
+      transaction t (db->begin ());
+
+      //db->erase (p.begin (), p.end ());
+
+      /*
+      {
+        const std::vector<person>& cp (p);
+        db->erase (cp.begin (), cp.end ());
+      }
+      */
+
+      //db->erase (pp.begin (), pp.end ());
+
+      /*
+      {
+        const std::vector<person*>& cpp (pp);
+        db->erase (cpp.begin (), cpp.end ());
+      }
+      */
+
+      {
+        auto_ptr<person> a[2];
+        a[0].reset (new person);
+        a[1].reset (new person);
+
+        a[0]->id = 1;
+        a[1]->id = 2;
+
+        db->erase (a, a + sizeof (a) / sizeof (a[0]));
+      }
+
+      t.commit ();
+    }
+
   }
   catch (const odb::exception& e)
   {
