@@ -99,9 +99,52 @@ main (int argc, char* argv[])
       t.commit ();
     }
 
+    // update()
+    //
+    {
+      transaction t (db->begin ());
+      t.tracer (stderr_tracer);
+
+      p[0].num ++;
+      p[1].num ++;
+      p[2].num ++;
+      p[3].num ++;
+      p[4].num ++;
+
+
+      p[0].num += 10;
+      p[1].num += 10;
+      p[2].num += 10;
+      p[3].num += 10;
+      p[4].num += 10;
+
+
+      db->update (p.begin (), p.end ());
+
+      /*
+      {
+        auto_ptr<person> a[2];
+        a[0].reset (new person);
+        a[1].reset (new person);
+
+        *a[0] = p[0];
+        a[0]->id = 1;
+
+        *a[1] = p[1];
+        a[1]->id = 2;
+        a[1]->num += 10;
+
+        db->update (a, a + sizeof (a) / sizeof (a[0]));
+      }
+      */
+
+
+      t.commit ();
+    }
+
     // Erase via id.
     //
-#if 0
+#if 1
     {
       transaction t (db->begin ());
 
@@ -109,11 +152,12 @@ main (int argc, char* argv[])
         pp[0]->id,
         pp[1]->id,
         pp[2]->id,
+        pp[3]->id//,
         /*
-        pp[3]->id,
         pp[4]->id,
-        */
+
         123
+        */
 
         /*
         123,
@@ -132,7 +176,7 @@ main (int argc, char* argv[])
     }
 #endif
 
-
+#if 0
     // Erase via references/pointers.
     //
     {
@@ -169,11 +213,12 @@ main (int argc, char* argv[])
 
       t.commit ();
     }
+#endif
 
   }
   catch (const odb::exception& e)
   {
-    cerr << e.what () << endl;
+    cerr << "'" << e.what () << "'" << endl;
     return 1;
   }
 }
