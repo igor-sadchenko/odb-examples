@@ -22,6 +22,8 @@ main (int argc, char* argv[])
   {
     auto_ptr<database> db (create_database (argc, argv));
 
+    //@@ Run all the tests with and without auto id (templatize)
+
     //person p[3];
     std::vector<person> p (5, person ());
 
@@ -77,6 +79,30 @@ main (int argc, char* argv[])
            << pp[2]->id << endl
            << pp[3]->id << endl
            << pp[4]->id << endl;
+
+
+      // Test error detection in batch of 1.
+      //
+      try
+      {
+        //p[0].num += 100;
+        db->persist (p.begin (), p.begin () + 1);
+      }
+      catch (const odb::multiple_exceptions& e)
+      {
+        cerr << e.what () << endl;
+      }
+
+      try
+      {
+        p[0].num += 200;
+        p[1].num += 200;
+        db->persist (p.begin (), p.begin () + 2);
+      }
+      catch (const odb::multiple_exceptions& e)
+      {
+        cerr << e.what () << endl;
+      }
 
       t.commit ();
     }
