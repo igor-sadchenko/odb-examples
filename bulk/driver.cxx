@@ -96,7 +96,7 @@ main (int argc, char* argv[])
       try
       {
         p[0].num += 200;
-        p[1].num += 200;
+        //p[1].num += 200;
         db->persist (p.begin (), p.begin () + 2);
       }
       catch (const odb::multiple_exceptions& e)
@@ -173,6 +173,7 @@ main (int argc, char* argv[])
 #if 1
     {
       transaction t (db->begin ());
+      t.tracer (stderr_tracer);
 
       unsigned long ids[] = {
         pp[0]->id,

@@ -8,13 +8,14 @@
 
 #include <odb/core.hxx>
 
-#pragma db object
+#pragma db object bulk(3)
 class person
 {
 public:
   #pragma db id auto
   unsigned long id;
 
+  #pragma db unique
   unsigned int num;
 
 #ifdef ODB_DATABASE_MSSQL
