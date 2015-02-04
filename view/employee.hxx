@@ -239,6 +239,21 @@ struct employee_country
   std::string nat_country_name;
 };
 
+// An example of an object loading view. It is a different version of
+// the above view that loads the complete objects instead of a subset
+// of their data members.
+//
+#pragma db view object(employee) \
+  object(country = res: employee::residence_) \
+  object(country = nat: employee::nationality_)
+struct employee_country_objects
+{
+  shared_ptr<employee> e;
+  shared_ptr<country> res;
+  shared_ptr<country> nat;
+};
+
+
 // An example of a native view that provides a complete query and is based
 // on an ad-hoc table. This view allows us to load the employee vacation
 // information from the legacy employee_extra table.

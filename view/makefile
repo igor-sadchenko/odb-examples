@@ -46,7 +46,7 @@ gen  := $(addprefix $(out_base)/,$(genf))
 $(gen): $(odb)
 $(gen): odb := $(odb)
 $(gen) $(dist): export odb_options += --generate-query --generate-schema \
---default-pointer std::tr1::shared_ptr --table-prefix view_
+--default-pointer std::tr1::shared_ptr --generate-session --table-prefix view_
 $(gen): cpp_options := -I$(src_base)
 $(gen): $(odb.l.cpp-options)
 

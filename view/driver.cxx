@@ -277,6 +277,44 @@ main (int argc, char* argv[])
       t.commit ();
     }
 
+    // The same but using the object loading view.
+    //
+    {
+      typedef odb::query<employee_country_objects> query;
+      typedef odb::result<employee_country_objects> result;
+
+      transaction t (db->begin ());
+
+      // We have to use a session in order for the object pointers
+      // in our view and object pointers inside objects that we load
+      // to point to the same instances, where appropriate.
+      //
+      session s;
+
+      result r (db->query<employee_country_objects> (
+                  query::res::name == query::nat::name));
+
+      cout << "Employees residing inside the country of nationality" << endl;
+
+      for (result::iterator i (r.begin ()); i != r.end (); ++i)
+      {
+        assert (i->e->nationality () == i->nat);
+        assert (i->e->residence () == i->res);
+
+        const employee& e (*i->e);
+        const country& r (*i->res);
+        const country& n (*i->nat);
+
+        cout << "  " << e.first () << " " << e.last () << " "
+             << r.name () << " " << n.name () << endl;
+      }
+
+      cout << endl;
+
+      t.commit ();
+    }
+
+
     // Get the list of employees that have accumulated vacation days.
     //
     {
