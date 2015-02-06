@@ -253,6 +253,24 @@ struct employee_country_objects
   shared_ptr<country> nat;
 };
 
+// An example of using inner join type. Here we want to find employers
+// that have any employees. If we were to use the default left join type,
+// then we would have gotten all the employers, regardless of whether
+// they have any employees. By using the inner join, we make sure that
+// only matching employers are returned.
+//
+// It is also likely that there will be more than one employee for any
+// particular employer which will lead to duplicate employer records
+// being returned. To avoid this we use the 'distinct' result modifier.
+//
+// Try to change the join type or remove 'distinct' to observe the
+// change in behavior.
+//
+#pragma db view object(employer) object(employee inner) query(distinct)
+struct employer_with_employees
+{
+  shared_ptr<employer> e;
+};
 
 // An example of a native view that provides a complete query and is based
 // on an ad-hoc table. This view allows us to load the employee vacation

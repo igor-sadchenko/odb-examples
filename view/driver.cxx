@@ -314,6 +314,28 @@ main (int argc, char* argv[])
       t.commit ();
     }
 
+    // Get the list of employers that have any employees.
+    //
+    {
+      typedef odb::result<employer_with_employees> result;
+
+      shared_ptr<employer> es (new employer (3, "Empty Shell LLC"));
+
+      transaction t (db->begin ());
+      db->persist (es);
+
+      result r (db->query<employer_with_employees> ());
+
+      cout << "Employers with employees" << endl;
+
+      for (result::iterator i (r.begin ()); i != r.end (); ++i)
+        cout << "  " << i->e->name () << endl;
+
+      cout << endl;
+
+      db->erase (es);
+      t.commit ();
+    }
 
     // Get the list of employees that have accumulated vacation days.
     //
