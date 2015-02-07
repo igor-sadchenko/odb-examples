@@ -21,7 +21,7 @@ using std::tr1::shared_ptr;
 class country
 {
 public:
-  country (const std::string& code, std::string const& name)
+  country (const std::string& code, const std::string& name)
       : code_ (code), name_ (name)
   {
   }
